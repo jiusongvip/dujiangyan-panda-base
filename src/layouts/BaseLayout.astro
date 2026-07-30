@@ -1,0 +1,163 @@
+---
+import "../styles/global.css";
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, ogImage, jsonLd } = Astro.props;
+
+// Clean title: avoid duplicating brand name. If page title already contains
+// "Dujiangyan", use it as-is; otherwise append the brand suffix.
+const baseName = "Dujiangyan Panda Base";
+const fullTitle = title.includes("Dujiangyan") ? title : `${title} | ${baseName}`;
+
+// Canonical URL and page path for structured data
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const pagePath = Astro.url.pathname === "/" ? [] : Astro.url.pathname.replace(/\/$/, "").split("/").filter(Boolean);
+
+// Default OG image if none provided
+const defaultOgImage = new URL("/images/hero-panda-bamboo.webp", Astro.site).href;
+const ogImageUrl = ogImage || defaultOgImage;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="Dujiangyan Panda Base Guide" href="/rss.xml" />
+
+    <!-- JSON-LD Structured Data: Organization + WebSite + BreadcrumbList -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Dujiangyan Panda Base Guide",
+          "url": Astro.site?.href,
+          "description": "Independent travel guide for visiting and volunteering at Dujiangyan Panda Base near Chengdu, China.",
+          "logo": new URL("/favicon.svg", Astro.site).href,
+        },
+        {
+          "@type": "WebSite",
+          "name": "Dujiangyan Panda Base Guide",
+          "url": Astro.site?.href,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": `${Astro.site?.href}search?q={search_term_string}`
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        ...(pagePath.length > 0 ? [{
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": Astro.site?.href },
+            ...pagePath.map((seg, i) => ({
+              "@type": "ListItem",
+              "position": i + 2,
+              "name": seg.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" "),
+              "item": new URL(`/${pagePath.slice(0, i + 1).join("/")}`, Astro.site).href,
+            }))
+          ]
+        }] : []),
+        ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+      ]
+    })} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 bg-warm-50/80 backdrop-blur-md border-b border-warm-200/60">
+      <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5 font-semibold text-warm-900 hover:text-accent-600 transition-colors">
+          <span class="w-8 h-8 rounded-full bg-accent-100 flex items-center justify-center shrink-0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-600">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 18c1.5-2 3-3 5-3s3.5 1 5 3"/><circle cx="8" cy="9" r="1"/><circle cx="16" cy="9" r="1"/>
+            </svg>
+          </span>
+          <span class="hidden sm:inline">Dujiangyan Panda Base</span>
+        </a>
+        <div class="flex items-center gap-6 text-sm font-medium">
+          <a href="/volunteer-program" class="text-warm-700 hover:text-accent-600 transition-colors">Volunteer</a>
+          <a href="/tickets" class="text-warm-700 hover:text-accent-600 transition-colors">Tickets</a>
+          <a href="/how-to-get-there" class="text-warm-700 hover:text-accent-600 transition-colors">How to Get There</a>
+          <a href="/visit-guide" class="hidden md:inline text-warm-700 hover:text-accent-600 transition-colors">Guide</a>
+        </div>
+      </nav>
+    </header>
+    <main class="flex-1">
+      <slot />
+    </main>
+    <footer class="bg-warm-900 text-warm-300 py-16">
+      <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <p class="text-warm-100 font-semibold mb-3">Explore</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/volunteer-program" class="hover:text-white transition-colors">Volunteer Program</a></li>
+            <li><a href="/tickets" class="hover:text-white transition-colors">Tickets</a></li>
+            <li><a href="/how-to-get-there" class="hover:text-white transition-colors">How to Get There</a></li>
+            <li><a href="/visit-guide" class="hover:text-white transition-colors">Visit Guide</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-warm-100 font-semibold mb-3">Compare</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/dujiangyan-vs-chengdu-panda-base" class="hover:text-white transition-colors">vs Chengdu Base</a></li>
+            <li><a href="/best-time-to-visit" class="hover:text-white transition-colors">Best Time to Visit</a></li>
+            <li><a href="/nearby-attractions" class="hover:text-white transition-colors">Nearby Attractions</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-warm-100 font-semibold mb-3">Info</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/faq" class="hover:text-white transition-colors">FAQ</a></li>
+            <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+            <li><a href="/about" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-warm-100 font-semibold mb-3">Legal</p>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-white transition-colors">Terms of Use</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-warm-100 font-semibold mb-3">Dujiangyan Panda Base</p>
+          <p class="text-sm leading-relaxed">Your complete guide to visiting, volunteering, and experiencing the pandas at Dujiangyan.</p>
+        </div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 mt-12 pt-6 border-t border-warm-800 text-sm text-warm-500">
+        <p>&copy; {new Date().getFullYear()} Dujiangyan Panda Base Guide. Not affiliated with the official base.</p>
+      </div>
+    </footer>
+  </body>
+</html>

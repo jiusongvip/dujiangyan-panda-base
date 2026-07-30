@@ -1,0 +1,362 @@
+{
+  "summary": {
+    "health_score": 52,
+    "business_type": "Local Service / Tourist Attraction (Independent Travel Guide)",
+    "top_findings": [
+      "No robots.txt file — search engines have no crawl guidance",
+      "Zero structured data / JSON-LD on all 11 pages — misses rich result opportunities for TouristAttraction, FAQ, and Article schemas",
+      "Duplicate brand name in all page titles due to BaseLayout suffix pattern",
+      "Missing canonical tags on all pages — no self-canonical or cross-domain directives",
+      "Blog page has zero real content — four dead links to '#' with no actual blog posts",
+      "About page is dangerously thin (~150 words) — harms E-E-A-T signals",
+      "No og:image on any page — social sharing has no preview images",
+      "Images lack explicit width/height attributes — CLS risk on every page",
+      "Four unused font subsets shipped (cyrillic, cyrillic-ext, latin-ext, vietnamese) adding ~46 KB unnecessary payload for English-only site",
+      "No llms.txt, no author/bio signals, no content freshness dates — weak AI search readiness"
+    ],
+    "quick_wins": [
+      "Add robots.txt to public/ directory (2 minutes)",
+      "Add canonical self-referencing tags to BaseLayout (1 line change)",
+      "Remove redundant brand-name suffix from titles, or make BaseLayout smarter about deduplication",
+      "Add og:image meta to BaseLayout using the hero image",
+      "Add width/height attributes to all <img> tags for CLS prevention",
+      "Add JSON-LD TouristAttraction schema to homepage and key landing pages",
+      "Add JSON-LD FAQPage schema to /faq/ and /volunteer-program/",
+      "Add JSON-LD BreadcrumbList to BaseLayout",
+      "Drop unused font subsets — subset Geist Variable to Latin only via @fontsource config",
+      "Create llms.txt at site root with page summaries"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 45,
+      "what_works": [
+        "Sitemap auto-generated via @astrojs/sitemap — valid XML, 11 URLs indexed",
+        "Clean, minified static HTML — zero JavaScript framework overhead",
+        "Proper lang=\"en\" declaration",
+        "Semantic HTML5 with logical heading structure",
+        "Favicon as lightweight SVG",
+        "All internal links use clean absolute paths (/volunteer-program/, etc.)"
+      ],
+      "findings": [
+        {
+          "title": "No robots.txt file",
+          "severity": "Critical",
+          "description": "Neither dist/ nor public/ contains a robots.txt. Search engines have no crawl directives — no sitemap reference, no disallow rules. This is a basic missing file that every site needs.",
+          "recommendation": "Create public/robots.txt with sitemap pointer: `Sitemap: https://dujiangyanpanda.com/sitemap-index.xml`"
+        },
+        {
+          "title": "Missing canonical tags on all pages",
+          "severity": "High",
+          "description": "No <link rel=\"canonical\"> on any of the 11 pages. Without self-referencing canonicals, search engines may treat URL variants (trailing slash, www, HTTP/HTTPS) as duplicates.",
+          "recommendation": "Add self-referencing canonical in BaseLayout using Astro.url. Also add a <meta name=\"robots\" content=\"index, follow\"> directive."
+        },
+        {
+          "title": "Sitemap lacks lastmod, changefreq, and priority",
+          "severity": "Medium",
+          "description": "sitemap-0.xml contains bare <url><loc> entries with no metadata. While Google says it ignores priority/changefreq, lastmod is a strong crawl signal and should always be included.",
+          "recommendation": "Configure @astrojs/sitemap to include lastmod. Add a custom sitemap config in astro.config.mjs."
+        },
+        {
+          "title": "No hreflang or language targeting",
+          "severity": "Low",
+          "description": "The site is English-only but doesn't declare a self-referencing hreflang. Important for international travel audiences.",
+          "recommendation": "Add <link rel=\"alternate\" hreflang=\"en\" href=\"...\"> self-reference to BaseLayout."
+        },
+        {
+          "title": "No 404 page",
+          "severity": "Low",
+          "description": "No custom 404 page exists. Missing pages return whatever the hosting platform serves — usually an unhelpful default.",
+          "recommendation": "Create src/pages/404.astro with navigation back to homepage and key pages."
+        },
+        {
+          "title": "No RSS feed for blog",
+          "severity": "Low",
+          "description": "Blog page exists but has no RSS/Atom feed. This limits discoverability and syndication options.",
+          "recommendation": "Add @astrojs/rss integration once blog posts are created."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 65,
+      "what_works": [
+        "Well-written, natural English across all informational pages",
+        "Detailed practical content: specific prices, schedules, seasonal data",
+        "Genuinely useful for international travelers planning a visit",
+        "Strong topical depth on volunteer, tickets, and transit pages",
+        "Good FAQ content (8 questions on FAQ page, 5 on volunteer page, 5 on homepage)",
+        "Transparent disclaimer in footer about non-affiliation"
+      ],
+      "findings": [
+        {
+          "title": "Blog page has no real content — all posts are dead links",
+          "severity": "Critical",
+          "description": "The /blog/ page lists 4 blog post titles with dates (March-June 2026) but all links go to '#'. Google will see this as a soft 404 or thin content page. It actively harms the site's quality signals.",
+          "recommendation": "Either create real blog posts immediately or remove the blog listing page. Do not publish placeholder pages with dead links."
+        },
+        {
+          "title": "About page is dangerously thin",
+          "severity": "High",
+          "description": "The /about/ page contains ~150 words across 3 generic paragraphs. No author bios, no credentials, no contact info, no team info. This is a major E-E-A-T weakness, especially for a site providing travel advice.",
+          "recommendation": "Expand to 500+ words. Add author/team information with credentials, contact methods, editorial policy, and content update frequency."
+        },
+        {
+          "title": "No author or content attribution anywhere",
+          "severity": "High",
+          "description": "No page has author bylines, bio information, or any indicator of who wrote the content. For a travel guide site, Google's E-E-A-T guidelines heavily weight demonstrable expertise and author transparency.",
+          "recommendation": "Add author schema and bylines. Even a collective 'Editorial Team' attribution is better than nothing."
+        },
+        {
+          "title": "No content freshness signals",
+          "severity": "Medium",
+          "description": "No 'last updated' dates, publish dates, or any temporal signals on any informational page. Travel information (prices, schedules, policies) changes frequently and Google values freshness indicators.",
+          "recommendation": "Add 'Last updated' dates to key pages (tickets, volunteer-program, how-to-get-there, visit-guide). The footer already shows © 2026 — use that as a minimum baseline."
+        },
+        {
+          "title": "No contact page or contact information",
+          "severity": "Medium",
+          "description": "The about page mentions 'reach out through our contact channels' but no contact page exists. Missing contact info hurts both user trust and E-E-A-T.",
+          "recommendation": "Create a /contact/ page with at minimum an email address or contact form."
+        },
+        {
+          "title": "Missing privacy policy and terms pages",
+          "severity": "Medium",
+          "description": "No privacy policy or terms of use pages. Even if not collecting user data, these are trust signals and increasingly expected by Google.",
+          "recommendation": "Add /privacy/ and /terms/ pages as part of the footer."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 58,
+      "what_works": [
+        "Every page has a unique, keyword-rich title tag",
+        "Every page has a unique meta description of appropriate length (140-165 chars)",
+        "H1 on every page is clear and descriptive",
+        "Consistent header/footer navigation with key pages",
+        "Good internal linking — cross-references between related pages (e.g., volunteer page links to tickets)",
+        "Proper OpenGraph title and description on all pages"
+      ],
+      "findings": [
+        {
+          "title": "Duplicate brand name in all titles due to BaseLayout suffix",
+          "severity": "High",
+          "description": "BaseLayout appends '| Dujiangyan Panda Base' to every title. Pages that already include the brand name become redundant. Examples: Homepage becomes 'Dujiangyan Panda Base - Volunteer, Tickets & Visit Guide 2026 | Dujiangyan Panda Base'; About becomes 'About - Dujiangyan Panda Base Guide | Dujiangyan Panda Base'. This wastes valuable title tag real estate and looks unprofessional in SERPs.",
+          "recommendation": "Either remove the brand suffix from BaseLayout and let each page own its full title, or make the suffix conditional (don't append if the page title already contains 'Dujiangyan')."
+        },
+        {
+          "title": "Homepage title includes year '2026' — will become outdated",
+          "severity": "Medium",
+          "description": "The homepage title tag includes '2026'. This hardcoded year will age poorly and requires manual updates annually.",
+          "recommendation": "Remove the year from the title, or use a dynamic year via the Astro template (already done in footer)."
+        },
+        {
+          "title": "Blog page uses <h2> for page heading instead of <h1>",
+          "severity": "Medium",
+          "description": "The /blog/ page uses <h2> for 'Stories & Guides' — it should be an <h1> as the main page heading. The eyebrow 'Blog' is styled as a <p> above it.",
+          "recommendation": "Change to <h1>Stories & Guides</h1> for proper heading hierarchy."
+        },
+        {
+          "title": "FAQ page uses <h2> tags inside <details> elements — non-standard and inaccessible",
+          "severity": "Low",
+          "description": "The FAQ questions are marked up as <h2> inside <details><summary>. This is invalid HTML (interactive content inside interactive content) and may confuse assistive technologies.",
+          "recommendation": "Remove <h2> wrapping from FAQ headings inside <details>. Use <summary> alone with appropriate styling."
+        },
+        {
+          "title": "Missing Twitter/X card metadata",
+          "severity": "Low",
+          "description": "No twitter:card, twitter:title, or twitter:description meta tags on any page.",
+          "recommendation": "Add Twitter card metadata to BaseLayout (at minimum twitter:card = summary_large_image)."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 5,
+      "what_works": [
+        "No structured data currently implemented — clean baseline to build from"
+      ],
+      "findings": [
+        {
+          "title": "Zero structured data on the entire site",
+          "severity": "Critical",
+          "description": "Not a single JSON-LD block or microdata attribute exists across all 11 pages. This is the single largest missed opportunity: the site has TouristAttraction content, FAQ content, article listings, and organizational information — all of which could qualify for rich results in Google SERPs.",
+          "recommendation": "Implement these schemas in priority order: (1) Organization + WebSite (site-wide), (2) TouristAttraction on homepage and attraction pages, (3) FAQPage on /faq/ and /volunteer-program/, (4) Article on blog posts, (5) BreadcrumbList on all pages, (6) LocalBusiness if representing an actual tour operator."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 78,
+      "what_works": [
+        "Static HTML site — server response time will be fast on any CDN",
+        "CSS bundled into single 26.7 KB file",
+        "All images are WebP format",
+        "No client-side JavaScript framework or heavy JS bundles",
+        "No third-party scripts (no analytics, no ads, no tracking)",
+        "Proper lazy loading on non-hero images",
+        "Hero image uses loading=\"eager\""
+      ],
+      "findings": [
+        {
+          "title": "No explicit image dimensions — CLS risk",
+          "severity": "High",
+          "description": "Every <img> tag lacks explicit width and height attributes. The hero image and content images will push page layout as they load, causing Cumulative Layout Shift. This directly impacts the CLS metric in Core Web Vitals.",
+          "recommendation": "Add width and height attributes to all <img> tags. For responsive images, include these alongside CSS `height: auto` and `max-width: 100%`."
+        },
+        {
+          "title": "Unused font subsets shipped unnecessarily",
+          "severity": "Medium",
+          "description": "Five Geist Variable woff2 files totaling ~75 KB are loaded. Only the Latin subset (28.7 KB) is needed for English content. Cyrillic (14.7 KB), Latin-ext (16.1 KB), Cyrillic-ext (7.2 KB), and Vietnamese (7.8 KB) add ~46 KB of unnecessary download.",
+          "recommendation": "Configure @fontsource-variable/geist to load only the Latin subset. If using Tailwind's font import, restrict to the needed unicode-range in the CSS."
+        },
+        {
+          "title": "No responsive images (srcset/sizes)",
+          "severity": "Medium",
+          "description": "All images use single-source URLs. The hero image at 178 KB loads at full resolution on mobile devices where a smaller version would suffice.",
+          "recommendation": "Use Astro's Image component or sharp to generate responsive srcset variants. This is particularly important for the 178 KB hero image."
+        },
+        {
+          "title": "No font-display strategy visible",
+          "severity": "Low",
+          "description": "Font loading behavior is not explicitly controlled. Without font-display: swap, text may be invisible during font load (FOIT).",
+          "recommendation": "Ensure @fontsource CSS includes font-display: swap. Alternatively, set it explicitly in global.css."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 70,
+      "what_works": [
+        "All 5 images are WebP — optimal format for web",
+        "Good descriptive alt text on every image",
+        "Reasonable file sizes (22-178 KB range)",
+        "Hero image loaded eagerly; content images lazy-loaded",
+        "Images have aspect-ratio preserved via CSS (aspect-[4/5], aspect-[2/1], aspect-[4/3])"
+      ],
+      "findings": [
+        {
+          "title": "No explicit width/height attributes on images",
+          "severity": "High",
+          "description": "Same CLS issue noted in Performance. All <img> tags need explicit dimensions.",
+          "recommendation": "Add width/height to all <img> tags. Use CSS aspect-ratio as a complement, not a replacement."
+        },
+        {
+          "title": "Hero image at 178 KB is the largest asset",
+          "severity": "Medium",
+          "description": "The hero-panda-bamboo.webp at 178 KB is reasonable for a full-bleed hero but could be compressed further. No smaller variant for mobile exists.",
+          "recommendation": "Compress to 120-140 KB range or generate a mobile variant at 80-100 KB via srcset."
+        },
+        {
+          "title": "No og:image on any page",
+          "severity": "Medium",
+          "description": "Social sharing previews will show no image. For a visually-driven travel site, this is a significant missed engagement opportunity.",
+          "recommendation": "Set a default og:image in BaseLayout (use hero-panda-bamboo.webp or create a dedicated 1200x630 social card)."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 40,
+      "what_works": [
+        "Clean semantic HTML — easy for AI crawlers to parse",
+        "Well-structured content with clear headings and sections",
+        "English-language content targeting international audience",
+        "Good content depth on key informational pages",
+        "No JavaScript-rendered content — fully static, crawler-friendly"
+      ],
+      "findings": [
+        {
+          "title": "No llms.txt file",
+          "severity": "Medium",
+          "description": "No /llms.txt exists at the site root. This file provides structured context to LLM crawlers and is becoming an expected signal for AI search readiness.",
+          "recommendation": "Create public/llms.txt with a brief site description and links to key pages. Follow the llms.txt spec format."
+        },
+        {
+          "title": "No structured data — AI crawler comprehension gap",
+          "severity": "High",
+          "description": "Without JSON-LD, AI crawlers (ChatGPT, Perplexity, Google AI Overviews) must infer page meaning from text alone. Schema provides explicit entity definitions that improve citation accuracy.",
+          "recommendation": "Adding TouristAttraction, FAQPage, and Organization schemas will directly improve how AI search engines understand and cite this site."
+        },
+        {
+          "title": "No author/credential signals",
+          "severity": "Medium",
+          "description": "AI search engines prioritize content with clear provenance. No author information, credentials, or content methodology is present.",
+          "recommendation": "Add author pages, editorial guidelines, and content methodology statements."
+        },
+        {
+          "title": "No robots.txt — may block AI crawlers inadvertently",
+          "severity": "Medium",
+          "description": "Without an explicit robots.txt, some AI crawlers (like GPTBot) have separate user-agent directives. It's better to explicitly allow or disallow them.",
+          "recommendation": "Add explicit GPTBot and anthropic-ai directives to robots.txt (allow or disallow, with a decision made)."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Create robots.txt with sitemap reference (public/robots.txt)",
+          "Add self-referencing canonical tags to BaseLayout",
+          "Add JSON-LD Organization + WebSite schema to BaseLayout",
+          "Add JSON-LD TouristAttraction schema to homepage",
+          "Add JSON-LD FAQPage schema to /faq/ page",
+          "Fix blog page — either publish real posts or remove the dead-link listing page",
+          "Add explicit width/height to all <img> tags for CLS prevention",
+          "Add og:image to BaseLayout (default social sharing image)"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Fix duplicate brand name in title tags — conditionally suppress BaseLayout suffix",
+          "Add JSON-LD BreadcrumbList to BaseLayout",
+          "Add JSON-LD FAQPage schema to /volunteer-program/",
+          "Expand /about/ page from ~150 to 500+ words with author/team attribution",
+          "Create /contact/ page",
+          "Configure @astrojs/sitemap to include lastmod dates",
+          "Add Twitter/X card meta tags to BaseLayout",
+          "Drop unused font subsets — restrict Geist Variable to Latin only"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Create and publish 4 real blog posts (the ones currently listed as dead links)",
+          "Add author schema and bylines to all content pages",
+          "Add 'Last updated' dates to key pages (tickets, volunteer, transit, guide)",
+          "Create /privacy/ and /terms/ pages",
+          "Create llms.txt at site root",
+          "Add hreflang self-reference to BaseLayout",
+          "Generate responsive image variants via Astro's Image component (srcset/sizes)",
+          "Implement RSS feed via @astrojs/rss for blog"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Set up Google Search Console and submit sitemap after deployment",
+          "Deploy to production and monitor Core Web Vitals via CrUX",
+          "Create custom 404 page (src/pages/404.astro)",
+          "Monitor indexed pages and crawl stats",
+          "Track ranking positions for target keywords via DataForSEO or SE Ranking",
+          "Build backlink profile — outreach to travel blogs, Sichuan tourism sites",
+          "Consider Chinese-language version for domestic search traffic",
+          "Add article JSON-LD schema to all blog posts"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": ""
+  }
+}

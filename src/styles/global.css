@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+
+@theme {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+
+  /* Forest green accent -- nature-inspired, not AI-default purple */
+  --color-accent-50: #f0f7f2;
+  --color-accent-100: #dceee1;
+  --color-accent-200: #badec3;
+  --color-accent-300: #8cc79f;
+  --color-accent-400: #5daa76;
+  --color-accent-500: #3a8e56;
+  --color-accent-600: #2e7344;
+  --color-accent-700: #255c38;
+  --color-accent-800: #204a2f;
+  --color-accent-900: #1b3d27;
+  --color-accent-950: #0e2216;
+
+  /* Warm stone neutrals */
+  --color-warm-50: #fafaf8;
+  --color-warm-100: #f5f4f0;
+  --color-warm-200: #e8e5dc;
+  --color-warm-300: #d4d0c2;
+  --color-warm-400: #bab3a0;
+  --color-warm-500: #a69b85;
+  --color-warm-600: #92846e;
+  --color-warm-700: #7a6d5c;
+  --color-warm-800: #655a4c;
+  --color-warm-900: #544b40;
+  --color-warm-950: #2d2721;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-warm-900 bg-warm-50 antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+  }
+}

@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page Not Found - Dujiangyan Panda Base"
+  description="The page you're looking for doesn't exist. Explore our guides to visiting and volunteering at Dujiangyan Panda Base."
+>
+  <section class="max-w-3xl mx-auto px-4 py-24 md:py-32 text-center">
+    <p class="text-7xl md:text-9xl font-bold text-accent-200">404</p>
+    <h1 class="mt-6 text-3xl md:text-4xl font-bold text-warm-900 leading-tight">
+      Page not found
+    </h1>
+    <p class="mt-4 text-warm-600 leading-relaxed max-w-md mx-auto">
+      The page you're looking for doesn't exist or has been moved. Here are some helpful links to get you back on track.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <a href="/" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">
+        Go Home
+      </a>
+      <a href="/visit-guide" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-warm-300 text-warm-700 font-medium text-sm hover:bg-warm-100 transition-colors">
+        Visit Guide
+      </a>
+      <a href="/volunteer-program" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-warm-300 text-warm-700 font-medium text-sm hover:bg-warm-100 transition-colors">
+        Volunteer Program
+      </a>
+    </div>
+    <div class="mt-16 grid sm:grid-cols-3 gap-4 text-left max-w-2xl mx-auto">
+      <div>
+        <p class="font-semibold text-warm-900 mb-2">Plan Your Visit</p>
+        <ul class="space-y-1.5 text-sm text-warm-600">
+          <li><a href="/tickets" class="hover:text-accent-600 transition-colors">Tickets & Pricing</a></li>
+          <li><a href="/how-to-get-there" class="hover:text-accent-600 transition-colors">How to Get There</a></li>
+          <li><a href="/best-time-to-visit" class="hover:text-accent-600 transition-colors">Best Time to Visit</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-warm-900 mb-2">Explore</p>
+        <ul class="space-y-1.5 text-sm text-warm-600">
+          <li><a href="/dujiangyan-vs-chengdu-panda-base" class="hover:text-accent-600 transition-colors">vs Chengdu Base</a></li>
+          <li><a href="/nearby-attractions" class="hover:text-accent-600 transition-colors">Nearby Attractions</a></li>
+          <li><a href="/faq" class="hover:text-accent-600 transition-colors">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-warm-900 mb-2">More</p>
+        <ul class="space-y-1.5 text-sm text-warm-600">
+          <li><a href="/blog" class="hover:text-accent-600 transition-colors">Blog</a></li>
+          <li><a href="/about" class="hover:text-accent-600 transition-colors">About</a></li>
+          <li><a href="/contact" class="hover:text-accent-600 transition-colors">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

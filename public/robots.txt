@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dujiangyan-panda-base.com/sitemap.xml
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /

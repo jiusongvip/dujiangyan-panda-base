@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const postDate = "2026-06-15";
+const jsonLd = {
+  "@type": "Article",
+  "headline": "Dujiangyan Panda Volunteer: My Honest Experience",
+  "datePublished": postDate,
+  "dateModified": postDate,
+  "author": { "@type": "Person", "name": "Sarah Chen" },
+  "description": "What a day as a panda keeper really looks like. Cleaning, feeding, and the unforgettable moments.",
+};
+---
+
+<BaseLayout
+  title="Dujiangyan Panda Volunteer: My Honest Experience"
+  description="What a day as a panda keeper really looks like. Cleaning enclosures, preparing food, feeding pandas, and the moments that make it unforgettable."
+  ogImage="/images/volunteer-feeding.webp"
+  jsonLd={jsonLd}
+>
+  <article class="max-w-3xl mx-auto px-4 py-16 md:py-24">
+    <p class="text-xs font-medium tracking-wide text-accent-600 uppercase mb-3">Blog</p>
+    <p class="text-xs text-warm-500 mb-3">Published June 15, 2026</p>
+    <h1 class="text-3xl md:text-5xl font-bold text-warm-900 leading-tight tracking-tight">
+      Dujiangyan Panda Volunteer: My Honest Experience
+    </h1>
+    <p class="mt-4 text-lg text-warm-600 leading-relaxed">
+      What a day as a panda keeper really looks like. Cleaning enclosures, preparing bamboo, hand-feeding pandas, and the moments that make it unforgettable.
+    </p>
+
+    <figure class="mt-8">
+      <img src="/images/volunteer-feeding.webp" alt="Giant panda enjoying fresh bamboo at Dujiangyan Panda Base" width="1200" height="600" class="rounded-xl w-full aspect-[2/1] object-cover" loading="lazy" />
+      <figcaption class="mt-2 text-xs text-warm-500 text-center">Close-up of a panda at the Dujiangyan volunteer program</figcaption>
+    </figure>
+
+    <div class="mt-10 space-y-6 text-warm-700 leading-relaxed">
+      <h2 class="text-2xl font-semibold text-warm-900">The 6 AM wake-up call</h2>
+      <p>
+        When I signed up for the panda volunteer program at Dujiangyan, I knew it would involve some physical work. What I didn't expect was just how real the experience would feel. Our group met at the base gates at 8:15 AM — a mix of international travelers, a couple from Australia on their honeymoon, and a family from Singapore with their teenage daughter. By 8:30 AM, we had changed into the blue volunteer uniforms (yes, you get to keep the cap) and received our safety briefing from a coordinator who spoke excellent English.
+      </p>
+      <p>
+        The morning air was cool, the hillside misty, and the sound of bamboo rustling in the breeze set the tone for what would become one of the most memorable days of my travels in China.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-warm-900">The work nobody tells you about</h2>
+      <p>
+        Let me be honest: being a panda volunteer involves actual work. Your first task is cleaning enclosures. Pandas eat up to 40 kg of bamboo per day, and what goes in must come out. You sweep, you rake, you collect bamboo stalks that look like they have been through a wood chipper. It is physical, and you will get your hands dirty — but that is exactly what makes it feel authentic.
+      </p>
+      <p>
+        The coordinators are patient and encouraging. They show you how to separate the fresh bamboo from the old, how to spot panda droppings (surprisingly clean-looking — basically compressed bamboo), and how to prepare the panda cakes. These "cakes" are made from a steamed grain mixture including corn, soybeans, and eggs, and pandas go absolutely wild for them.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-warm-900">The moment you have been waiting for</h2>
+      <p>
+        Around 11 AM comes the highlight: feeding time. The coordinator hands you apple slices and panda cakes, and you wait at a designated spot near the enclosure. When the keeper signals, you place the food on a bamboo skewer or a flat bamboo tray and extend it toward the panda.
+      </p>
+      <p>
+        A giant panda sitting two feet away from you, reaching out with its paw to take an apple from your hand, is surreal. The pandas are gentle but focused — their entire world narrows to the food in front of them. You are allowed to take photos during this time (no flash), and the coordinators are happy to take pictures for you. I have a photo of myself with a panda mid-munch that I still cannot believe is real.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-warm-900">What it actually costs</h2>
+      <p>
+        The program fee was CNY 800 (approximately USD 110) for the full day, which included the uniform, gloves, a lunch box with rice and Sichuan-style vegetables (surprisingly good), and a certificate of participation at the end. Compared to the standard <a href="/tickets" class="text-accent-600 hover:text-accent-700 underline">entrance ticket of CNY 58</a>, the volunteer fee is significantly more, but the experience is completely different. You are not just watching pandas — you are part of their care routine.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-warm-900">Would I do it again?</h2>
+      <p>
+        Without hesitation. The volunteer program at Dujiangyan is not a tourist attraction dressed up as "volunteering" — it is a genuine contribution to the daily operations of the base, with the added bonus of getting closer to pandas than you ever thought possible. If you are on the fence about whether to just visit or to volunteer, choose the volunteer program. Book at least 2 weeks ahead. Wear clothes you do not mind getting dirty. And bring your camera — you will want to remember this.
+      </p>
+
+      <p class="text-sm text-warm-500 mt-8">
+        For more details on costs, age limits, and how to book, see our complete <a href="/volunteer-program" class="text-accent-600 hover:text-accent-700 underline">volunteer program guide</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
