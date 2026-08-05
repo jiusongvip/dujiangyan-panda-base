@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dujiangyan-panda-base.com/sitemap.xml
+Sitemap: https://dujiangyan-panda-base.com/sitemap-index.xml
 
 # AI Crawlers
 User-agent: GPTBot

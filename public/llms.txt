@@ -1,18 +1,23 @@
 # dujiangyan-panda-base.com
-> An independent travel guide to Dujiangyan Panda Base near Chengdu, China. Covers volunteer programs, ticket pricing, how to get there, best times to visit, and nearby UNESCO attractions.
+> An independent travel guide to Dujiangyan Panda Base near Chengdu, China. Everything is on one page: closure status, volunteer program, ticket pricing, how to get there, best times to visit, Dujiangyan vs Chengdu comparison, nearby UNESCO attractions, and FAQ.
 
-## Key Pages
-- [Home](https://dujiangyan-panda-base.com/): Overview with quick facts, visitor information, and FAQ
-- [Volunteer Program](https://dujiangyan-panda-base.com/volunteer-program/): Full guide to becoming a panda keeper for a day — costs, booking, daily schedule, requirements
-- [Tickets & Pricing](https://dujiangyan-panda-base.com/tickets/): Entrance fees, ticket types, where to buy, visitor tips
-- [How to Get There](https://dujiangyan-panda-base.com/how-to-get-there/): Step-by-step transport from Chengdu — train, bus, taxi, organized tours with costs and times
-- [Visit Guide](https://dujiangyan-panda-base.com/visit-guide/): What to bring, suggested half-day itinerary, insider tips
-- [FAQ](https://dujiangyan-panda-base.com/faq/): Frequently asked questions about visiting and volunteering
-- [Best Time to Visit](https://dujiangyan-panda-base.com/best-time-to-visit/): Seasonal guide with weather, crowds, and panda activity
-- [Dujiangyan vs Chengdu Panda Base](https://dujiangyan-panda-base.com/dujiangyan-vs-chengdu-panda-base/): Side-by-side comparison of the two panda bases
-- [Nearby Attractions](https://dujiangyan-panda-base.com/nearby-attractions/): Dujiangyan Irrigation System and Mount Qingcheng (both UNESCO)
-- [Blog](https://dujiangyan-panda-base.com/blog/): Articles and travel stories about Dujiangyan panda experiences
-- [About](https://dujiangyan-panda-base.com/about/): About this independent guide
+## Main Page
+- [Complete Guide](https://dujiangyan-panda-base.com/): One page that answers every question about Dujiangyan Panda Base.
+  - #closure — Current closure status (closed April 23, 2026 for renovation) and official announcement
+  - #tickets — Entrance fees (adult CNY 58, student CNY 29, seniors/children free), where to buy
+  - #volunteer — Panda keeper volunteer program: cost (CNY 700-900), daily schedule, age/health requirements, booking
+  - #getting-there — How to reach the base from Chengdu: high-speed train, bus, taxi, organized tour with costs and times
+  - #best-time — Best time to visit: seasonal and month-by-month guide (spring & autumn best)
+  - #comparison — Dujiangyan vs Chengdu Panda Base side-by-side comparison
+  - #nearby — Nearby UNESCO attractions: Dujiangyan Irrigation System, Mount Qingcheng
+  - #alternatives — Where to see pandas while Dujiangyan is closed: Panda Valley, Wolong, Bifengxia, Chengdu Base
+  - #visit-guide — Panda daily rhythm, best viewing times, packing checklist
+  - #stories — First-hand volunteer experience and booking reality check
+  - #faq — Frequently asked questions (13 answered)
+
+## Legal
+- [Privacy Policy](https://dujiangyan-panda-base.com/privacy): How we handle data
+- [Terms of Use](https://dujiangyan-panda-base.com/terms): Disclaimer and usage terms
 
 ## Optional
 - Helpful for: international travelers planning a Sichuan panda visit, volunteer tourists, day-trippers from Chengdu

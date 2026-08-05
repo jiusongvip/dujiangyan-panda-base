@@ -1,19 +1,24 @@
 ---
+// Spec box: structured, scannable facts like competitor sight pages.
 const infos = [
-  { label: "Opening Hours", value: "8:30 AM - 5:00 PM", note: "Daily, year-round" },
-  { label: "Entrance Fee", value: "CNY 58", note: "Adult ticket" },
-  { label: "Location", value: "Dujiangyan, Sichuan", note: "~60 km from Chengdu" },
-  { label: "Best Season", value: "Mar - May, Sep - Nov", note: "Mild weather" },
+  { label: "Status", value: "CLOSED", note: "Renovating since Apr 23, 2026", alert: true },
+  { label: "Opening Hours", value: "8:30 AM - 5:00 PM", note: "Daily, year-round (normal ops)" },
+  { label: "Entrance Fee", value: "CNY 58", note: "Students ¥29 · Seniors 60-65 ¥29 · 65+ free" },
+  { label: "Shuttle Bus", value: "CNY 10-15", note: "Optional — hilly terrain" },
+  { label: "Visit Duration", value: "Half day", note: "Volunteers: full day" },
+  { label: "Volunteer Program", value: "CNY 700-900", note: "Ages 12-65 · book 1-2 wks ahead" },
+  { label: "Location", value: "Dujiangyan, Sichuan", note: "~70 km from Chengdu" },
+  { label: "Best Season", value: "Mar-May · Sep-Nov", note: "Mild weather, active pandas" },
 ];
 ---
 
 <section class="max-w-7xl mx-auto px-4 mt-6 relative z-10">
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-warm-200 bg-warm-200 shadow-sm">
     {infos.map((info) => (
-      <div class="bg-white rounded-xl border border-warm-200 p-5 shadow-sm hover:shadow-md transition-shadow">
-        <p class="text-xs font-medium tracking-wide text-warm-500 uppercase mb-1">{info.label}</p>
-        <p class="text-lg font-semibold text-warm-900">{info.value}</p>
-        <p class="text-sm text-warm-500 mt-0.5">{info.note}</p>
+      <div class={`bg-white p-5 ${info.alert ? "bg-amber-50" : ""}`}>
+        <p class="text-[11px] font-semibold tracking-[0.15em] text-warm-500 uppercase mb-2">{info.label}</p>
+        <p class={`font-display text-lg md:text-xl font-semibold leading-tight ${info.alert ? "text-amber-800" : "text-warm-950"}`}>{info.value}</p>
+        <p class="text-xs text-warm-500 mt-1.5 leading-snug">{info.note}</p>
       </div>
     ))}
   </div>

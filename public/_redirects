@@ -1,0 +1,30 @@
+/about                     /#about      301
+/best-time-to-visit        /#best-time  301
+/blog                      /#stories    301
+/blog/how-to-book-panda-volunteer        /#stories   301
+/blog/dujiangyan-panda-volunteer-experience  /#stories  301
+/closure-updates           /#alternatives    301
+/contact                   /#about      301
+/dujiangyan-vs-chengdu-panda-base        /#comparison    301
+/faq                       /#faq        301
+/how-to-get-there          /#getting-there  301
+/nearby-attractions        /#nearby     301
+/tickets                   /#tickets    301
+/visit-guide               /#visit-guide    301
+/volunteer-program         /#volunteer  301
+
+# preserve trailing-slash variants
+/volunteer-program/        /#volunteer  301
+/best-time-to-visit/       /#best-time  301
+/closure-updates/          /#alternatives    301
+/dujiangyan-vs-chengdu-panda-base/       /#comparison   301
+/faq/                      /#faq        301
+/how-to-get-there/         /#getting-there  301
+/nearby-attractions/       /#nearby     301
+/tickets/                  /#tickets    301
+/visit-guide/              /#visit-guide   301
+/about/                    /#about      301
+/contact/                  /#about      301
+/blog/                     /#stories    301
+/blog/how-to-book-panda-volunteer/       /#stories   301
+/blog/dujiangyan-panda-volunteer-experience/   /#stories  301

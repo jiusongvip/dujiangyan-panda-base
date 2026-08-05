@@ -2,49 +2,99 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import QuickInfoCards from "../components/QuickInfoCards.astro";
 import SectionHeader from "../components/SectionHeader.astro";
-import ContentCard from "../components/ContentCard.astro";
 import Faq from "../components/Faq.astro";
+import { Icon } from "astro-icon/components";
+
+// ---------------------------------------------------------------
+// Single-page strategy: this ONE URL answers every search need for
+// Dujiangyan Panda Base — tickets, volunteer program, transport,
+// best time, comparisons, nearby attractions, closure status, FAQ.
+// All legacy URLs 301-redirect to the relevant #section on this page.
+// ---------------------------------------------------------------
 
 const faqItems = [
   {
     q: "Is Dujiangyan Panda Base currently open?",
-    a: "No. Dujiangyan Panda Base (都江堰中华大熊猫苑) closed on April 23, 2026 for facility upgrades and renovation. The reopening date has not been announced. See our closure updates page for the latest information and recommended alternatives.",
+    a: "No. Dujiangyan Panda Base (都江堰中华大熊猫苑) closed on <strong>April 23, 2026</strong> for facility upgrades and renovation. The reopening date has not been announced. While it is closed, see our <a href=\"#alternatives\" class=\"text-accent-600 hover:text-accent-700 underline\">recommended alternatives</a> below.",
   },
   {
     q: "What is the difference between Dujiangyan Panda Base and Chengdu Panda Base?",
-    a: "Dujiangyan Panda Base is quieter and less crowded than the Chengdu Research Base. It offers more intimate panda encounters, including volunteer programs where you can help clean enclosures and prepare food. Chengdu Base is larger with more pandas overall and easier access from the city center. Note: Dujiangyan is currently closed for renovations.",
+    a: "Dujiangyan is quieter, has fewer pandas (~20), and is the only base near Chengdu offering a hands-on volunteer program. Chengdu Research Base is much larger (~200 pandas), has a famous panda nursery, and is easier to reach by subway. See the <a href=\"#comparison\" class=\"text-accent-600 hover:text-accent-700 underline\">full side-by-side comparison</a>.",
   },
   {
-    q: "How do I book the volunteer program?",
-    a: "The volunteer program typically needs to be booked in advance through official channels or authorized travel agencies. Spaces are limited, especially during peak seasons. IMPORTANT: The Dujiangyan base is currently closed. See our closure updates page for alternative volunteer programs at Panda Valley, Wolong, or Bifengxia.",
+    q: "How much does the volunteer program cost?",
+    a: "The volunteer program costs approximately CNY 700-900 per person and includes the entrance fee, uniform, gloves, lunch, and a certificate. See the <a href=\"#volunteer\" class=\"text-accent-600 hover:text-accent-700 underline\">volunteer section</a> for the full breakdown and booking tips.",
   },
   {
-    q: "How long does it take to get there from Chengdu?",
-    a: "By high-speed train from Chengdu's Xipu Station to Dujiangyan Station takes about 20-30 minutes, followed by a short taxi ride to the base. Total journey time is roughly 1-1.5 hours depending on connections. Note: the base is currently closed — check our closure updates page before planning your trip.",
+    q: "How do I get to Dujiangyan Panda Base from Chengdu?",
+    a: "The fastest way is the high-speed train from Xipu Station to Dujiangyan Station (20-30 min), then a 15-minute taxi to the base — about 1-1.5 hours total. Bus, taxi/ride-hailing, and organized tours are also options. See <a href=\"#getting-there\" class=\"text-accent-600 hover:text-accent-700 underline\">all four transport options</a> with costs.",
   },
   {
-    q: "Can I hold a panda at Dujiangyan Panda Base?",
-    a: "Under normal operations, the volunteer program may allow you to sit next to a panda for a photo, but direct holding is no longer permitted under current conservation regulations. The base is currently closed for renovations — check alternative bases for panda interaction programs.",
+    q: "Can I hold a baby panda?",
+    a: "Direct holding is no longer permitted under current conservation guidelines. The volunteer program does allow you to sit next to a panda for a photo and get very close during feeding and enclosure care.",
   },
   {
-    q: "Is it suitable for children?",
-    a: "Yes! Under normal operations, the base is family-friendly. The volunteer program typically has a minimum age of 12, but general visitors of all ages are welcome. The paths are well-maintained and stroller-friendly. Currently the base is closed — see our alternatives guide for family-friendly panda experiences.",
+    q: "When is the best time to visit?",
+    a: "Spring (March-May) and autumn (September-November) offer the best weather and most active pandas. During summer, arrive early morning before the heat. Winter has the fewest crowds. See the <a href=\"#best-time\" class=\"text-accent-600 hover:text-accent-700 underline\">month-by-month guide</a>.",
+  },
+  {
+    q: "Do I need to book tickets in advance?",
+    a: "General admission can be bought at the gate, but booking online is recommended during peak seasons (summer and Chinese holidays). The volunteer program must be booked at least 1-2 weeks ahead. See <a href=\"#tickets\" class=\"text-accent-600 hover:text-accent-700 underline\">ticket details</a>.",
+  },
+  {
+    q: "Is the base suitable for children?",
+    a: "Yes, the base is family-friendly and the paths are stroller-friendly. The volunteer program has a minimum age of 12, but general visitors of all ages are welcome.",
+  },
+  {
+    q: "What are the opening hours?",
+    a: "Under normal operations the base is open daily from 8:30 AM to 5:00 PM, year-round. Arrive at opening time — pandas are most active in the morning.",
+  },
+  {
+    q: "What is the minimum age for volunteers?",
+    a: "The volunteer program is open to ages 12-65. Participants under 18 must be accompanied by a parent or guardian.",
+  },
+  {
+    q: "Do I need to speak Chinese to volunteer?",
+    a: "Basic English is usually sufficient — most programs have English-speaking coordinators. Learning a few Chinese phrases can enhance the experience.",
+  },
+  {
+    q: "What should I wear for the volunteer program?",
+    a: "Comfortable clothes you don't mind getting dirty, closed-toe shoes, sunscreen, and insect repellent. The base provides a uniform or apron for volunteer activities.",
+  },
+  {
+    q: "How far in advance should I book the volunteer program?",
+    a: "At least 1-2 weeks in advance. During peak seasons (summer, Chinese holidays), spots can fill up 3-4 weeks ahead — Golden Week can fill a month in advance.",
   },
 ];
 
-const jsonLd = {
+const strip = (s) => s.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+
+const touristAttractionLd = {
   "@type": "TouristAttraction",
   "name": "Dujiangyan Panda Base",
-  "description": "A quieter, more intimate panda experience near Chengdu, offering volunteer programs, close viewing areas, and a scenic hillside setting with approximately 20 pandas.",
+  "alternateName": "都江堰中华大熊猫苑",
+  "description": "A quieter, more intimate panda experience near Chengdu offering volunteer programs, close viewing areas, and a scenic hillside setting with approximately 20 pandas. Operated by the China Conservation and Research Center for the Giant Panda. Closed for renovations since April 23, 2026.",
+  "url": new URL("/", Astro.site).href,
+  "image": [
+    new URL("/images/hero-panda-bamboo.webp", Astro.site).href,
+    new URL("/images/panda-forest.webp", Astro.site).href,
+    new URL("/images/volunteer-feeding.webp", Astro.site).href,
+  ],
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Dujiangyan",
     "addressRegion": "Sichuan",
     "addressCountry": "CN",
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 30.9961,
+    "longitude": 103.6197,
+  },
   "openingHours": "Mo-Su 08:30-17:00",
   "priceRange": "CNY 58",
   "publicAccess": true,
+  "isAccessibleForFree": false,
   "touristType": ["Nature lovers", "Families", "Volunteers"],
 };
 
@@ -55,217 +105,1181 @@ const faqLd = {
     "name": item.q,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": item.a,
+      "text": strip(item.a),
     },
   })),
 };
 
-// Combine into @graph — BaseLayout will merge them with Organization/WebSite/BreadcrumbList
-const combinedLd = [jsonLd, faqLd];
+const closureArticleLd = {
+  "@type": "Article",
+  "headline": "Dujiangyan Panda Base Closure Update — Renovation Status & Alternatives",
+  "description": "Dujiangyan Panda Base (都江堰中华大熊猫苑) closed on April 23, 2026 for renovations. Track reopening updates and find the best alternative panda experiences.",
+  "datePublished": "2026-04-16",
+  "dateModified": "2026-07-31",
+  "author": {
+    "@type": "Organization",
+    "name": "Dujiangyan Panda Base Guide",
+  },
+};
+
+const combinedLd = [touristAttractionLd, faqLd, closureArticleLd];
+
+const tickets = [
+  { type: "Adult", price: "58", note: "Standard entry", highlight: true },
+  { type: "Student", price: "29", note: "Valid student ID required", highlight: false },
+  { type: "Senior (60-65)", price: "29", note: "Chinese ID or passport required", highlight: false },
+  { type: "Senior (65+)", price: "Free", note: "Chinese ID or passport required", highlight: false },
+  { type: "Child (under 1.2 m)", price: "Free", note: "Height measured at gate", highlight: false },
+  { type: "Volunteer Program", price: "700-900", note: "Includes entry, uniform, lunch, certificate", highlight: false },
+];
+
+const transport = [
+  {
+    method: "High-Speed Train",
+    time: "30-50 min train + 10-15 min transfer",
+    cost: "CNY 10 (train) + transfer",
+    icon: "M5 12h14M12 5l7 7-7 7",
+    steps: [
+      "Take Chengdu Metro Line 2 to Xipu Station (犀浦站)",
+      "Transfer to the high-speed train to Qingchengshan Station (青城山站) — the closest stop, from ¥10, trains every 15-30 min",
+      "From Qingchengshan Station, take a taxi (about 10 min) or local bus No. 102, getting off at the Panda Base / disease-control stop",
+    ],
+    tag: "Fastest",
+  },
+  {
+    method: "Bus",
+    time: "1.5-2 hours",
+    cost: "CNY 10-15 + local bus",
+    icon: "M12 5v14M5 12h14",
+    steps: [
+      "From Chengdu Chadianzi Bus Station (茶店子客运站, reachable on Metro Line 2 — first bus ~7:30 AM, last ~7:00 PM)",
+      "Coach to Dujiangyan Bus Station, about 1.5-2 hours",
+      "Transfer to local bus No. 102 to the Panda Base stop (about 50 min)",
+    ],
+    tag: "Cheapest",
+  },
+  {
+    method: "Taxi / Ride-Hailing",
+    time: "1-1.5 hours",
+    cost: "CNY 150-250",
+    icon: "M12 2L4 12l8 10 8-10z",
+    steps: [
+      "Use Didi (Chinese Uber) or hail a taxi from anywhere in Chengdu",
+      "Show the driver: 都江堰熊猫基地 (Dujiangyan Panda Base)",
+      "Most convenient door-to-door, especially with luggage",
+      "Tip: taxis are scarce in Dujiangyan — arrange a return ride via your Didi app or hotel in advance, or you may struggle to get back to Chengdu",
+    ],
+    tag: "Most convenient",
+  },
+  {
+    method: "Organized Tour",
+    time: "Full day",
+    cost: "CNY 300-600",
+    icon: "M12 2a10 10 0 100 20 10 10 0 000-20z",
+    steps: [
+      "Book through Trip.com, Klook, or a local agency",
+      "Includes hotel pickup, transport, and sometimes a guide",
+      "Often combined with the Dujiangyan Irrigation System",
+    ],
+    tag: "Hassle-free",
+  },
+];
+
+const seasons = [
+  {
+    name: "Spring",
+    period: "Mar - May (15-25 C)",
+    rating: "Best",
+    color: "bg-green-50 border-green-200",
+    badge: "bg-green-200 text-green-800",
+    desc: "Mild temperatures, lush bamboo, active pandas outdoors. April and May are ideal — comfortable weather before the summer heat. The best window to visit.",
+  },
+  {
+    name: "Summer",
+    period: "Jun - Aug (25-35 C)",
+    rating: "Good",
+    color: "bg-yellow-50 border-yellow-200",
+    badge: "bg-yellow-200 text-yellow-800",
+    desc: "Hot and humid with afternoon thunderstorms. Pandas nap by midday — arrive at 8:30 AM. July and August are peak domestic season, so expect crowds.",
+  },
+  {
+    name: "Autumn",
+    period: "Sep - Nov (15-25 C)",
+    rating: "Best",
+    color: "bg-orange-50 border-orange-200",
+    badge: "bg-orange-200 text-orange-800",
+    desc: "Crisp, clear days and beautiful fall colors. Pandas are active and playful. Avoid the first week of October (Golden Week) when the country travels.",
+  },
+  {
+    name: "Winter",
+    period: "Dec - Feb (0-10 C)",
+    rating: "Okay",
+    color: "bg-blue-50 border-blue-200",
+    badge: "bg-blue-200 text-blue-800",
+    desc: "Cold but very quiet — the base is nearly empty. Pandas love the cool weather and stay active. Chinese New Year brings a brief visitor spike.",
+  },
+];
+
+const monthTable = [
+  ["Jan", "3-9", "Very low", "Good", "Good"],
+  ["Feb", "5-12", "Low (except CNY)", "Good", "Good"],
+  ["Mar", "10-17", "Moderate", "Active", "Excellent"],
+  ["Apr", "15-23", "Moderate", "Very active", "Excellent"],
+  ["May", "19-27", "Busy", "Active (mornings)", "Excellent"],
+  ["Jun", "22-30", "Moderate", "Lazy (hot)", "Good"],
+  ["Jul", "24-33", "Very busy", "Lazy (hot)", "Okay"],
+  ["Aug", "23-32", "Very busy", "Lazy (hot)", "Okay"],
+  ["Sep", "19-27", "Moderate", "Very active", "Excellent"],
+  ["Oct", "15-22", "Busy (Golden Week)", "Very active", "Excellent"],
+  ["Nov", "10-16", "Low", "Active", "Excellent"],
+  ["Dec", "4-10", "Very low", "Good", "Good"],
+];
+
+const volunteerDay = [
+  { step: "1", title: "Morning Briefing", desc: "Arrive by 8:30 AM, change into your uniform, and get a safety orientation from an English-speaking coordinator." },
+  { step: "2", title: "Clean Enclosures", desc: "Sweep and clean panda enclosures — real behind-the-scenes panda care work." },
+  { step: "3", title: "Prepare Food", desc: "Wash bamboo, make panda cakes from a grain mix, and portion apples and carrots." },
+  { step: "4", title: "Feed the Pandas", desc: "The highlight — hand-feed pandas under staff supervision. Photos allowed (no flash)." },
+  { step: "5", title: "Observe & Learn", desc: "Watch panda behavior, learn about conservation, visit the nursery if cubs are present." },
+  { step: "6", title: "Certificate", desc: "Receive your volunteer certificate and souvenir. Programs finish around 3:00-4:00 PM." },
+];
+
+const rhythm = [
+  { time: "8:30 AM", icon: "sun", title: "Gates Open — Pandas Eat Breakfast", desc: "Best time of day. Pandas are hungry, active, and climbing. Arrive at opening.", active: true },
+  { time: "9:00 AM", icon: "broom", title: "Volunteers Start Morning Shift", desc: "Safety briefing, uniform change, then enclosure cleaning and food prep.", active: false },
+  { time: "10:30 AM", icon: "carrot", title: "Feeding Time", desc: "Volunteers hand-feed bamboo shoots, apples, and panda cakes. Best photo opportunity.", active: false },
+  { time: "11:30 AM", icon: "moon", title: "Nap Time Begins", desc: "Most pandas settle in for a midday nap. Good time for the museum or nature trails.", active: false },
+  { time: "2:00 PM", icon: "apple-whole", title: "Afternoon Activity Window", desc: "Pandas wake for an afternoon snack. Quieter with softer light for photography.", active: true },
+  { time: "5:00 PM", icon: "cloud-sun", title: "Base Closes", desc: "Head back to Chengdu or continue to the Dujiangyan Irrigation System (15 min away).", active: false },
+];
+
+const zones = [
+  { name: "Panpan Garden", chinese: "盼盼园", highlight: "At the entrance", desc: "The first zone you meet. Watch mother pandas caring for cubs — eating bamboo, climbing, and playing." },
+  { name: "Linze Garden", chinese: "临泽园", highlight: "Red pandas & black bears", desc: "The red panda area. Spot red pandas in the trees and black bears in the neighboring enclosure." },
+  { name: "Diequan Garden", chinese: "叠泉园", highlight: "Most popular", desc: "The largest zone and furthest from the entrance, home to the most pandas — including Panda Lele, the famously active returnee from Singapore. Take the shuttle if you'd rather not walk." },
+  { name: "Shuangnan Garden", chinese: "双楠园", highlight: "Uphill walking", desc: "More giant pandas in a hillside setting. Expect some uphill walking between the viewing areas here." },
+];
+
+const packing = [
+  { icon: "shoe-prints", title: "Comfortable walking shoes", desc: "The base is on a hillside with uneven paths. Leave the sandals at home.", must: true },
+  { icon: "camera", title: "Camera with zoom lens", desc: "Pandas can be 5-15 meters from viewing areas. Phone zoom won't cut it.", must: true },
+  { icon: "passport", title: "Passport", desc: "Required for foreign visitors at ticket purchase and entry.", must: true },
+  { icon: "spray-can-sparkles", title: "Sunscreen + hat", desc: "Limited shade in some open areas. Sichuan sun is stronger than you think.", must: true },
+  { icon: "droplet", title: "Water + snacks", desc: "Limited food options inside the base. Pack enough for a half day.", must: false },
+  { icon: "umbrella", title: "Rain jacket or umbrella", desc: "Sichuan weather changes fast. A light rain jacket saves your day.", must: false },
+];
+
+const comparison = [
+  ["Crowds", "Quiet, relaxed", "Very busy, especially mornings"],
+  ["Pandas", "~20", "~200"],
+  ["Entrance fee", "CNY 58", "CNY 55"],
+  ["Volunteer program", "Yes (CNY 700-900)", "Not available"],
+  ["Baby pandas", "Seasonal", "Nursery open year-round"],
+  ["Transit from Chengdu", "60 min via train + taxi", "30 min via Metro Line 3"],
+  ["Setting", "Hillside, natural forest", "Large manicured park"],
+  ["Nearby UNESCO sites", "Irrigation System, Mount Qingcheng", "None nearby"],
+  ["Open hours", "8:30 AM - 5:00 PM", "7:30 AM - 6:00 PM"],
+  ["Best for", "Volunteers, couples, quiet visits", "Families, first-timers, photographers"],
+];
+
+const alternatives = [
+  {
+    name: "Dujiangyan Panda Valley (熊猫谷)",
+    tag: ["CLOSEST", "RECOMMENDED"],
+    tagColor: ["bg-green-100 text-green-700", "bg-accent-100 text-accent-700"],
+    image: "/images/red-panda.webp",
+    pandas: "~12 giant + ~20 red",
+    tickets: "CNY 55",
+    hours: "7:30 AM - 5:30 PM",
+    transit: "Train to Lidui Park + taxi",
+    volunteer: false,
+    desc: "~17 km from the closed base, ~65 km from Chengdu. Part of the Chengdu system but focused on semi-wild training. Red pandas roam freely and may walk right past you on the boardwalks.",
+  },
+  {
+    name: "Wolong Giant Panda Nature Reserve (卧龙)",
+    tag: ["VOLUNTEER AVAILABLE"],
+    tagColor: ["bg-amber-100 text-amber-700"],
+    image: "/images/mount-qingcheng.webp",
+    pandas: "~50",
+    tickets: "CNY 90",
+    hours: "Full day",
+    transit: "Bus from Chengdu (2-2.5 h)",
+    volunteer: true,
+    desc: "~120 km from Chengdu. The largest panda reserve with the most natural setting and a full volunteer program similar to Dujiangyan's. Best for an immersive mountain experience.",
+  },
+  {
+    name: "Bifengxia Panda Base (碧峰峡)",
+    tag: ["VOLUNTEER AVAILABLE"],
+    tagColor: ["bg-amber-100 text-amber-700"],
+    image: "/images/hero-panda-bamboo.webp",
+    pandas: "~80",
+    tickets: "CNY 118",
+    hours: "Full day",
+    transit: "Bus from Chengdu (2.5 h)",
+    volunteer: true,
+    desc: "~160 km from Chengdu, near Ya'an. One of three bases offering the official panda keeper volunteer program, set in a scenic gorge with fewer crowds than Wolong.",
+  },
+  {
+    name: "Chengdu Research Base of Giant Panda Breeding (成都大熊猫繁育研究基地)",
+    tag: ["LARGEST"],
+    tagColor: ["bg-blue-100 text-blue-700"],
+    image: "/images/volunteer-feeding.webp",
+    pandas: "~200",
+    tickets: "CNY 55",
+    hours: "7:30 AM - 6:00 PM",
+    transit: "Metro Line 3",
+    volunteer: false,
+    desc: "~10 km from downtown Chengdu. The most famous base with a panda nursery and excellent museum. Very crowded — arrive before 8 AM. No volunteer program, but the best place to see baby pandas.",
+  },
+];
+
+const nearby = [
+  {
+    title: "Dujiangyan Irrigation System",
+    dist: "15 min from the base",
+    unesco: true,
+    image: "/images/dujiangyan-irrigation.webp",
+    desc: "A 2,000-year-old engineering marvel and UNESCO World Heritage site built in 256 BC. Walk the ancient riverbanks, cross the historic Anlan Suspension Bridge, and visit Erwang Temple.",
+  },
+  {
+    title: "Mount Qingcheng",
+    dist: "30 min from the base",
+    unesco: true,
+    image: "/images/mount-qingcheng.webp",
+    desc: "One of the birthplaces of Taoism and a UNESCO World Heritage site. Hike misty forests, visit ancient Taoist temples, and enjoy panoramic summit views. Allow 3-5 hours for the front mountain.",
+  },
+  {
+    title: "Panda Valley (熊猫谷)",
+    dist: "20 min from the base",
+    unesco: false,
+    image: "/images/panda-forest.webp",
+    desc: "The Dujiangyan Field Research Center for Giant Pandas — a semi-wild training area where pandas learn survival skills. Even quieter than the main base, with red pandas roaming the boardwalks.",
+  },
+  {
+    title: "Dujiangyan Old Town",
+    dist: "15 min from the base",
+    unesco: false,
+    image: "/images/dujiangyan-nanqiao-bridge.webp",
+    desc: "Pedestrian streets near the South Bridge (Nanqiao) come alive at night with food stalls, riverside restaurants, and Sichuan opera. The illuminated South Bridge is beautiful after dark.",
+  },
+];
+
+const featured = [
+  {
+    title: "A half-day panda visit",
+    label: "Just visiting",
+    image: "/images/panda-forest.webp",
+    alt: "Giant pandas resting in forested enclosure at Dujiangyan",
+    href: "#tickets",
+    desc: "Two to four hours, 20 pandas, open-air enclosures you can't get in Chengdu. Best started at 8:30 AM feeding time.",
+  },
+  {
+    title: "The volunteer keeper program",
+    label: "Get hands-on",
+    image: "/images/volunteer-feeding.webp",
+    alt: "Volunteer hand-feeding a giant panda at Dujiangyan",
+    href: "#volunteer",
+    desc: "The only base near Chengdu with a hands-on keeper program — clean, feed, and learn from the keepers. Book 1-2 weeks ahead.",
+  },
+  {
+    title: "Pair it with UNESCO sights",
+    label: "Full day out",
+    image: "/images/mount-qingcheng.webp",
+    alt: "Misty forest path on Mount Qingcheng in Dujiangyan",
+    href: "#nearby",
+    desc: "Add the 2,000-year-old Irrigation System and Mount Qingcheng. All within 30 minutes of the base.",
+  },
+];
+
+const whyChoose = [
+  {
+    icon: "medal",
+    title: "Closest keeper program to Chengdu",
+    desc: "Just 1.5 hours from the city, Dujiangyan is the only base near Chengdu offering a real hands-on volunteer program.",
+  },
+  {
+    icon: "window-maximize",
+    title: "Open-air, not behind glass",
+    desc: "Unlike Chengdu's glass-walled nurseries, Dujiangyan's enclosures are open — closer views and clearer photos.",
+  },
+  {
+    icon: "leaf",
+    title: "Genuinely quieter",
+    desc: "A fraction of Chengdu's crowds, on a scenic hillside. Weekday mornings feel almost private.",
+  },
+  {
+    icon: "paw",
+    title: "Real rescue & conservation",
+    desc: "Operated by the CCRCGP for rescue and disease prevention — your visit supports genuine conservation work.",
+  },
+];
+
+const visitorFeedback = [
+  {
+    quote: "\u201cArriving at 8:30 AM for the morning feeding is the single best decision — pandas are climbing, eating, and playing.\u201d",
+    source: "TripAdvisor",
+    rating: "4.7/5 · 388 reviews",
+    tag: "Most-repeated advice",
+  },
+  {
+    quote: "\u201cOpen-air enclosures beat the glass walls of Chengdu — the pandas feel closer and the photos come out clearer.\u201d",
+    source: "TripAdvisor",
+    rating: "4.7/5 · 388 reviews",
+    tag: "Dujiangyan's edge",
+  },
+  {
+    quote: "\u201cWeekdays are dramatically quieter than weekends — a calm, unhurried half day.\u201d",
+    source: "Trip.com",
+    rating: "Aggregated themes",
+    tag: "When to go",
+  },
+  {
+    quote: "\u201cViewing is from 5-15 m away, so bring a real zoom lens — phone zoom won't cut it.\u201d",
+    source: "Klook",
+    rating: "Aggregated themes",
+    tag: "Pack this",
+  },
+];
+
+const trustSources = [
+  { name: "CCRCGP", note: "Official operator", url: "https://panda.org.cn/en/", highlight: true },
+  { name: "TripAdvisor", note: "4.7/5 · 388 reviews", url: "", highlight: true },
+  { name: "Trip.com", note: "Bookings & schedules", url: "https://www.trip.com/", highlight: false },
+  { name: "Klook", note: "Tour & ticket listings", url: "https://www.klook.com/", highlight: false },
+  { name: "Wikipedia", note: "Background & history", url: "https://en.wikipedia.org/", highlight: false },
+];
+
+const heroSlides = [
+  { src: "/images/hero-panda-bamboo.webp", alt: "Giant panda eating bamboo in its natural habitat at Dujiangyan" },
+  { src: "/images/panda-forest.webp", alt: "Giant pandas resting in a forested enclosure at Dujiangyan Panda Base" },
+  { src: "/images/volunteer-feeding.webp", alt: "Panda keeper volunteer hand-feeding a giant panda at Dujiangyan" },
+  { src: "/images/mount-qingcheng.webp", alt: "Misty forest and mountain scenery near Mount Qingcheng, Dujiangyan" },
+];
+
+const stats = [
+  { value: 4.7, decimals: 1, suffix: "/5", label: "TripAdvisor rating", sub: "388 visitor reviews" },
+  { value: 20, suffix: "", label: "Giant pandas", sub: "open-air hillside enclosures" },
+  { value: 58, prefix: "¥", suffix: "", label: "Entrance fee", sub: "students & 60-65 ¥29" },
+  { value: 700, suffix: "", label: "Volunteers yearly", sub: "keeper program since 2014" },
+  { value: 6, suffix: " hrs", label: "Volunteer day", sub: "8:30 AM - 3:30 PM" },
+  { value: 1.5, decimals: 1, suffix: " h", label: "From Chengdu", sub: "train + taxi, door-to-door" },
+];
+
+const routeSteps = [
+  { icon: "ticket", title: "Book your train", desc: "Xipu Station → Dujiangyan Station. Around CNY 15-25 one way." },
+  { icon: "train-subway", title: "Ride the high-speed rail", desc: "The fastest leg — roughly 20-30 minutes of flat, scenic farmland." },
+  { icon: "taxi", title: "Taxi from the station", desc: "About 15 minutes to the base gate. Negotiate the meter or use a ride-hailing app." },
+  { icon: "paw", title: "You're at the gate", desc: "Total door-to-door is around 1-1.5 hours from downtown Chengdu." },
+];
 ---
 
 <BaseLayout
-  title="Dujiangyan Panda Base - Volunteer, Tickets & Visit Guide"
-  description="Complete guide to Dujiangyan Panda Base near Chengdu. Volunteer programs, ticket prices, transport options, best seasons to visit, and insider tips."
+  title="Dujiangyan Panda Base Guide 2026 - Tickets, Volunteer & More"
+  description="Complete Dujiangyan Panda Base guide: tickets (¥58), volunteer program, how to get there, best time to visit, vs Chengdu, nearby UNESCO sites, and closure updates."
   jsonLd={combinedLd}
 >
-  <!-- Hero -->
+  <!-- ============ HERO ============ -->
   <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-accent-950/60 via-accent-950/30 to-transparent z-10" />
+    <div class="absolute inset-0 bg-gradient-to-b from-accent-950/80 via-accent-950/50 to-accent-950/30 z-10" />
     <div class="absolute inset-0">
-      <img
-        src="/images/hero-panda-bamboo.webp"
-        alt="Giant panda eating bamboo in natural habitat"
-        width="1920"
-        height="1080"
-        class="w-full h-full object-cover"
-        loading="eager"
-      />
+      {heroSlides.map((slide, i) => (
+        <img
+          src={slide.src}
+          alt={slide.alt}
+          width="1920"
+          height="1080"
+          data-hero-slide
+          class={`absolute inset-0 w-full h-full object-cover transform-gpu transition-opacity duration-[1400ms] ease-in-out ${i === 0 ? "opacity-100 hero-zoom" : "opacity-0"}`}
+          loading={i === 0 ? "eager" : "lazy"}
+        />
+      ))}
     </div>
-    <div class="relative z-20 max-w-7xl mx-auto px-4 min-h-[85dvh] flex flex-col justify-center">
+    <div class="relative z-20 max-w-7xl mx-auto px-4 min-h-[86dvh] flex flex-col justify-center pb-16">
       <div class="max-w-2xl">
-        <p class="text-accent-200 text-sm font-medium tracking-wide uppercase mb-4">Dujiangyan, Sichuan, China</p>
-        <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight">
-          Meet the Pandas at Dujiangyan
+        <p class="text-accent-200 text-sm font-medium tracking-wide uppercase mb-4 flex items-center gap-2">
+          <span class="inline-block w-8 h-px bg-accent-300/70"></span> Dujiangyan, Sichuan · 1.5 h from Chengdu
+        </p>
+        <h1 class="font-display text-4xl md:text-6xl lg:text-[4.25rem] font-semibold text-white leading-[1.05] tracking-tight">
+          Dujiangyan Panda Base — meet China's pandas up close
         </h1>
-        <p class="mt-5 text-lg md:text-xl text-warm-200 leading-relaxed max-w-xl">
-          A quieter, more intimate panda experience just 60 km from Chengdu. Volunteer, visit, and connect with China's most beloved animal.
+        <p class="mt-5 text-lg md:text-xl text-warm-100 leading-relaxed max-w-xl">
+          Tickets, the volunteer keeper program, how to get there, and every question answered — all on one page.
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="/volunteer-program" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">
+          <a href="#alternatives" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-500 text-white font-medium text-sm hover:bg-amber-600 transition-colors">
+            Current Closure Status
+          </a>
+          <a href="#volunteer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">
             Volunteer Program
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="/visit-guide" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white font-medium text-sm hover:bg-white/10 transition-colors">
-            Visit Guide
+          <a href="#tickets" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white font-medium text-sm hover:bg-white/10 transition-colors">
+            Tickets & Pricing
+          </a>
+        </div>
+        <div class="mt-10 flex items-center gap-2">
+          {heroSlides.map((_, i) => (
+            <button
+              type="button"
+              data-hero-dot
+              aria-label={`Show slide ${i + 1}`}
+              class={`w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? "bg-white" : "bg-white/40 hover:bg-white/70"}`}
+            ></button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Planner widget -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 -mt-24 pb-12">
+      <div class="rounded-2xl bg-white/95 backdrop-blur border border-warm-200 shadow-xl p-5 md:p-6">
+        <p class="text-xs font-semibold text-warm-500 uppercase tracking-wide mb-4">Plan your visit</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end">
+          <div>
+            <label for="plan-when" class="block text-xs font-medium text-warm-700 mb-1.5">When are you planning to visit?</label>
+            <select id="plan-when" data-anchor="#best-time" class="w-full text-sm rounded-lg border border-warm-300 bg-white px-3 py-2.5 text-warm-800 focus:outline-none focus:ring-2 focus:ring-accent-400">
+              <option value="#best-time">Spring (Mar-May)</option>
+              <option value="#best-time">Summer (Jun-Aug)</option>
+              <option value="#best-time">Autumn (Sep-Nov)</option>
+              <option value="#best-time">Winter (Dec-Feb)</option>
+            </select>
+          </div>
+          <div>
+            <label for="plan-what" class="block text-xs font-medium text-warm-700 mb-1.5">What do you want to do?</label>
+            <select id="plan-what" data-anchor="#tickets" class="w-full text-sm rounded-lg border border-warm-300 bg-white px-3 py-2.5 text-warm-800 focus:outline-none focus:ring-2 focus:ring-accent-400">
+              <option value="#tickets">Just visit the pandas</option>
+              <option value="#volunteer">Join the keeper program</option>
+              <option value="#nearby">Full day: base + UNESCO sites</option>
+            </select>
+          </div>
+          <div>
+            <label for="plan-budget" class="block text-xs font-medium text-warm-700 mb-1.5">Budget per person</label>
+            <select id="plan-budget" data-anchor="#tickets" class="w-full text-sm rounded-lg border border-warm-300 bg-white px-3 py-2.5 text-warm-800 focus:outline-none focus:ring-2 focus:ring-accent-400">
+              <option value="#tickets">Under CNY 100</option>
+              <option value="#volunteer">CNY 100 - 600</option>
+              <option value="#volunteer">CNY 700+ (volunteer)</option>
+            </select>
+          </div>
+          <a href="#tickets" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-accent-600 text-white font-semibold text-sm hover:bg-accent-700 transition-colors">
+            Plan my visit
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Closure Notice Banner -->
-  <section class="bg-amber-50 border-b border-amber-200">
-    <div class="max-w-7xl mx-auto px-4 py-4">
-      <div class="flex flex-wrap items-start gap-3 md:items-center">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500 text-white text-xs font-semibold shrink-0">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          CLOSED
-        </span>
-        <div class="flex-1 min-w-0">
-          <p class="text-sm md:text-base text-amber-900 font-medium">
-            Dujiangyan Panda Base (中华大熊猫苑) is currently <strong>closed for renovations</strong> since April 23, 2026. Reopening date has not been announced.
-          </p>
-          <p class="text-xs md:text-sm text-amber-700 mt-0.5">
-            <a href="/closure-updates" class="underline hover:text-amber-900 font-medium">Read the closure details</a> — or see our 
-            <a href="/closure-updates#alternatives" class="underline hover:text-amber-900 font-medium">recommended alternatives</a> including Panda Valley, Wolong, and Bifengxia.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+    document.documentElement.classList.add("js");
 
-  <!-- Quick Info Cards -->
+    document.querySelectorAll("select[data-anchor]").forEach((sel) => {
+      sel.addEventListener("change", () => {
+        if (sel.value) window.location.hash = sel.value;
+      });
+    });
+
+    // ---------- Hero Ken Burns ----------
+    const heroSlides = Array.from(document.querySelectorAll("[data-hero-slide]"));
+    const heroDots = Array.from(document.querySelectorAll("[data-hero-dot]"));
+    if (heroSlides.length > 1) {
+      let current = 0;
+      const show = (n) => {
+        current = (n + heroSlides.length) % heroSlides.length;
+        heroSlides.forEach((s, k) => {
+          s.classList.toggle("opacity-0", k !== current);
+          s.classList.toggle("hero-zoom", k === current);
+        });
+        heroDots.forEach((d, k) => {
+          d.classList.toggle("bg-white", k === current);
+          d.classList.toggle("bg-white/40", k !== current);
+        });
+      };
+      heroDots.forEach((dot, k) => dot.addEventListener("click", () => show(k)));
+      setInterval(() => show(current + 1), 7000);
+    }
+
+    // ---------- Scroll reveal ----------
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const ro = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("reveal-in");
+            ro.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      revealEls.forEach((el) => ro.observe(el));
+    }
+
+    // ---------- Count-up stats ----------
+    const counters = document.querySelectorAll("[data-count]");
+    const animateCount = (el) => {
+      const to = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || "0", 10);
+      const dur = 1500;
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min((now - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (to * eased).toFixed(decimals);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    if (counters.length && "IntersectionObserver" in window) {
+      const co = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const decimals = parseInt(el.dataset.decimals || "0", 10);
+            el.dataset.final = (parseFloat(el.dataset.count)).toFixed(decimals);
+            animateCount(el);
+            co.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach((c) => co.observe(c));
+    }
+
+    // ---------- Testimonial carousel ----------
+    const trackEls = document.querySelectorAll("[data-testimonial]");
+    if (trackEls.length > 1) {
+      const track = document.querySelector("[data-testimonial-track]");
+      const dots = Array.from(document.querySelectorAll("[data-testimonial-dot]"));
+      const prev = document.querySelector("[data-testimonial-prev]");
+      const next = document.querySelector("[data-testimonial-next]");
+      let idx = 0;
+      let timer;
+      const go = (n) => {
+        idx = (n + trackEls.length) % trackEls.length;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        dots.forEach((d, k) => d.classList.toggle("bg-accent-600", k === idx));
+        dots.forEach((d, k) => d.classList.toggle("bg-warm-300", k !== idx));
+      };
+      const autoplay = () => { timer = setInterval(() => go(idx + 1), 6000); };
+      dots.forEach((d, k) => d.addEventListener("click", () => { go(k); clearInterval(timer); autoplay(); }));
+      prev && prev.addEventListener("click", () => { go(idx - 1); clearInterval(timer); autoplay(); });
+      next && next.addEventListener("click", () => { go(idx + 1); clearInterval(timer); autoplay(); });
+      autoplay();
+    }
+  </script>
+
+  <!-- ============ STICKY SECTION NAV ============ -->
+  <nav class="sticky top-16 z-40 bg-warm-50/95 backdrop-blur-md border-b border-warm-200/70">
+    <div class="max-w-7xl mx-auto px-4 flex items-center gap-1 overflow-x-auto text-sm font-medium">
+      <a href="#alternatives" class="whitespace-nowrap px-3 py-3 text-amber-700 hover:text-amber-900 transition-colors font-semibold">Alternatives</a>
+      <a href="#tickets" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">Tickets</a>
+      <a href="#volunteer" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">Volunteer</a>
+      <a href="#getting-there" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">Getting There</a>
+      <a href="#best-time" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">Best Time</a>
+      <a href="#comparison" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">vs Chengdu</a>
+      <a href="#nearby" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">Nearby</a>
+      <a href="#faq" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">FAQ</a>
+    </div>
+  </nav>
+
+  <!-- ============ CLOSURE STATUS ============ -->
+  <!-- ============ QUICK FACTS ============ -->
   <QuickInfoCards />
 
-  <!-- 30-Second Verdict -->
-  <section class="max-w-7xl mx-auto px-4 py-12 md:py-16">
-    <div class="grid md:grid-cols-3 gap-5">
-      <div class="p-6 rounded-xl bg-green-50 border border-green-200">
-        <p class="text-xs font-semibold text-green-700 uppercase tracking-wide mb-1">Best for</p>
-        <p class="text-xl font-bold text-green-900">Volunteers & Quiet Visits</p>
-        <p class="mt-2 text-sm text-green-800 leading-relaxed">If you want to get hands-on with pandas — cleaning, feeding, preparing food — this is the only base near Chengdu that lets you do it.</p>
+  <!-- ============ EDITORIAL INTRO ============ -->
+  <section class="max-w-3xl mx-auto px-4 py-16 md:py-24 reveal">
+    <p class="flex items-center gap-3 text-xs font-semibold tracking-[0.2em] text-accent-600 uppercase mb-5">
+      <span class="inline-block w-8 h-px bg-accent-500/60"></span> The short version
+    </p>
+    <p class="font-display text-xl md:text-2xl font-medium text-warm-900 leading-relaxed">
+      A panda trip is never just a trip. At Dujiangyan, an hour and a half from Chengdu, the enclosures are open-air, the hillside is quiet, and — unlike the huge city base — you can actually get hands-on as a keeper for a day.
+    </p>
+    <p class="mt-5 text-warm-600 leading-relaxed">
+      This guide brings the essential, reader-verified details onto one page: tickets, the volunteer program, transport, the best time to go, how Dujiangyan stacks up against Chengdu, and the UNESCO sights nearby. Skip the noise below the fold — here's the honest picture.
+    </p>
+  </section>
+
+  <!-- ============ FEATURED EXPERIENCES ============ -->
+  <section class="bg-warm-100/40 py-20 md:py-24 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-2xl">
+        <p class="text-xs font-medium tracking-wide text-accent-600 uppercase mb-3">Ways to plan your day</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-warm-900 leading-tight">Three ways to experience Dujiangyan</h2>
       </div>
-      <div class="p-6 rounded-xl bg-amber-50 border border-amber-200">
-        <p class="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-1">Skip if</p>
-        <p class="text-xl font-bold text-amber-900">You Want Lots of Pandas</p>
-        <p class="mt-2 text-sm text-amber-800 leading-relaxed">With ~20 pandas vs Chengdu's 200, this is about quality over quantity. Go to <a href="/dujiangyan-vs-chengdu-panda-base" class="underline font-medium">Chengdu Research Base</a> for scale.</p>
-      </div>
-      <div class="p-6 rounded-xl bg-blue-50 border border-blue-200">
-        <p class="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-1">Ideal combo</p>
-        <p class="text-xl font-bold text-blue-900">Volunteer Day + UNESCO Sites</p>
-        <p class="mt-2 text-sm text-blue-800 leading-relaxed">Combine a morning volunteer shift with the <a href="/nearby-attractions" class="underline font-medium">Dujiangyan Irrigation System</a> and Mount Qingcheng — both UNESCO sites within 15 minutes.</p>
+      <div class="mt-10 grid md:grid-cols-3 gap-5">
+        {featured.map((f) => (
+          <a href={f.href} class="group rounded-2xl overflow-hidden border border-warm-200 bg-white hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <span class="absolute top-3 left-3 z-10 text-[10px] px-2.5 py-1 rounded-full bg-white/90 text-warm-800 font-semibold uppercase">{f.label}</span>
+              <img src={f.image} alt={f.alt} width="800" height="600" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+            </div>
+            <div class="p-5">
+              <h3 class="font-semibold text-warm-900 text-lg">{f.title}</h3>
+              <p class="mt-1.5 text-sm text-warm-600 leading-relaxed">{f.desc}</p>
+              <span class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent-600 group-hover:text-accent-700">
+                Learn more
+                <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Why Dujiangyan -->
-  <section class="max-w-7xl mx-auto px-4 py-24 md:py-32">
-    <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-      <div>
-        <SectionHeader
-          eyebrow="Why Dujiangyan"
-          title="A more personal panda experience"
-          subtitle="Unlike the busy Chengdu Research Base, Dujiangyan Panda Base offers a tranquil setting where you can observe pandas in a natural hillside environment. The smaller crowds and closer viewing areas make every moment feel special."
-        />
-        <ul class="mt-8 space-y-4">
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-accent-100 flex items-center justify-center mt-0.5 shrink-0">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-accent-600"><path d="M20 6L9 17l-5-5"/></svg>
-            </span>
-            <span class="text-warm-700">Fewer visitors, more time to watch the pandas</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-accent-100 flex items-center justify-center mt-0.5 shrink-0">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-accent-600"><path d="M20 6L9 17l-5-5"/></svg>
-            </span>
-            <span class="text-warm-700">Hands-on volunteer program -- help care for pandas</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-accent-100 flex items-center justify-center mt-0.5 shrink-0">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-accent-600"><path d="M20 6L9 17l-5-5"/></svg>
-            </span>
-            <span class="text-warm-700">Set against the scenic hills of Dujiangyan, near the UNESCO irrigation system</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="w-5 h-5 rounded-full bg-accent-100 flex items-center justify-center mt-0.5 shrink-0">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-accent-600"><path d="M20 6L9 17l-5-5"/></svg>
-            </span>
-            <span class="text-warm-700">Easy day trip from Chengdu via high-speed train</span>
-          </li>
+  <!-- ============ TRUST / SOURCES (marquee) ============ -->
+  <section class="border-y border-warm-200 bg-white overflow-hidden">
+    <div class="pt-8 pb-3">
+      <p class="text-center text-xs font-medium text-warm-500 uppercase tracking-wide">Trusted information sourced from</p>
+    </div>
+    <div class="relative">
+      <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent"></div>
+      <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent"></div>
+      <div class="marquee-track flex w-max items-center gap-16 py-6">
+        {[...trustSources, ...trustSources].map((s, i) => {
+          const inner = (
+            <>
+              <span class={`font-display text-xl font-bold whitespace-nowrap ${s.highlight ? "text-accent-700" : "text-warm-700"} transition-colors`}>{s.name}</span>
+              <span class="text-[11px] text-warm-500 whitespace-nowrap">{s.note}</span>
+            </>
+          );
+          const marker = i >= trustSources.length ? { "aria-hidden": "true" } : {};
+          return s.url ? (
+            <a href={s.url} target="_blank" rel="noopener noreferrer" {...marker} class="flex flex-col items-center shrink-0 group">{inner}</a>
+          ) : (
+            <div {...marker} class="flex flex-col items-center shrink-0">{inner}</div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT VISITORS SAY (rating badges + feedback cards) ============ -->
+  <section id="visitors-say" class="scroll-mt-28 bg-white py-20 md:py-24 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-xs font-medium tracking-wide text-accent-600 uppercase mb-3">What visitors say</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-warm-900 leading-tight">Real feedback, honest expectations</h2>
+          <p class="mt-3 text-warm-600">Paraphrased themes from 380+ visitor reviews — the most honest preview of your day.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <div class="px-4 py-2.5 rounded-lg border border-warm-200 bg-warm-50">
+            <p class="text-xs text-warm-500">TripAdvisor</p>
+            <p class="font-bold text-warm-900">4.7 / 5 <span class="text-xs font-medium text-warm-500">· 388 reviews</span></p>
+          </div>
+          <div class="px-4 py-2.5 rounded-lg border border-warm-200 bg-warm-50">
+            <p class="text-xs text-warm-500">Booking platforms</p>
+            <p class="font-bold text-warm-900">Trip.com <span class="text-warm-400 font-normal">·</span> Klook</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 relative">
+        <div class="overflow-hidden">
+          <div class="flex transition-transform duration-700 ease-out" data-testimonial-track>
+            {visitorFeedback.map((v) => (
+              <figure class="w-full shrink-0 px-1" data-testimonial>
+                <div class="mx-auto max-w-3xl rounded-3xl border border-warm-200 bg-warm-50/40 p-8 md:p-12 text-center">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" class="text-accent-500/30 mx-auto mb-6" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                  <span class="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full bg-accent-100 text-accent-700 font-semibold">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    {v.tag}
+                  </span>
+                  <blockquote class="mt-6 font-display text-xl md:text-2xl font-medium text-warm-900 leading-relaxed">{v.quote}</blockquote>
+                  <figcaption class="mt-6">
+                    <p class="text-sm font-semibold text-warm-900">{v.source}</p>
+                    <p class="text-xs text-warm-500">{v.rating}</p>
+                  </figcaption>
+                </div>
+              </figure>
+            ))}
+          </div>
+        </div>
+        <div class="mt-8 flex items-center justify-center gap-4">
+          <button type="button" data-testimonial-prev aria-label="Previous review" class="w-11 h-11 rounded-full border border-warm-300 bg-white text-warm-700 hover:bg-accent-50 hover:text-accent-700 hover:border-accent-300 transition-colors flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="flex items-center gap-2">
+            {visitorFeedback.map((_, i) => (
+              <button type="button" data-testimonial-dot aria-label={`Go to review ${i + 1}`} class={`w-2 h-2 rounded-full transition-colors ${i === 0 ? "bg-accent-600" : "bg-warm-300 hover:bg-warm-400"}`}></button>
+            ))}
+          </div>
+          <button type="button" data-testimonial-next aria-label="Next review" class="w-11 h-11 rounded-full border border-warm-300 bg-white text-warm-700 hover:bg-accent-50 hover:text-accent-700 hover:border-accent-300 transition-colors flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="mt-8 p-6 rounded-2xl border border-amber-200 bg-amber-50/50">
+        <h3 class="font-semibold text-amber-900 mb-3 flex items-center gap-2">Set honest expectations</h3>
+        <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-warm-700 list-disc pl-5">
+          <li>Pandas nap from ~11:30 AM — expect sleepy pandas at midday, not action.</li>
+          <li>Facilities are functional rather than luxurious; a few visitors note maintenance could be better.</li>
+          <li>Volunteer programs have grown more observation-led since April 2024 — confirm what's included when you book.</li>
+          <li>Without a shuttle, expect steady walking on a hillside.</li>
         </ul>
       </div>
-      <div class="relative">
-        <img
-          src="/images/panda-forest.webp"
-          alt="Giant panda walking through a lush green forest"
-          width="800"
-          height="1000"
-          class="rounded-2xl w-full aspect-[4/5] object-cover"
-          loading="lazy"
-        />
-        <div class="absolute -bottom-4 -left-4 bg-accent-500 text-white rounded-xl px-5 py-3 shadow-lg">
-          <p class="text-2xl font-bold">20+</p>
-          <p class="text-xs text-accent-100">Pandas at the base</p>
-        </div>
+      <p class="mt-6 text-xs text-warm-500">Dujiangyan Panda Base is currently closed for renovation; these themes describe normal operations. Reviewed on TripAdvisor, Trip.com and Klook.</p>
+    </div>
+  </section>
+
+  <!-- ============ WHY CHOOSE ============ -->
+  <section class="bg-accent-950 py-20 md:py-24 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-2xl">
+        <p class="flex items-center gap-3 text-xs font-semibold tracking-[0.2em] text-accent-300 uppercase mb-4">
+          <span class="inline-block w-8 h-px bg-accent-300/70"></span> Why Dujiangyan
+        </p>
+        <h2 class="font-display text-3xl md:text-4xl font-semibold text-white leading-[1.08]">The base worth the detour from Chengdu</h2>
+      </div>
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {whyChoose.map((w) => (
+          <div class="rounded-3xl bg-warm-950 border border-warm-800 p-7">
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-white/5 border border-white/10">
+              <Icon name={`fa6-solid:${w.icon}`} class="w-5 h-5 text-accent-300" />
+            </span>
+            <h3 class="mt-4 font-display text-lg font-semibold text-white leading-snug">{w.title}</h3>
+            <p class="mt-2 text-sm text-warm-300 leading-relaxed">{w.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Cost Overview -->
-  <section class="bg-white py-24 md:py-32">
+  <!-- ============ COUNT-UP STATS ============ -->
+  <section class="border-y border-warm-200 bg-white py-20 md:py-24 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <p class="flex items-center justify-center gap-3 text-xs font-semibold tracking-[0.2em] text-accent-600 uppercase mb-4">
+        <span class="inline-block w-8 h-px bg-accent-500/60"></span> Dujiangyan at a glance
+      </p>
+      <p class="text-center font-display text-2xl md:text-3xl font-semibold text-warm-900 max-w-2xl mx-auto leading-snug">
+        The numbers that tell you whether this is your base
+      </p>
+      <div class="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+        {stats.map((s) => (
+          <div class="bg-warm-50/40 p-6 text-center">
+            <p class="font-display text-3xl md:text-4xl font-semibold text-warm-950">
+              {s.prefix}<span data-count={s.value} data-decimals={s.decimals ?? 0}>0</span>{s.suffix}
+            </p>
+            <p class="mt-2 text-sm font-semibold text-warm-900">{s.label}</p>
+            <p class="mt-0.5 text-[11px] text-warm-500">{s.sub}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 30-SECOND VERDICT ============ -->
+  <section class="max-w-7xl mx-auto px-4 pb-16 md:pb-24 reveal">
+    <div class="grid md:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+      <div class="p-8 bg-white">
+        <p class="text-[11px] font-semibold tracking-[0.18em] text-accent-600 uppercase mb-3">Best for</p>
+        <p class="font-display text-2xl font-semibold text-warm-950">Volunteers &amp; quiet visits</p>
+        <p class="mt-3 text-sm text-warm-600 leading-relaxed">If you want to get hands-on with pandas — cleaning, feeding, preparing food — this is the only base near Chengdu that lets you do it.</p>
+      </div>
+      <div class="p-8 bg-white">
+        <p class="text-[11px] font-semibold tracking-[0.18em] text-amber-600 uppercase mb-3">Skip if</p>
+        <p class="font-display text-2xl font-semibold text-warm-950">You want lots of pandas</p>
+        <p class="mt-3 text-sm text-warm-600 leading-relaxed">With ~20 pandas vs Chengdu's 200, this is about quality over quantity. See the <a href="#comparison" class="text-accent-600 underline font-medium">Dujiangyan vs Chengdu comparison</a> for scale.</p>
+      </div>
+      <div class="p-8 bg-white">
+        <p class="text-[11px] font-semibold tracking-[0.18em] text-blue-600 uppercase mb-3">Ideal combo</p>
+        <p class="font-display text-2xl font-semibold text-warm-950">Volunteer day + UNESCO sites</p>
+        <p class="mt-3 text-sm text-warm-600 leading-relaxed">Combine a morning volunteer shift with the <a href="#nearby" class="text-accent-600 underline font-medium">Dujiangyan Irrigation System</a> and Mount Qingcheng — both UNESCO sites within 30 minutes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TICKETS ============ -->
+  <section id="tickets" class="scroll-mt-28 bg-white py-20 md:py-28 reveal">
     <div class="max-w-7xl mx-auto px-4">
       <SectionHeader
-        eyebrow="At a Glance"
-        title="What you will spend"
-        subtitle="All costs in one place. No hidden fees, no surprises."
+        eyebrow="Tickets & Pricing"
+        title="How much is Dujiangyan Panda Base?"
+        subtitle="Transparent pricing with no hidden fees. Verified against official listings and visitor reports, last updated July 2026. Prices are suspended while the base is closed for renovation."
       />
-      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="p-5 rounded-xl border border-warm-200 bg-warm-50 text-center">
-          <p class="text-xs font-medium text-warm-500 uppercase tracking-wide">General Visit</p>
-          <p class="mt-2 text-3xl font-bold text-warm-900">¥58</p>
-          <p class="text-xs text-warm-500 mt-1">Adult entrance</p>
-          <p class="text-xs text-warm-400 mt-0.5">Students ¥29 · Seniors Free</p>
+      <div class="mt-12 overflow-hidden rounded-2xl border border-warm-200 bg-white">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-warm-100/70">
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Ticket Type</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Price (CNY)</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Notes</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-warm-200">
+            {tickets.map((t) => (
+              <tr class={t.highlight ? "bg-accent-50/60" : "bg-white"}>
+                <td class="px-6 py-4 font-medium text-warm-900">{t.type}</td>
+                <td class="px-6 py-4 font-display text-xl font-semibold text-warm-950">{t.price}</td>
+                <td class="px-6 py-4 text-warm-600">{t.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 grid sm:grid-cols-2 gap-px overflow-hidden rounded-2xl border border-warm-200 bg-warm-200">
+        <div class="p-8 bg-warm-50/50">
+          <h3 class="font-display text-xl font-semibold text-warm-950">Where to buy</h3>
+          <p class="mt-3 text-sm text-warm-600 leading-relaxed">
+            At the gate (cash and WeChat Pay accepted) or online via Trip.com, Meituan, and other platforms — often slightly cheaper and skips the line. Foreign visitors must bring a passport.
+          </p>
         </div>
-        <div class="p-5 rounded-xl border border-accent-200 bg-accent-50 text-center ring-1 ring-accent-300">
-          <p class="text-xs font-medium text-accent-700 uppercase tracking-wide">Volunteer Day</p>
-          <p class="mt-2 text-3xl font-bold text-accent-800">¥700-900</p>
-          <p class="text-xs text-accent-600 mt-1">Includes everything</p>
-          <p class="text-xs text-accent-500 mt-0.5">Entry · Uniform · Lunch · Certificate</p>
-        </div>
-        <div class="p-5 rounded-xl border border-warm-200 bg-warm-50 text-center">
-          <p class="text-xs font-medium text-warm-500 uppercase tracking-wide">Transport</p>
-          <p class="mt-2 text-3xl font-bold text-warm-900">¥30-50</p>
-          <p class="text-xs text-warm-500 mt-1">Round trip from Chengdu</p>
-          <p class="text-xs text-warm-400 mt-0.5">Train ¥10-15 ×2 + Taxi ¥20-30</p>
-        </div>
-        <div class="p-5 rounded-xl border border-warm-200 bg-warm-50 text-center">
-          <p class="text-xs font-medium text-warm-500 uppercase tracking-wide">Half-Day Trip</p>
-          <p class="mt-2 text-3xl font-bold text-warm-900">¥88-108</p>
-          <p class="text-xs text-warm-500 mt-1">Ticket + transport</p>
-          <p class="text-xs text-warm-400 mt-0.5">Bring your own lunch</p>
+        <div class="p-8 bg-warm-50/50">
+          <h3 class="font-display text-xl font-semibold text-warm-950">Smart buying tips</h3>
+          <ul class="mt-3 text-sm text-warm-600 space-y-2 list-disc pl-5">
+            <li>Book online during peak season (summer, Chinese holidays)</li>
+            <li>Arrive before 10 AM to see morning feeding</li>
+            <li>Avoid Golden Week (early October) if possible</li>
+          </ul>
         </div>
       </div>
-      <p class="mt-4 text-center text-xs text-warm-500">Prices verified July 2026. <a href="/tickets" class="text-accent-600 hover:text-accent-700 underline">Full ticket breakdown →</a></p>
     </div>
   </section>
 
-  <!-- Panda Daily Rhythm -->
-  <section class="max-w-7xl mx-auto px-4 py-24 md:py-32">
+  <!-- ============ VOLUNTEER PROGRAM ============ -->
+  <section id="volunteer" class="scroll-mt-28 max-w-7xl mx-auto px-4 py-20 md:py-28 reveal">
+    <SectionHeader
+      eyebrow="Volunteer Program"
+      title="Become a panda keeper for a day"
+      subtitle="The only base near Chengdu where you can get hands-on with pandas. Currently suspended while the base is closed — Wolong and Bifengxia run equivalent programs."
+    />
+
+    <div class="mt-12 grid md:grid-cols-2 gap-10 items-center">
+      <div class="relative overflow-hidden rounded-3xl">
+        <img
+          src="/images/dujiangyan-panda-center.webp"
+          alt="Enclosure with giant pandas at the Dujiangyan Giant Panda Center"
+          width="1200"
+          height="900"
+          class="w-full aspect-[4/3] object-cover"
+          loading="lazy"
+        />
+        <p class="absolute bottom-2 right-3 text-[10px] text-white/80 bg-black/40 rounded px-2 py-0.5">Photo: Laika ac · CC BY-SA 2.0</p>
+      </div>
+      <div>
+        <div class="overflow-hidden rounded-2xl border border-warm-200 divide-y divide-warm-200">
+          <div class="flex items-center justify-between px-6 py-4"><span class="text-sm text-warm-600">Program fee</span><span class="font-display text-xl font-semibold text-warm-950">CNY 700-900</span></div>
+          <div class="flex items-center justify-between px-6 py-4 bg-warm-50/50"><span class="text-sm text-warm-600">Includes</span><span class="text-sm font-medium text-warm-900">Entry, uniform, gloves, lunch, certificate</span></div>
+          <div class="flex items-center justify-between px-6 py-4"><span class="text-sm text-warm-600">Duration</span><span class="text-sm font-medium text-warm-900">Full day · 8:30 AM - 3:30 PM</span></div>
+          <div class="flex items-center justify-between px-6 py-4 bg-warm-50/50"><span class="text-sm text-warm-600">Age limit</span><span class="text-sm font-medium text-warm-900">12-65 (guardian for minors)</span></div>
+          <div class="flex items-center justify-between px-6 py-4"><span class="text-sm text-warm-600">Group size</span><span class="text-sm font-medium text-warm-900">Small groups, 10-20 per day</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="mt-20 font-display text-2xl md:text-3xl font-semibold text-warm-950">What a typical day looks like</h2>
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+      {volunteerDay.map((item) => (
+        <div class="p-7 bg-white">
+          <span class="font-display text-3xl font-semibold text-accent-600/40">{item.step}</span>
+          <h3 class="mt-2 font-display text-lg font-semibold text-warm-950">{item.title}</h3>
+          <p class="mt-2 text-sm text-warm-600 leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-5 text-xs text-warm-500">A typical keeper day (per published itineraries): ~8:00 AM start with care work (breaking bamboo, washing bamboo shoots, cleaning enclosure glass), lunch and a panda film around noon, panda-cake making and leaf cutting mid-afternoon, then your certificate by ~2:30 PM. Even during the keeper program you are <strong>not allowed to touch or hold the pandas</strong>.</p>
+
+    <div class="mt-12 grid sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-warm-200 bg-warm-200">
+      <div class="p-7 bg-white">
+        <h3 class="font-semibold text-warm-900">Health</h3>
+        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Good general health required. Anyone with a cold, flu, or infectious condition won't be allowed near the pandas.</p>
+      </div>
+      <div class="p-7 bg-white">
+        <h3 class="font-semibold text-warm-900">Language</h3>
+        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Basic English is usually sufficient — most programs have English-speaking coordinators.</p>
+      </div>
+      <div class="p-7 bg-white">
+        <h3 class="font-semibold text-warm-900">Documents</h3>
+        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Valid passport or ID. Some programs ask for a simple health declaration form.</p>
+      </div>
+    </div>
+
+    <div class="mt-10 rounded-3xl bg-accent-900 p-8 md:p-10">
+      <h3 class="font-display text-2xl font-semibold text-white mb-3">How to book &amp; official channels</h3>
+      <p class="text-accent-200 text-sm leading-relaxed mb-5">There is no dedicated English booking site for the volunteer program. The reliable paths are:</p>
+      <ul class="space-y-2.5 text-sm text-warm-200 list-disc pl-5">
+        <li><strong class="text-white">Authorized travel agencies</strong> partnered with the base (recommended, handle all paperwork in English) — expect CNY 700-900 total</li>
+        <li><strong class="text-white">Your Chengdu hotel / hostel concierge</strong> — give them 3-4 days lead time</li>
+        <li><strong class="text-white">Official WeChat channel</strong> of the China Conservation and Research Center for the Giant Panda (<a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn</a>) — for Chinese speakers</li>
+      </ul>
+      <p class="mt-4 text-xs text-accent-200 flex items-center gap-1.5"><Icon name="fa6-solid:triangle-exclamation" class="w-3.5 h-3.5 text-amber-400 shrink-0" /> While Dujiangyan is closed, equivalent keeper programs run at <a href="#alternatives" class="text-accent-300 hover:text-white underline">Wolong and Bifengxia</a>.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOW TO GET THERE ============ -->
+  <section id="getting-there" class="scroll-mt-28 bg-white py-20 md:py-28 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <SectionHeader
+        eyebrow="Getting There"
+        title="How to get to Dujiangyan Panda Base from Chengdu"
+        subtitle="Four ways to reach the base. The high-speed train is the fastest and most convenient option — about 1-1.5 hours door-to-door."
+      />
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {routeSteps.map((r, i) => (
+          <div class="relative rounded-3xl border border-warm-200 bg-warm-50/40 p-7">
+            <span class="absolute -top-4 left-6 h-8 w-8 rounded-full bg-accent-600 text-white font-display text-base font-semibold flex items-center justify-center shadow">{i + 1}</span>
+            <span class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-accent-50 border border-accent-100">
+              <Icon name={`fa6-solid:${r.icon}`} class="w-5 h-5 text-accent-700" />
+            </span>
+            <h3 class="mt-4 font-display text-lg font-semibold text-warm-950">{r.title}</h3>
+            <p class="mt-2 text-sm text-warm-600 leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 space-y-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+        {transport.map((item) => (
+          <div class="p-7 md:p-8 bg-white">
+            <div class="flex items-start gap-5 md:gap-8">
+              <div class="hidden md:flex w-10 h-10 rounded-full bg-accent-100 items-center justify-center shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-700"><path d={item.icon}/></svg>
+              </div>
+              <div class="flex-1">
+                <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 class="font-display text-xl font-semibold text-warm-950">{item.method}</h3>
+                  <span class="text-xs text-warm-500">{item.time}</span>
+                  <span class="text-xs font-semibold text-accent-700">{item.cost}</span>
+                  <span class="ml-auto text-[10px] px-2.5 py-1 rounded-full bg-accent-100 text-accent-800 font-semibold uppercase tracking-wide">{item.tag}</span>
+                </div>
+                <ol class="mt-4 space-y-2.5 border-l border-warm-200 ml-2 pl-6">
+                  {item.steps.map((s, i) => (
+                    <li class="relative flex items-start gap-3 text-sm text-warm-700">
+                      <span class="absolute -left-6 top-1.5 w-4 h-4 rounded-full bg-accent-600 text-white text-[9px] font-bold flex items-center justify-center">{i + 1}</span>
+                      <span>{s}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12">
+        <h2 class="font-display text-2xl font-semibold text-warm-950 mb-4">Map</h2>
+        <div class="overflow-hidden rounded-3xl border border-warm-200">
+          <iframe
+            src="https://www.google.com/maps?q=Dujiangyan%20Panda%20Base%20%E9%83%BD%E6%B1%9F%E5%A0%B0%E4%B8%AD%E5%8D%8E%E5%A4%A7%E7%86%8A%E7%8C%AB%E8%8B%91&output=embed"
+            title="Map showing the location of Dujiangyan Panda Base near Chengdu"
+            width="1200"
+            height="400"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="w-full h-[320px] md:h-[400px] border-0"
+          ></iframe>
+        </div>
+        <p class="mt-3 text-xs text-warm-500">
+          Show <a href="https://www.google.com/maps/search/Dujiangyan+Panda+Base+%E9%83%BD%E6%B1%9F%E5%A0%B0%E4%B8%AD%E5%8D%8E%E5%A4%A7%E7%86%8A%E7%8C%AB%E8%8B%91" target="_blank" rel="noopener noreferrer" class="text-accent-600 hover:text-accent-700 underline">Dujiangyan Panda Base on Google Maps</a> · About 70 km (1-1.5 h) from downtown Chengdu, 18 km from Dujiangyan city.
+        </p>
+      </div>
+
+      <div class="mt-10 rounded-3xl bg-accent-50/70 border border-accent-200 p-7 md:p-8">
+        <h2 class="font-display text-xl font-semibold text-warm-950 mb-3">Useful links</h2>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://www.trip.com/trains/china/" target="_blank" rel="noopener noreferrer" class="text-accent-700 hover:text-accent-800 underline">China high-speed rail schedules (Trip.com)</a> — check train times and book tickets</li>
+          <li><a href="https://en.wikipedia.org/wiki/Chengdu_Chadianzi_Bus_Station" target="_blank" rel="noopener noreferrer" class="text-accent-700 hover:text-accent-800 underline">Chengdu Chadianzi Bus Station</a> — location and route information</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BEST TIME TO VISIT ============ -->
+  <section id="best-time" class="scroll-mt-28 max-w-7xl mx-auto px-4 py-20 md:py-28 reveal">
+    <SectionHeader
+      eyebrow="Best Time to Visit"
+      title="When to visit Dujiangyan Panda Base"
+      subtitle="Spring and autumn offer the best weather and most active pandas. Here's what each season and month looks like."
+    />
+    <div class="mt-12 grid md:grid-cols-2 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+      {seasons.map((s) => (
+        <div class={`p-8 ${s.color}`}>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-display text-xl font-semibold text-warm-950">{s.name}</h3>
+            <span class={`text-xs font-medium px-3 py-1 rounded-full ${s.badge}`}>{s.rating}</span>
+          </div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-warm-500 mb-2">{s.period}</p>
+          <p class="text-sm text-warm-700 leading-relaxed">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2 class="mt-20 font-display text-2xl md:text-3xl font-semibold text-warm-950">Month by month</h2>
+    <div class="mt-6 overflow-x-auto rounded-3xl border border-warm-200 bg-white">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-warm-100/70">
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Month</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Temp (C)</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Crowds</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Panda Activity</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Rating</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-warm-200">
+          {monthTable.map((m, i) => (
+            <tr class={i % 2 ? "bg-warm-50/60" : "bg-white"}>
+              <td class="px-5 py-3 font-medium text-warm-900">{m[0]}</td>
+              <td class="px-5 py-3 text-warm-600">{m[1]}</td>
+              <td class="px-5 py-3 text-warm-600">{m[2]}</td>
+              <td class="px-5 py-3 text-warm-600">{m[3]}</td>
+              <td class={`px-5 py-3 ${m[4] === "Excellent" ? "text-accent-700 font-medium" : "text-warm-600"}`}>{m[4]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-xs text-warm-500">Typical conditions at ~700 m elevation. Sichuan weather can be unpredictable — always check the forecast before you go.</p>
+  </section>
+
+  <!-- ============ VS CHENGDU ============ -->
+  <section id="comparison" class="scroll-mt-28 bg-white py-20 md:py-28 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <SectionHeader
+        eyebrow="Compare"
+        title="Dujiangyan vs Chengdu Panda Base"
+        subtitle="Two bases, two very different experiences. Here's how to choose for your Sichuan trip."
+      />
+      <div class="mt-12 overflow-x-auto rounded-3xl border border-warm-200 bg-white">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-warm-100/70">
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Feature</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-accent-800 bg-accent-50/70">Dujiangyan</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Chengdu</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-warm-200">
+            {comparison.map((c, i) => (
+              <tr class={i % 2 ? "bg-warm-50/60" : "bg-white"}>
+                <td class="px-6 py-3.5 font-medium text-warm-900">{c[0]}</td>
+                <td class="px-6 py-3.5 text-warm-800 bg-accent-50/70">{c[1]}</td>
+                <td class="px-6 py-3.5 text-warm-600">{c[2]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-8 grid sm:grid-cols-2 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+        <div class="p-8 bg-white">
+          <h3 class="font-display text-2xl font-semibold text-accent-800 mb-4">Pick Dujiangyan if…</h3>
+          <ul class="space-y-2.5 text-sm text-warm-700">
+            <li>You want to do the volunteer program</li>
+            <li>You prefer a quiet, uncrowded experience</li>
+            <li>You're combining with the Irrigation System or Mount Qingcheng</li>
+            <li>You're traveling as a couple or small group</li>
+          </ul>
+        </div>
+        <div class="p-8 bg-white">
+          <h3 class="font-display text-2xl font-semibold text-warm-950 mb-4">Pick Chengdu if…</h3>
+          <ul class="space-y-2.5 text-sm text-warm-700">
+            <li>You want to see as many pandas as possible (~200)</li>
+            <li>Seeing baby pandas in the nursery is a priority</li>
+            <li>You're short on time (easy subway from downtown)</li>
+            <li>You're visiting with young children</li>
+          </ul>
+        </div>
+      </div>
+      <p class="mt-8 text-warm-600 leading-relaxed max-w-[75ch]">
+        <strong>Can you do both?</strong> Absolutely — and many visitors do: a morning at Chengdu Research Base, then an afternoon train to Dujiangyan for a volunteer day the next morning. If you only have one panda day, choose <strong>Dujiangyan for the volunteer experience, Chengdu for the spectacle.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ NEARBY ATTRACTIONS ============ -->
+  <section id="nearby" class="scroll-mt-28 max-w-7xl mx-auto px-4 py-20 md:py-28 reveal">
+    <SectionHeader
+      eyebrow="Nearby"
+      title="Make it a full day in Dujiangyan"
+      subtitle="Combine your panda visit with these UNESCO sites and scenic spots, all within 30 minutes of the base."
+    />
+    <div class="mt-12 space-y-8">
+      {nearby.map((attraction) => (
+        <div class={attraction.image ? "grid md:grid-cols-2 gap-8 md:gap-12 items-center" : ""}>
+          {attraction.image ? (
+            <div class="overflow-hidden rounded-3xl">
+              <img src={attraction.image} alt={attraction.title} width="800" height="600" class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+            </div>
+          ) : (
+            <div></div>
+          )}
+          <div class={attraction.image ? "" : "p-0 md:p-8"}>
+            <div class="flex items-center gap-3 mb-3">
+              {attraction.unesco && <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 uppercase tracking-wide">UNESCO</span>}
+              <span class="text-xs text-warm-500">{attraction.dist}</span>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-warm-950">{attraction.title}</h3>
+            <p class="mt-3 text-sm text-warm-600 leading-relaxed">{attraction.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mt-14 rounded-3xl bg-accent-900 p-8 md:p-10">
+      <h2 class="font-display text-2xl font-semibold text-white mb-3">Suggested day-trip route</h2>
+      <p class="text-accent-200 leading-relaxed">Start at the Panda Base in the morning (8:30 AM), then head to the Dujiangyan Irrigation System for the afternoon. Cross the Anlan Bridge, explore the temples, and finish with dinner in Dujiangyan Old Town. Mount Qingcheng deserves its own full day.</p>
+    </div>
+  </section>
+
+  <!-- ============ ALTERNATIVES WHILE CLOSED ============ -->
+  <section id="alternatives" class="scroll-mt-28 bg-accent-950 py-20 md:py-28 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-3xl">
+        <p class="flex items-center gap-3 text-xs font-semibold tracking-[0.2em] text-accent-300 uppercase mb-4">
+          <span class="inline-block w-8 h-px bg-accent-300/70"></span> While Dujiangyan Is Closed
+        </p>
+        <h2 class="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-semibold text-white leading-[1.08]">Where to see pandas instead</h2>
+        <p class="mt-5 text-accent-200 leading-relaxed max-w-[65ch]">From closest to furthest, here are the best panda experiences available right now.</p>
+      </div>
+      <div class="mt-12 space-y-6">
+        {alternatives.map((alt, ai) => (
+          <div class="rounded-3xl bg-white p-0 overflow-hidden">
+            <div class="grid md:grid-cols-[300px_1fr]">
+              <div class="relative md:h-full">
+                <img src={alt.image} alt={`${alt.name} giant panda`} width="600" height="450" class="w-full h-44 md:h-full object-cover" loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent md:bg-none"></div>
+              </div>
+              <div class="p-7 md:p-8">
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                  {alt.tag.map((t, i) => (
+                    <span class={`px-2.5 py-1 rounded-full ${alt.tagColor[i]} text-xs font-semibold uppercase tracking-wide`}>{t}</span>
+                  ))}
+                </div>
+                <h3 class="font-display text-xl font-semibold text-warm-950">{alt.name}</h3>
+                <p class="mt-2 text-sm text-warm-600 leading-relaxed">{alt.desc}</p>
+                <div class="mt-5 grid sm:grid-cols-4 gap-3 text-xs">
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Tickets</span><span class="font-display text-base font-semibold text-warm-950">{alt.tickets}</span></div>
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Hours</span><span class="font-semibold text-warm-900">{alt.hours}</span></div>
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Transit</span><span class="font-semibold text-warm-900">{alt.transit}</span></div>
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Volunteer</span><span class={`font-semibold ${alt.volunteer ? "text-accent-700" : "text-warm-900"}`}>{alt.volunteer ? "Available" : "Not offered"}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 rounded-3xl bg-warm-900 border border-warm-800 p-7 md:p-8">
+        <h3 class="font-display text-xl font-semibold text-white mb-3">Booking tips while Dujiangyan is closed</h3>
+        <ul class="space-y-2.5 text-sm text-warm-300 list-disc pl-5">
+          <li><strong class="text-white">Panda Valley:</strong> book online in advance — there is no reliable on-site ticket window. Use the official English page at <a href="https://panda.org.cn/en/pandavalley/tickets" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn/en/pandavalley/tickets</a> or the WeChat mini-program 熊猫谷 (has an English toggle). Foreign visitors book with a passport number.</li>
+          <li><strong class="text-white">Wolong & Bifengxia:</strong> volunteer keeper programs are booked through authorized agencies or the CCRCGP's official channels — plan 1-2 weeks ahead in peak season.</li>
+          <li><strong class="text-white">General:</strong> weekday mornings are always quieter; don't rely on walk-up tickets on weekends or Chinese holidays.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DAILY RHYTHM ============ -->
+  <section id="visit-guide" class="scroll-mt-28 max-w-7xl mx-auto px-4 py-20 md:py-28 reveal">
     <SectionHeader
       eyebrow="During Your Visit"
       title="A panda's day — plan around it"
-      subtitle="Pandas follow a predictable rhythm. Time your visit right and you will see them at their best."
+      subtitle="Pandas follow a predictable rhythm. Time your visit right and you'll see them at their best."
     />
     <div class="mt-10 relative">
-      <!-- Timeline line -->
       <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-warm-200 -translate-x-1/2 hidden md:block" />
       <div class="space-y-8">
-        {[
-          { time: "8:30 AM", emoji: "🌅", title: "Gates Open — Pandas Eat Breakfast", desc: "Best time of day. Pandas are hungry and active. You will see them climbing, playing, and munching bamboo. Arrive at opening.", active: true },
-          { time: "9:00 AM", emoji: "🧹", title: "Volunteers Start Morning Shift", desc: "Volunteer program begins: safety briefing, change into uniform, head to enclosures to start cleaning and food prep.", active: false },
-          { time: "10:30 AM", emoji: "🎋", title: "Feeding Time", desc: "Volunteers hand-feed pandas bamboo shoots, apples, and panda cakes under staff supervision. Best photo opportunity.", active: false },
-          { time: "11:30 AM", emoji: "😴", title: "Nap Time Begins", desc: "Most pandas settle in for a midday nap. Good time to visit the museum, gift shop, or walk the nature trails.", active: false },
-          { time: "12:00 PM", emoji: "🍱", title: "Lunch Break", desc: "Volunteers eat at the staff cafeteria. Regular visitors should bring their own food or plan to eat in Dujiangyan town.", active: false },
-          { time: "2:00 PM", emoji: "🍎", title: "Afternoon Activity Window", desc: "Pandas wake up for an afternoon snack. Quieter than morning with softer light — great for photography.", active: true },
-          { time: "3:30 PM", emoji: "📜", title: "Certificate & Wrap-Up", desc: "Volunteers receive their certificate and souvenir. Regular visitors make their final loop through the enclosures.", active: false },
-          { time: "5:00 PM", emoji: "🌇", title: "Base Closes", desc: "Gates close. Head back to Chengdu or continue to the Dujiangyan Irrigation System (15 min away) for sunset views.", active: false },
-        ].map((item) => (
+        {rhythm.map((item) => (
           <div class="flex items-start gap-4 md:gap-8">
             <div class={`hidden md:flex w-1/2 justify-end ${item.active ? '' : 'md:order-2'}`}>
               {item.active && (
                 <div class="text-right pr-8">
-                  <span class="text-2xl">{item.emoji}</span>
+                  <Icon name={`fa6-solid:${item.icon}`} class="w-6 h-6 text-accent-600" />
                   <h3 class="text-base font-semibold text-accent-800">{item.title}</h3>
                   <p class="text-sm text-warm-600 mt-1 max-w-xs ml-auto">{item.desc}</p>
                 </div>
@@ -275,136 +1289,150 @@ const combinedLd = [jsonLd, faqLd];
               {item.time.split(':')[0]}
             </div>
             <div class={`md:w-1/2 ${item.active ? '' : 'md:order-1 md:text-right md:pr-8'}`}>
-              <div class="md:hidden mb-1"><span class="text-lg">{item.emoji}</span></div>
+              <div class="md:hidden mb-1"><Icon name={`fa6-solid:${item.icon}`} class="w-5 h-5 text-accent-600" /></div>
               <p class="text-xs font-semibold text-warm-500">{item.time}</p>
               <h3 class={`text-sm font-semibold mt-0.5 ${item.active ? 'text-accent-800' : 'text-warm-700'}`}>{item.title}</h3>
               <p class="text-xs text-warm-600 mt-1 leading-relaxed md:max-w-xs">{item.desc}</p>
-              {!item.active && <div class="hidden md:block mt-1"><span class="text-xl">{item.emoji}</span></div>}
+              {!item.active && <div class="hidden md:block mt-1"><Icon name={`fa6-solid:${item.icon}`} class="w-5 h-5 text-warm-400" /></div>}
             </div>
           </div>
         ))}
       </div>
     </div>
-    <p class="mt-10 text-center text-xs text-warm-500">Based on typical daily schedule. Actual times may vary by season. <a href="/visit-guide" class="text-accent-600 hover:text-accent-700 underline">Full visit guide →</a></p>
-  </section>
 
-  <!-- Explore Sections -->
-  <section class="bg-white py-24 md:py-32">
-    <div class="max-w-7xl mx-auto px-4">
-      <SectionHeader
-        eyebrow="Plan Your Visit"
-        title="Everything you need to know"
-        subtitle="From volunteer signups to getting there, we've covered every detail of your Dujiangyan panda adventure."
-      />
-      <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <ContentCard
-          href="/volunteer-program"
-          title="Volunteer Program"
-          description="Spend a day as a panda keeper. Learn about costs, booking, age limits, and what a typical volunteer day looks like."
-        />
-        <ContentCard
-          href="/tickets"
-          title="Tickets & Pricing"
-          description="Entrance fees, where to buy tickets, discount options, and tips for avoiding the queues."
-        />
-        <ContentCard
-          href="/how-to-get-there"
-          title="How to Get There"
-          description="Step-by-step directions from Chengdu by train, bus, taxi, or organized tour. Maps and travel times included."
-        />
-        <ContentCard
-          href="/dujiangyan-vs-chengdu-panda-base"
-          title="Dujiangyan vs Chengdu"
-          description="Compare the two bases side by side so you can decide which one fits your itinerary best."
-        />
-        <ContentCard
-          href="/best-time-to-visit"
-          title="Best Time to Visit"
-          description="Season-by-season guide to weather, crowds, panda activity, and what to expect each month."
-        />
-        <ContentCard
-          href="/nearby-attractions"
-          title="Nearby Attractions"
-          description="Combine your visit with the Dujiangyan Irrigation System, Mount Qingcheng, and other UNESCO sites nearby."
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Pre-Trip Checklist -->
-  <section class="max-w-7xl mx-auto px-4 py-24 md:py-32">
-    <SectionHeader
-      eyebrow="Before You Go"
-      title="Pack this, not that"
-      subtitle="Six essentials that make the difference between a good visit and a great one."
-    />
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {[
-        { icon: "👟", title: "Comfortable walking shoes", desc: "The base is on a hillside with uneven paths. Leave the sandals at home.", must: true },
-        { icon: "📷", title: "Camera with zoom lens", desc: "Pandas may be 5-15 meters away from viewing areas. Phone zoom won't cut it.", must: true },
-        { icon: "🛂", title: "Passport", desc: "Required for foreign visitors at ticket purchase and entry. No exceptions.", must: true },
-        { icon: "🧴", title: "Sunscreen + hat", desc: "Limited shade in some open areas. Sichuan sun is stronger than you think.", must: true },
-        { icon: "💧", title: "Water + snacks", desc: "Limited food options inside the base. Pack enough for a half day.", must: false },
-        { icon: "🌂", title: "Rain jacket or umbrella", desc: "Sichuan weather changes fast. A light rain jacket saves your day.", must: false },
-      ].map((item) => (
-        <div class={`p-5 rounded-xl border ${item.must ? 'border-accent-200 bg-accent-50/30' : 'border-warm-200'}`}>
-          <div class="flex items-start gap-3">
-            <span class="text-2xl shrink-0">{item.icon}</span>
-            <div>
-              <div class="flex items-center gap-2">
-                <h3 class="font-semibold text-sm text-warm-900">{item.title}</h3>
-                {item.must && <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-accent-500 text-white font-semibold">MUST</span>}
-              </div>
-              <p class="text-xs text-warm-600 mt-1 leading-relaxed">{item.desc}</p>
-            </div>
-          </div>
+    <h2 class="mt-20 font-display text-2xl md:text-3xl font-semibold text-warm-950">The base, zone by zone</h2>
+    <p class="mt-3 text-sm text-warm-600">The park holds 40+ pandas (20+ on view) across four main zones, each a 5-10 minute walk apart, plus a shuttle. To dodge the tour groups, start at the entrance and work inward: Panpan Garden → Linze Garden → Diequan Garden → Shuangnan Garden.</p>
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+      {zones.map((z) => (
+        <div class="p-7 bg-white">
+          <span class="text-[10px] px-2.5 py-1 rounded-full bg-accent-100 text-accent-800 font-semibold uppercase tracking-wide">{z.highlight}</span>
+          <h3 class="mt-3 font-display text-lg font-semibold text-warm-950">{z.name} <span class="text-warm-400 font-sans font-normal text-xs">({z.chinese})</span></h3>
+          <p class="mt-2 text-xs text-warm-600 leading-relaxed">{z.desc}</p>
         </div>
       ))}
     </div>
+
+    <div class="mt-8 rounded-3xl border border-amber-200 bg-amber-50/60 p-7 md:p-8">
+      <h3 class="font-display text-xl font-semibold text-amber-900 mb-3">Before you go — things to know</h3>
+      <ul class="space-y-2.5 text-sm text-warm-700 list-disc pl-5">
+        <li>The base is <strong>hilly with many steps</strong> and not very wheelchair-friendly — if that's a concern, Panda Valley is the flatter alternative.</li>
+        <li>Stone viewing fences are quite high: hold young children (under about 1.2 m) so they can see the pandas.</li>
+        <li>Shuttle buses run within the park between the zones.</li>
+        <li>Meals: the base canteen, nearby farmhouses, or in Dujiangyan city center. No need to stay overnight unless you're also visiting the Irrigation System or Mt. Qingcheng.</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="bg-accent-900 py-24 md:py-32">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-white leading-tight">Ready to meet the pandas?</h2>
-      <p class="mt-4 text-accent-200 max-w-lg mx-auto">Start planning your Dujiangyan panda adventure today. The pandas are waiting.</p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="/visit-guide" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-accent-800 font-medium text-sm hover:bg-accent-50 transition-colors">
-          Read the Full Guide
-        </a>
-        <a href="/volunteer-program" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-accent-400 text-white font-medium text-sm hover:bg-accent-800 transition-colors">
-          Volunteer Program
-        </a>
+  <!-- ============ PACKING CHECKLIST ============ -->
+  <section class="bg-warm-100/40 py-20 md:py-28 reveal">
+    <div class="max-w-7xl mx-auto px-4">
+      <SectionHeader
+        eyebrow="Before You Go"
+        title="Pack this, not that"
+        subtitle="Six essentials that make the difference between a good visit and a great one."
+      />
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
+        {packing.map((item) => (
+          <div class={`p-7 ${item.must ? "bg-accent-50/60" : "bg-white"}`}>
+            <div class="flex items-start gap-3">
+              <Icon name={`fa6-solid:${item.icon}`} class="w-6 h-6 text-accent-700 shrink-0 mt-0.5" />
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-display text-base font-semibold text-warm-950">{item.title}</h3>
+                  {item.must && <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-accent-600 text-white font-semibold uppercase tracking-wide">Must</span>}
+                </div>
+                <p class="text-xs text-warm-600 mt-1.5 leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Share Your Story (Post-Visit) -->
-  <section class="max-w-3xl mx-auto px-4 py-24 md:py-32 text-center">
+  <!-- ============ FIRST-HAND STORY + BOOKING ============ -->
+  <section id="stories" class="scroll-mt-28 max-w-4xl mx-auto px-4 py-20 md:py-28 reveal">
     <SectionHeader
-      eyebrow="After Your Visit"
-      title="Been there? Share your story"
-      subtitle="Your experience helps future visitors plan better trips. Send us your photos, tips, and panda stories — we feature the best ones on our blog."
+      eyebrow="Volunteer Stories"
+      title="A panda keeper's day, first-hand"
+      subtitle="Honest accounts from volunteers who cleaned enclosures, prepared bamboo, and hand-fed pandas at Dujiangyan."
     />
-    <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
-        Share Your Experience
-      </a>
-      <a href="/blog" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-warm-300 text-warm-700 font-medium text-sm hover:bg-warm-50 transition-colors">
-        Read Volunteer Stories
-      </a>
+    <div class="mt-12 rounded-3xl border border-warm-200 bg-warm-100/40 p-8 md:p-12">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-accent-500/30 mb-6" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+      <p class="font-display text-lg md:text-xl text-warm-800 leading-relaxed">
+        "When I signed up, I knew it would involve physical work — but the realness of it was the best part. By 8:30 AM we'd changed into the blue volunteer uniforms and gotten our safety briefing from an English-speaking coordinator. Cleaning enclosures is hard work (pandas eat up to 40 kg of bamboo a day, and what goes in must come out), but that's what makes it feel authentic. Then came the highlight around 11 AM: hand-feeding. A giant panda sitting two feet away, reaching out to take an apple from your hand, is surreal. The fee was CNY 800, including uniform, lunch, and a certificate."
+      </p>
+      <p class="mt-6 text-sm font-semibold text-warm-900">— Sarah, volunteer, June 2026</p>
+      <p class="mt-8 pt-6 border-t border-warm-200 text-sm text-warm-600 leading-relaxed">
+        <strong>Booking reality check:</strong> the base has no dedicated English booking site — the reliable paths are authorized travel agencies, your Chengdu hotel/hostel concierge, or the base's WeChat channel for Chinese speakers. Book 1-2 weeks ahead (3-4 weeks in peak season). Be wary of anyone quoting far above CNY 900 or guaranteeing you can "hold a baby panda" — that's no longer permitted.
+      </p>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="max-w-3xl mx-auto px-4 py-24 md:py-32">
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="scroll-mt-28 max-w-3xl mx-auto px-4 py-20 md:py-28 reveal">
     <SectionHeader
       eyebrow="FAQ"
       title="Frequently asked questions"
+      subtitle="Every common question about visiting, volunteering, and getting to Dujiangyan Panda Base."
     />
     <div class="mt-10">
       <Faq items={faqItems} />
+    </div>
+  </section>
+
+  <!-- ============ FULL-BLEED CTA ============ -->
+  <section class="relative overflow-hidden reveal">
+    <div class="absolute inset-0">
+      <img src="/images/dujiangyan-irrigation.webp" alt="Dujiangyan Irrigation System river with an ancient bridge" width="1920" height="1080" class="w-full h-full object-cover" loading="lazy" />
+      <div class="absolute inset-0 bg-accent-950/75"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto px-4 py-28 md:py-36 text-center">
+      <p class="flex items-center justify-center gap-3 text-xs font-semibold tracking-[0.2em] text-accent-200 uppercase mb-5">
+        <span class="inline-block w-8 h-px bg-accent-300/70"></span> Ready when it reopens
+      </p>
+      <h2 class="font-display text-3xl md:text-5xl font-semibold text-white leading-[1.08]">
+        One page. Every answer for your panda day.
+      </h2>
+      <p class="mt-5 text-warm-200 text-lg max-w-xl mx-auto leading-relaxed">
+        Tickets, the keeper program, transport, and the best time to go — all reader-verified. Plan now so you're first in line when the gates reopen.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="#tickets" class="px-6 py-3 rounded-full bg-amber-500 text-white font-medium text-sm hover:bg-amber-600 transition-colors">Tickets & Pricing</a>
+        <a href="#volunteer" class="px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">Volunteer Program</a>
+        <a href="#alternatives" class="px-6 py-3 rounded-full border border-white/40 text-white font-medium text-sm hover:bg-white/10 transition-colors">Alternatives While Closed</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT / CONTACT ============ -->
+  <section id="about" class="scroll-mt-28 bg-warm-950 py-20 md:py-28 reveal">
+    <div class="max-w-4xl mx-auto px-4">
+      <p class="flex items-center gap-3 text-xs font-semibold tracking-[0.2em] text-accent-300 uppercase mb-4">
+        <span class="inline-block w-8 h-px bg-accent-300/70"></span> About This Guide
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl font-semibold text-white leading-[1.08]">An independent, reader-verified guide</h2>
+      <div class="mt-7 space-y-4 text-warm-300 leading-relaxed">
+        <p>
+          Dujiangyan Panda Base Guide is an independent travel resource created to help international travelers plan their visit. We are <strong class="text-warm-100">not affiliated</strong> with the official base or any government tourism organization.
+        </p>
+        <p>
+          We keep prices, hours, and booking information accurate by revisiting our content regularly, monitoring official channels, and incorporating feedback from readers and past volunteers. Time-sensitive information on this page was last verified <strong class="text-warm-100">July 2026</strong>.
+        </p>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 gap-px overflow-hidden rounded-3xl border border-warm-800 bg-warm-800">
+        <div class="p-8 bg-warm-900">
+          <h3 class="font-display text-xl font-semibold text-white">Have a correction or a story?</h3>
+          <p class="mt-3 text-sm text-warm-300">Spotted outdated info or volunteered at a panda base? We welcome corrections and guest stories — they keep this guide accurate.</p>
+          <a href="mailto:hello@dujiangyan-panda-base.com" class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">
+            hello@dujiangyan-panda-base.com
+          </a>
+        </div>
+        <div class="p-8 bg-warm-900">
+          <h3 class="font-display text-xl font-semibold text-white">Official matters</h3>
+          <p class="mt-3 text-sm text-warm-300">For volunteer bookings, visiting permits, or official information, contact the China Conservation and Research Center for the Giant Panda directly — <a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn</a>.</p>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -94,71 +94,74 @@ const ogImageUrl = ogImage || defaultOgImage;
     })} />
   </head>
   <body class="min-h-screen flex flex-col">
-    <header class="sticky top-0 z-50 bg-warm-50/80 backdrop-blur-md border-b border-warm-200/60">
+    <header class="sticky top-0 z-50 bg-warm-50/85 backdrop-blur-md border-b border-warm-200/60">
       <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5 font-semibold text-warm-900 hover:text-accent-600 transition-colors">
+        <a href="/" class="flex items-center gap-2.5 hover:opacity-90 transition-opacity">
           <span class="w-8 h-8 rounded-full bg-accent-100 flex items-center justify-center shrink-0">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-600">
               <circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 18c1.5-2 3-3 5-3s3.5 1 5 3"/><circle cx="8" cy="9" r="1"/><circle cx="16" cy="9" r="1"/>
             </svg>
           </span>
-          <span class="hidden sm:inline">Dujiangyan Panda Base</span>
+          <span class="hidden sm:inline font-display font-semibold text-warm-950 text-lg">Dujiangyan Panda Base</span>
         </a>
-        <div class="flex items-center gap-6 text-sm font-medium">
-          <a href="/closure-updates" class="text-amber-700 hover:text-amber-900 transition-colors font-semibold">Closure Info</a>
-          <a href="/volunteer-program" class="text-warm-700 hover:text-accent-600 transition-colors">Volunteer</a>
-          <a href="/tickets" class="text-warm-700 hover:text-accent-600 transition-colors">Tickets</a>
-          <a href="/how-to-get-there" class="text-warm-700 hover:text-accent-600 transition-colors">How to Get There</a>
-          <a href="/visit-guide" class="hidden md:inline text-warm-700 hover:text-accent-600 transition-colors">Guide</a>
+        <div class="flex items-center gap-7 text-[13px] font-medium tracking-wide">
+          <a href="/#alternatives" class="text-amber-700 hover:text-amber-900 transition-colors font-semibold uppercase tracking-[0.08em]">Alternatives</a>
+          <a href="/#volunteer" class="text-warm-700 hover:text-accent-600 transition-colors uppercase tracking-[0.08em]">Volunteer</a>
+          <a href="/#tickets" class="text-warm-700 hover:text-accent-600 transition-colors uppercase tracking-[0.08em]">Tickets</a>
+          <a href="/#getting-there" class="hidden md:inline text-warm-700 hover:text-accent-600 transition-colors uppercase tracking-[0.08em]">Getting There</a>
+          <a href="/#faq" class="hidden lg:inline text-warm-700 hover:text-accent-600 transition-colors uppercase tracking-[0.08em]">FAQ</a>
         </div>
       </nav>
     </header>
     <main class="flex-1">
       <slot />
     </main>
-    <footer class="bg-warm-900 text-warm-300 py-16">
-      <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div>
-          <p class="text-warm-100 font-semibold mb-3">Explore</p>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/closure-updates" class="hover:text-amber-300 transition-colors">Closure Updates</a></li>
-            <li><a href="/volunteer-program" class="hover:text-white transition-colors">Volunteer Program</a></li>
-            <li><a href="/tickets" class="hover:text-white transition-colors">Tickets</a></li>
-            <li><a href="/how-to-get-there" class="hover:text-white transition-colors">How to Get There</a></li>
-            <li><a href="/visit-guide" class="hover:text-white transition-colors">Visit Guide</a></li>
-          </ul>
+    <footer class="bg-warm-950 text-warm-300">
+      <div class="max-w-7xl mx-auto px-4 pt-14 pb-16">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <p class="text-warm-100 font-display font-semibold text-lg mb-4">Dujiangyan Panda Base</p>
+            <p class="text-sm text-warm-400 leading-relaxed">Your complete, independent guide to visiting, volunteering, and experiencing the pandas at Dujiangyan.</p>
+          </div>
+          <div>
+            <p class="text-[11px] font-semibold tracking-[0.18em] text-warm-500 uppercase mb-4">Plan Your Visit</p>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/#alternatives" class="hover:text-amber-300 transition-colors">Alternatives (While Closed)</a></li>
+              <li><a href="/#volunteer" class="hover:text-white transition-colors">Volunteer Program</a></li>
+              <li><a href="/#tickets" class="hover:text-white transition-colors">Tickets & Pricing</a></li>
+              <li><a href="/#getting-there" class="hover:text-white transition-colors">How to Get There</a></li>
+              <li><a href="/#best-time" class="hover:text-white transition-colors">Best Time to Visit</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[11px] font-semibold tracking-[0.18em] text-warm-500 uppercase mb-4">Compare</p>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/#comparison" class="hover:text-white transition-colors">vs Chengdu Base</a></li>
+              <li><a href="/#nearby" class="hover:text-white transition-colors">Nearby Attractions</a></li>
+              <li><a href="/#alternatives" class="hover:text-white transition-colors">Alternatives (While Closed)</a></li>
+              <li><a href="/#faq" class="hover:text-white transition-colors">FAQ</a></li>
+              <li><a href="/#stories" class="hover:text-white transition-colors">Volunteer Stories</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[11px] font-semibold tracking-[0.18em] text-warm-500 uppercase mb-4">Contact & Legal</p>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/#about" class="hover:text-white transition-colors">About This Guide</a></li>
+              <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" class="hover:text-white transition-colors">Terms of Use</a></li>
+            </ul>
+            <a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 text-sm text-accent-300 hover:text-white transition-colors">
+              Official operator: panda.org.cn
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
-        <div>
-          <p class="text-warm-100 font-semibold mb-3">Compare</p>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/dujiangyan-vs-chengdu-panda-base" class="hover:text-white transition-colors">vs Chengdu Base</a></li>
-            <li><a href="/best-time-to-visit" class="hover:text-white transition-colors">Best Time to Visit</a></li>
-            <li><a href="/nearby-attractions" class="hover:text-white transition-colors">Nearby Attractions</a></li>
-          </ul>
+        <div class="mt-12 pt-6 border-t border-warm-800 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-sm text-warm-500">
+          <p>&copy; {new Date().getFullYear()} Dujiangyan Panda Base Guide. Not affiliated with the official base.</p>
+          <p class="flex items-center gap-2 text-xs">
+            <span class="text-amber-400">★</span> Rated 4.7/5 by 388 travelers on TripAdvisor
+          </p>
         </div>
-        <div>
-          <p class="text-warm-100 font-semibold mb-3">Info</p>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/faq" class="hover:text-white transition-colors">FAQ</a></li>
-            <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
-            <li><a href="/about" class="hover:text-white transition-colors">About</a></li>
-            <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="text-warm-100 font-semibold mb-3">Legal</p>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-            <li><a href="/terms" class="hover:text-white transition-colors">Terms of Use</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="text-warm-100 font-semibold mb-3">Dujiangyan Panda Base</p>
-          <p class="text-sm leading-relaxed">Your complete guide to visiting, volunteering, and experiencing the pandas at Dujiangyan.</p>
-        </div>
-      </div>
-      <div class="max-w-7xl mx-auto px-4 mt-12 pt-6 border-t border-warm-800 text-sm text-warm-500">
-        <p>&copy; {new Date().getFullYear()} Dujiangyan Panda Base Guide. Not affiliated with the official base.</p>
       </div>
     </footer>
   </body>

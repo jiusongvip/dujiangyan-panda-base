@@ -4,17 +4,21 @@ export interface Props {
   title: string;
   subtitle?: string;
   as?: "h1" | "h2" | "h3";
+  light?: boolean;
 }
 
-const { eyebrow, title, subtitle, as: Tag = "h2" } = Astro.props;
+const { eyebrow, title, subtitle, as: Tag = "h2", light = false } = Astro.props;
 ---
 
 <div class="max-w-3xl">
   {eyebrow && (
-    <p class="text-xs font-medium tracking-wide text-accent-600 uppercase mb-3">{eyebrow}</p>
+    <p class={`flex items-center gap-3 text-xs font-semibold tracking-[0.2em] uppercase mb-4 ${light ? "text-accent-300" : "text-accent-600"}`}>
+      <span class={`inline-block w-8 h-px ${light ? "bg-accent-300/70" : "bg-accent-500/60"}`}></span>
+      {eyebrow}
+    </p>
   )}
-  <Tag class="text-3xl md:text-4xl font-bold text-warm-900 leading-tight">{title}</Tag>
+  <Tag class={`font-display text-3xl md:text-4xl lg:text-[2.75rem] font-semibold leading-[1.08] tracking-tight ${light ? "text-white" : "text-warm-950"}`}>{title}</Tag>
   {subtitle && (
-    <p class="mt-4 text-warm-600 leading-relaxed max-w-[65ch]">{subtitle}</p>
+    <p class={`mt-5 leading-relaxed max-w-[65ch] ${light ? "text-accent-200" : "text-warm-600"}`}>{subtitle}</p>
   )}
 </div>
