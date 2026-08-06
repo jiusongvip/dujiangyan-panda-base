@@ -15,7 +15,7 @@ const baseName = "Dujiangyan Panda Base";
 const fullTitle = title.includes("Dujiangyan") ? title : `${title} | ${baseName}`;
 
 // Canonical URL and page path for structured data
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, "");
 const pagePath = Astro.url.pathname === "/" ? [] : Astro.url.pathname.replace(/\/$/, "").split("/").filter(Boolean);
 
 // Default OG image if none provided
