@@ -7,8 +7,8 @@ import icon from "astro-icon";
 // the matching #section on the homepage, consolidating all ranking
 // authority into one page. Legal pages (/privacy, /terms) stay distinct.
 export default defineConfig({
-  site: "https://dujiangyan-panda-base.com",
-  trailingSlash: "never",
+  site: "https://www.dujiangyan-panda-base.com",
+  trailingSlash: "always",
   integrations: [sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],

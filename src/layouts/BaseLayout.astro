@@ -15,7 +15,9 @@ const baseName = "Dujiangyan Panda Base";
 const fullTitle = title.includes("Dujiangyan") ? title : `${title} | ${baseName}`;
 
 // Canonical URL and page path for structured data
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, "");
+const canonicalUrl = Astro.url.pathname === "/"
+  ? new URL("/", Astro.site).href.replace(/\/$/, "")
+  : new URL(Astro.url.pathname, Astro.site).href;
 const pagePath = Astro.url.pathname === "/" ? [] : Astro.url.pathname.replace(/\/$/, "").split("/").filter(Boolean);
 
 // Default OG image if none provided
@@ -155,8 +157,8 @@ const ogImageUrl = ogImage || defaultOgImage;
             <p class="text-[11px] font-semibold tracking-[0.18em] text-warm-500 uppercase mb-4">Contact & Legal</p>
             <ul class="space-y-2.5 text-sm">
               <li><a href="/#about" class="hover:text-white transition-colors">About This Guide</a></li>
-              <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms" class="hover:text-white transition-colors">Terms of Use</a></li>
+              <li><a href="/privacy/" class="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms/" class="hover:text-white transition-colors">Terms of Use</a></li>
             </ul>
             <a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 text-sm text-accent-300 hover:text-white transition-colors">
               Official operator: panda.org.cn
