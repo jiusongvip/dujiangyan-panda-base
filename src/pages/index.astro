@@ -502,7 +502,7 @@ const routeSteps = [
           width="1920"
           height="1080"
           data-hero-slide
-          class={`absolute inset-0 w-full h-full object-cover transform-gpu transition-opacity duration-[1400ms] ease-in-out ${i === 0 ? "opacity-100 hero-zoom" : "opacity-0"}`}
+          class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1400ms] ease-in-out ${i === 0 ? "opacity-100 hero-zoom" : "opacity-0"}`}
           loading={i === 0 ? "eager" : "lazy"}
           fetchpriority={i === 0 ? "high" : undefined}
         />
@@ -547,7 +547,7 @@ const routeSteps = [
 
     <!-- Planner widget -->
     <div class="relative z-20 max-w-7xl mx-auto px-4 -mt-24 pb-12">
-      <div class="rounded-2xl bg-white/95 backdrop-blur border border-warm-200 shadow-xl p-5 md:p-6">
+      <div class="rounded-2xl bg-white border border-warm-200 shadow-lg p-5 md:p-6">
         <p class="text-xs font-semibold text-warm-700 uppercase tracking-wide mb-4">Plan your visit</p>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end">
           <div>
@@ -686,7 +686,7 @@ const routeSteps = [
   </script>
 
   <!-- ============ STICKY SECTION NAV ============ -->
-  <nav class="sticky top-16 z-40 bg-warm-50/95 backdrop-blur-md border-b border-warm-200/70">
+  <nav class="sticky top-16 z-40 bg-warm-50 border-b border-warm-200/70">
     <div class="max-w-7xl mx-auto px-4 flex items-center gap-1 overflow-x-auto text-sm font-medium">
       <a href="#alternatives" class="whitespace-nowrap px-3 py-3 text-amber-700 hover:text-amber-900 transition-colors font-semibold">Alternatives</a>
       <a href="#tickets" class="whitespace-nowrap px-3 py-3 text-warm-700 hover:text-accent-600 transition-colors">Tickets</a>
