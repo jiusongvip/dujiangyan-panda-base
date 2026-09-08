@@ -506,8 +506,9 @@ const routeSteps = [
           width="1920"
           height="1080"
           data-hero-slide
-          class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1400ms] ease-in-out ${i === 0 ? "opacity-100 hero-zoom" : "opacity-0"}`}
+          class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1400ms] ease-in-out ${i === 0 ? "opacity-100" : "opacity-0"}`}
           loading={i === 0 ? "eager" : "lazy"}
+          decoding={i === 0 ? "async" : undefined}
           fetchpriority={i === 0 ? "high" : undefined}
         />
       ))}
@@ -611,10 +612,10 @@ const routeSteps = [
         }
       });
     };
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(hydrateSlides, { timeout: 4000 });
+    if (document.readyState === "complete") {
+      setTimeout(hydrateSlides, 300);
     } else {
-      setTimeout(hydrateSlides, 2000);
+      window.addEventListener("load", () => setTimeout(hydrateSlides, 300), { once: true });
     }
     if (heroSlides.length > 1) {
       let current = 0;
