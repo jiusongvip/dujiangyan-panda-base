@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import QuickInfoCards from "../components/QuickInfoCards.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import Faq from "../components/Faq.astro";
+import EmailLink from "../components/EmailLink.astro";
 import { Icon } from "astro-icon/components";
 
 // ---------------------------------------------------------------
@@ -491,6 +492,7 @@ const routeSteps = [
           data-hero-slide
           class={`absolute inset-0 w-full h-full object-cover transform-gpu transition-opacity duration-[1400ms] ease-in-out ${i === 0 ? "opacity-100 hero-zoom" : "opacity-0"}`}
           loading={i === 0 ? "eager" : "lazy"}
+          fetchpriority={i === 0 ? "high" : undefined}
         />
       ))}
     </div>
@@ -1424,9 +1426,7 @@ const routeSteps = [
         <div class="p-8 bg-warm-900">
           <h3 class="font-display text-xl font-semibold text-white">Have a correction or a story?</h3>
           <p class="mt-3 text-sm text-warm-300">Spotted outdated info or volunteered at a panda base? We welcome corrections and guest stories — they keep this guide accurate.</p>
-          <a href="mailto:hello@dujiangyan-panda-base.com" class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">
-            hello@dujiangyan-panda-base.com
-          </a>
+          <EmailLink class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors" />
         </div>
         <div class="p-8 bg-warm-900">
           <h3 class="font-display text-xl font-semibold text-white">Official matters</h3>

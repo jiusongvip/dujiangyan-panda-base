@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import EmailLink from "../../components/EmailLink.astro";
 ---
 
 <BaseLayout
   title="Terms of Use — Dujiangyan Panda Base Guide"
-  description="Terms of use for Dujiangyan Panda Base Guide. Read our disclaimer, content usage policy, and limitations of liability for this independent travel information website."
+  description="Terms of use for Dujiangyan Panda Base Guide. Read our disclaimer, content usage policy, and liability limits for this independent travel information site."
 >
   <section class="max-w-3xl mx-auto px-4 py-16 md:py-24">
     <p class="text-xs font-medium tracking-wide text-accent-600 uppercase mb-3">Legal</p>
@@ -62,7 +63,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <div>
         <h2 class="text-xl font-semibold text-warm-900 mb-3">7. Contact</h2>
         <p>
-          If you have questions about these terms, please contact us at <a href="mailto:hello@dujiangyan-panda-base.com" class="text-accent-600 hover:text-accent-700 underline">hello@dujiangyan-panda-base.com</a>.
+          If you have questions about these terms, please contact us at <EmailLink class="text-accent-600 hover:text-accent-700 underline" />.
         </p>
       </div>
     </div>

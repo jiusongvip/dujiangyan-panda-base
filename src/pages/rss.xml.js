@@ -1,7 +1,8 @@
 import rss from "@astrojs/rss";
 
-// Single-page strategy: all content lives on the homepage. The RSS feed
-// surfaces the freshest long-form sections for feed readers.
+// Single-page strategy: all content lives on the homepage. Every item links
+// to "/" — hash links would be mangled by the RSS lib's trailing-slash
+// handling (it appends "/" after the fragment), so keep plain root URLs.
 const posts = [
   {
     title: "Dujiangyan Panda Base: The Complete Visitor's Guide",
@@ -12,13 +13,13 @@ const posts = [
   {
     title: "Dujiangyan Panda Base Closure Update",
     description: "Closed April 23, 2026 for renovations. Track reopening status and find the best alternative panda experiences.",
-    link: "/#alternatives",
+    link: "/",
     pubDate: new Date("2026-04-16"),
   },
   {
     title: "Dujiangyan Panda Volunteer: An Honest Experience",
     description: "What a day as a panda keeper really looks like — cleaning enclosures, preparing bamboo, and hand-feeding pandas.",
-    link: "/#stories",
+    link: "/",
     pubDate: new Date("2026-06-15"),
   },
 ];

@@ -60,6 +60,11 @@ const ogImageUrl = ogImage || defaultOgImage;
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- LCP preload: only on the homepage, which has the hero carousel -->
+    {Astro.url.pathname === "/" && (
+      <link rel="preload" as="image" href="/images/hero-panda-bamboo.webp" fetchpriority="high" />
+    )}
+
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="Dujiangyan Panda Base Guide" href="/rss.xml" />
 
