@@ -16,6 +16,7 @@
   - #faq — Frequently asked questions (13 answered)
 
 ## Legal
+- [About](https://www.dujiangyan-panda-base.com/about/): Independence, editorial verification process, contact
 - [Privacy Policy](https://www.dujiangyan-panda-base.com/privacy): How we handle data
 - [Terms of Use](https://www.dujiangyan-panda-base.com/terms): Disclaimer and usage terms
 

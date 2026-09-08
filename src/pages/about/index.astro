@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EmailLink from "../../components/EmailLink.astro";
+---
+
+<BaseLayout
+  title="About This Guide — Dujiangyan Panda Base Guide"
+  description="Who is behind the Dujiangyan Panda Base Guide, how we verify every price and fact against official sources, our editorial standards, and how to contact us."
+>
+  <section class="max-w-3xl mx-auto px-4 py-16 md:py-24">
+    <p class="text-xs font-medium tracking-wide text-accent-600 uppercase mb-3">About</p>
+    <h1 class="text-3xl md:text-4xl font-bold text-warm-900 leading-tight tracking-tight">
+      About This Guide
+    </h1>
+    <p class="mt-6 text-lg text-warm-600 leading-relaxed">
+      Dujiangyan Panda Base Guide is an independent travel resource for international travelers planning a visit to Dujiangyan Panda Base (都江堰中华大熊猫苑) near Chengdu, China.
+    </p>
+
+    <div class="mt-10 space-y-8 text-warm-700 leading-relaxed">
+      <div>
+        <h2 class="text-xl font-semibold text-warm-900 mb-3">Independence</h2>
+        <p>
+          We are <strong>not affiliated</strong> with the official base, the China Conservation and Research Center for the Giant Panda (CCRCGP), or any government tourism organization. All editorial choices are our own, and we do not accept payment for listings or recommendations.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold text-warm-900 mb-3">How we verify information</h2>
+        <p>
+          Prices, hours, transport options, and program details are checked against official channels (panda.org.cn), booking platforms (Trip.com, Klook), and first-hand reports from readers and past volunteers. Time-sensitive information was last verified <strong>July 2026</strong>. Found something outdated? Tell us — corrections keep this guide accurate.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold text-warm-900 mb-3">Contact</h2>
+        <p>
+          Questions, corrections, or a volunteer story to share? Email us at <EmailLink class="text-accent-600 hover:text-accent-700 underline" />.
+        </p>
+        <p class="mt-3">
+          For volunteer bookings, visiting permits, or official information, contact the CCRCGP directly at <a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="text-accent-600 hover:text-accent-700 underline">panda.org.cn</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
