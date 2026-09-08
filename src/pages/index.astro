@@ -445,10 +445,26 @@ const trustSources = [
 ];
 
 const heroSlides = [
-  { src: "/images/hero-panda-bamboo.webp", alt: "Giant panda eating bamboo in its natural habitat at Dujiangyan" },
-  { src: "/images/panda-forest.webp", alt: "Giant pandas resting in a forested enclosure at Dujiangyan Panda Base" },
-  { src: "/images/volunteer-feeding.webp", alt: "Panda keeper volunteer hand-feeding a giant panda at Dujiangyan" },
-  { src: "/images/mount-qingcheng.webp", alt: "Misty forest and mountain scenery near Mount Qingcheng, Dujiangyan" },
+  {
+    src: "/images/hero-panda-bamboo-1280.webp",
+    srcset: "/images/hero-panda-bamboo-480.webp 480w, /images/hero-panda-bamboo-768.webp 768w, /images/hero-panda-bamboo-960.webp 960w, /images/hero-panda-bamboo-1280.webp 1280w, /images/hero-panda-bamboo.webp 1920w",
+    alt: "Giant panda eating bamboo in its natural habitat at Dujiangyan",
+  },
+  {
+    src: "/images/panda-forest.webp",
+    srcset: "",
+    alt: "Giant pandas resting in a forested enclosure at Dujiangyan Panda Base",
+  },
+  {
+    src: "/images/volunteer-feeding-1280.webp",
+    srcset: "/images/volunteer-feeding-768.webp 768w, /images/volunteer-feeding-1280.webp 1280w, /images/volunteer-feeding.webp 1920w",
+    alt: "Panda keeper volunteer hand-feeding a giant panda at Dujiangyan",
+  },
+  {
+    src: "/images/mount-qingcheng-1280.webp",
+    srcset: "/images/mount-qingcheng-768.webp 768w, /images/mount-qingcheng-1280.webp 1280w, /images/mount-qingcheng.webp 1920w",
+    alt: "Misty forest and mountain scenery near Mount Qingcheng, Dujiangyan",
+  },
 ];
 
 const stats = [
@@ -480,6 +496,8 @@ const routeSteps = [
       {heroSlides.map((slide, i) => (
         <img
           src={slide.src}
+          srcset={slide.srcset || undefined}
+          sizes={slide.srcset ? "100vw" : undefined}
           alt={slide.alt}
           width="1920"
           height="1080"

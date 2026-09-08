@@ -10,6 +10,11 @@ import icon from "astro-icon";
 export default defineConfig({
   site: "https://www.dujiangyan-panda-base.com",
   trailingSlash: "always",
+  build: {
+    // Inline the (small) global stylesheet into every page: removes the
+    // render-blocking CSS request and shortens the HTML -> CSS -> font chain.
+    inlineStylesheets: "always",
+  },
   integrations: [sitemap(), icon()],
   vite: {
     plugins: [tailwindcss()],

@@ -64,7 +64,14 @@ const ogImageUrl = ogImage || defaultOgImage;
 
     <!-- LCP preload: only on the homepage, which has the hero carousel -->
     {Astro.url.pathname === "/" && (
-      <link rel="preload" as="image" href="/images/hero-panda-bamboo.webp" fetchpriority="high" />
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero-panda-bamboo-1280.webp"
+        imagesrcset="/images/hero-panda-bamboo-480.webp 480w, /images/hero-panda-bamboo-768.webp 768w, /images/hero-panda-bamboo-960.webp 960w, /images/hero-panda-bamboo-1280.webp 1280w, /images/hero-panda-bamboo.webp 1920w"
+        imagesizes="100vw"
+        fetchpriority="high"
+      />
     )}
 
     <!-- RSS -->
