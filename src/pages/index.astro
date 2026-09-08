@@ -451,17 +451,19 @@ const heroSlides = [
     alt: "Giant panda eating bamboo in its natural habitat at Dujiangyan",
   },
   {
-    src: "/images/panda-forest.webp",
-    srcset: "",
+    src: "",
+    dataSrc: "/images/panda-forest.webp",
     alt: "Giant pandas resting in a forested enclosure at Dujiangyan Panda Base",
   },
   {
-    src: "/images/volunteer-feeding-1280.webp",
+    src: "",
+    dataSrc: "/images/volunteer-feeding-1280.webp",
     srcset: "/images/volunteer-feeding-768.webp 768w, /images/volunteer-feeding-1280.webp 1280w, /images/volunteer-feeding.webp 1920w",
     alt: "Panda keeper volunteer hand-feeding a giant panda at Dujiangyan",
   },
   {
-    src: "/images/mount-qingcheng-1280.webp",
+    src: "",
+    dataSrc: "/images/mount-qingcheng-1280.webp",
     srcset: "/images/mount-qingcheng-768.webp 768w, /images/mount-qingcheng-1280.webp 1280w, /images/mount-qingcheng.webp 1920w",
     alt: "Misty forest and mountain scenery near Mount Qingcheng, Dujiangyan",
   },
@@ -495,9 +497,11 @@ const routeSteps = [
     <div class="absolute inset-0">
       {heroSlides.map((slide, i) => (
         <img
-          src={slide.src}
-          srcset={slide.srcset || undefined}
-          sizes={slide.srcset ? "100vw" : undefined}
+          src={slide.src || undefined}
+          data-src={slide.dataSrc}
+          data-srcset={slide.src ? undefined : slide.srcset}
+          srcset={slide.src ? slide.srcset : undefined}
+          sizes={slide.src ? "100vw" : undefined}
           alt={slide.alt}
           width="1920"
           height="1080"
@@ -595,9 +599,27 @@ const routeSteps = [
     // ---------- Hero Ken Burns ----------
     const heroSlides = Array.from(document.querySelectorAll("[data-hero-slide]"));
     const heroDots = Array.from(document.querySelectorAll("[data-hero-dot]"));
+    const hydrateSlides = () => {
+      heroSlides.forEach((s) => {
+        if (s.dataset.src) {
+          s.src = s.dataset.src;
+          delete s.dataset.src;
+        }
+        if (s.dataset.srcset) {
+          s.srcset = s.dataset.srcset;
+          delete s.dataset.srcset;
+        }
+      });
+    };
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(hydrateSlides, { timeout: 4000 });
+    } else {
+      setTimeout(hydrateSlides, 2000);
+    }
     if (heroSlides.length > 1) {
       let current = 0;
       const show = (n) => {
+        hydrateSlides();
         current = (n + heroSlides.length) % heroSlides.length;
         heroSlides.forEach((s, k) => {
           s.classList.toggle("opacity-0", k !== current);

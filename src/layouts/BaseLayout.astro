@@ -29,14 +29,6 @@ const ogImageUrl = ogImage || defaultOgImage;
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T96B7YRQZ3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-T96B7YRQZ3');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
@@ -194,4 +186,18 @@ const ogImageUrl = ogImage || defaultOgImage;
       </div>
     </footer>
   </body>
+  <!-- GA4 deferred: injected after window load so gtag.js (~166 KiB) never
+       competes with LCP resources on mobile. Data still collected normally. -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    const ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-T96B7YRQZ3';
+    window.addEventListener('load', () => setTimeout(() => {
+      gtag('js', new Date());
+      gtag('config', 'G-T96B7YRQZ3');
+      document.head.appendChild(ga);
+    }, 1200));
+  </script>
 </html>
