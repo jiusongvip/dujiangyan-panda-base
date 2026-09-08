@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import EmailLink from "../components/EmailLink.astro";
 export interface Props {
   title: string;
   description: string;
@@ -43,6 +44,7 @@ const ogImageUrl = ogImage || defaultOgImage;
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />
@@ -78,6 +80,10 @@ const ogImageUrl = ogImage || defaultOgImage;
           "url": Astro.site?.href,
           "description": "Independent travel guide for visiting and volunteering at Dujiangyan Panda Base near Chengdu, China.",
           "logo": new URL("/favicon.svg", Astro.site).href,
+          "sameAs": [
+            "https://panda.org.cn/en/",
+            "https://en.wikipedia.org/wiki/China_Conservation_and_Research_Center_for_the_Giant_Panda",
+          ],
         },
         {
           "@type": "WebSite",
@@ -162,6 +168,7 @@ const ogImageUrl = ogImage || defaultOgImage;
             <p class="text-[11px] font-semibold tracking-[0.18em] text-warm-500 uppercase mb-4">Contact & Legal</p>
             <ul class="space-y-2.5 text-sm">
               <li><a href="/#about" class="hover:text-white transition-colors">About This Guide</a></li>
+              <li><EmailLink class="hover:text-white transition-colors" /></li>
               <li><a href="/privacy/" class="hover:text-white transition-colors">Privacy Policy</a></li>
               <li><a href="/terms/" class="hover:text-white transition-colors">Terms of Use</a></li>
             </ul>
