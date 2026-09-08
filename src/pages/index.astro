@@ -16,19 +16,19 @@ import { Icon } from "astro-icon/components";
 const faqItems = [
   {
     q: "Is Dujiangyan Panda Base currently open?",
-    a: "No. Dujiangyan Panda Base (都江堰中华大熊猫苑) closed on <strong>April 23, 2026</strong> for facility upgrades and renovation. The reopening date has not been announced. While it is closed, see our <a href=\"#alternatives\" class=\"text-accent-600 hover:text-accent-700 underline\">recommended alternatives</a> below.",
+    a: "No. Dujiangyan Panda Base (都江堰中华大熊猫苑) closed on <strong>April 23, 2026</strong> for facility upgrades; no reopening date yet. While it is closed, see our <a href=\"#alternatives\" class=\"text-accent-600 hover:text-accent-700 underline\">recommended alternatives</a>.",
   },
   {
     q: "What is the difference between Dujiangyan Panda Base and Chengdu Panda Base?",
-    a: "Dujiangyan is quieter, has fewer pandas (~20), and is the only base near Chengdu offering a hands-on volunteer program. Chengdu Research Base is much larger (~200 pandas), has a famous panda nursery, and is easier to reach by subway. See the <a href=\"#comparison\" class=\"text-accent-600 hover:text-accent-700 underline\">full side-by-side comparison</a>.",
+    a: "Dujiangyan is quieter, has fewer pandas (~20), and is the only base near Chengdu offering a hands-on volunteer program. Chengdu is much larger (~200 pandas), has a famous nursery, and is easier to reach by subway. See the <a href=\"#comparison\" class=\"text-accent-600 hover:text-accent-700 underline\">full comparison</a>.",
   },
   {
     q: "How much does the volunteer program cost?",
-    a: "The volunteer program costs approximately CNY 700-900 per person and includes the entrance fee, uniform, gloves, lunch, and a certificate. See the <a href=\"#volunteer\" class=\"text-accent-600 hover:text-accent-700 underline\">volunteer section</a> for the full breakdown and booking tips.",
+    a: "The volunteer program costs approximately CNY 700-900 per person, including entry, uniform, gloves, lunch, and a certificate. See the <a href=\"#volunteer\" class=\"text-accent-600 hover:text-accent-700 underline\">volunteer section</a>.",
   },
   {
     q: "How do I get to Dujiangyan Panda Base from Chengdu?",
-    a: "The fastest way is the high-speed train from Xipu Station to Dujiangyan Station (20-30 min), then a 15-minute taxi to the base — about 1-1.5 hours total. Bus, taxi/ride-hailing, and organized tours are also options. See <a href=\"#getting-there\" class=\"text-accent-600 hover:text-accent-700 underline\">all four transport options</a> with costs.",
+    a: "The fastest way is the high-speed train from Xipu Station to Dujiangyan Station (20-30 min), then a 15-minute taxi — 1-1.5 hours total. Bus, taxi, and tours also work. See <a href=\"#getting-there\" class=\"text-accent-600 hover:text-accent-700 underline\">all four transport options</a>.",
   },
   {
     q: "Can I hold a baby panda?",
@@ -36,11 +36,11 @@ const faqItems = [
   },
   {
     q: "When is the best time to visit?",
-    a: "Spring (March-May) and autumn (September-November) offer the best weather and most active pandas. During summer, arrive early morning before the heat. Winter has the fewest crowds. See the <a href=\"#best-time\" class=\"text-accent-600 hover:text-accent-700 underline\">month-by-month guide</a>.",
+    a: "Spring (March-May) and autumn (September-November) for the best weather and most active pandas; arrive early morning in summer. See the <a href=\"#best-time\" class=\"text-accent-600 hover:text-accent-700 underline\">month-by-month guide</a>.",
   },
   {
     q: "Do I need to book tickets in advance?",
-    a: "General admission can be bought at the gate, but booking online is recommended during peak seasons (summer and Chinese holidays). The volunteer program must be booked at least 1-2 weeks ahead. See <a href=\"#tickets\" class=\"text-accent-600 hover:text-accent-700 underline\">ticket details</a>.",
+    a: "At the gate, but book online during peak seasons (summer, Chinese holidays). The volunteer program must be booked 1-2 weeks ahead. See <a href=\"#tickets\" class=\"text-accent-600 hover:text-accent-700 underline\">ticket details</a>.",
   },
   {
     q: "Is the base suitable for children?",
@@ -48,7 +48,7 @@ const faqItems = [
   },
   {
     q: "What are the opening hours?",
-    a: "Under normal operations the base is open daily from 8:30 AM to 5:00 PM, year-round. Arrive at opening time — pandas are most active in the morning.",
+    a: "Open daily 8:30 AM to 5:00 PM, year-round (under normal operations). Arrive at opening — pandas are most active in the morning.",
   },
   {
     q: "What is the minimum age for volunteers?",
@@ -56,15 +56,15 @@ const faqItems = [
   },
   {
     q: "Do I need to speak Chinese to volunteer?",
-    a: "Basic English is usually sufficient — most programs have English-speaking coordinators. Learning a few Chinese phrases can enhance the experience.",
+    a: "Basic English is usually sufficient — most programs have English-speaking coordinators.",
   },
   {
     q: "What should I wear for the volunteer program?",
-    a: "Comfortable clothes you don't mind getting dirty, closed-toe shoes, sunscreen, and insect repellent. The base provides a uniform or apron for volunteer activities.",
+    a: "Comfortable clothes you don't mind getting dirty, closed-toe shoes, sunscreen, and insect repellent. The base provides a uniform or apron.",
   },
   {
     q: "How far in advance should I book the volunteer program?",
-    a: "At least 1-2 weeks in advance. During peak seasons (summer, Chinese holidays), spots can fill up 3-4 weeks ahead — Golden Week can fill a month in advance.",
+    a: "1-2 weeks in advance; 3-4 weeks in peak season — Golden Week can fill a month ahead.",
   },
 ];
 
@@ -141,9 +141,9 @@ const transport = [
     cost: "CNY 10 (train) + transfer",
     icon: "M5 12h14M12 5l7 7-7 7",
     steps: [
-      "Take Chengdu Metro Line 2 to Xipu Station (犀浦站)",
-      "Transfer to the high-speed train to Qingchengshan Station (青城山站) — the closest stop, from ¥10, trains every 15-30 min",
-      "From Qingchengshan Station, take a taxi (about 10 min) or local bus No. 102, getting off at the Panda Base / disease-control stop",
+      "Chengdu Metro Line 2 to Xipu Station (犀浦站)",
+      "High-speed train to Qingchengshan Station (青城山站) — closest stop, from ¥10, every 15-30 min",
+      "Taxi (10 min) or bus No. 102 to the Panda Base stop",
     ],
     tag: "Fastest",
   },
@@ -153,9 +153,9 @@ const transport = [
     cost: "CNY 10-15 + local bus",
     icon: "M12 5v14M5 12h14",
     steps: [
-      "From Chengdu Chadianzi Bus Station (茶店子客运站, reachable on Metro Line 2 — first bus ~7:30 AM, last ~7:00 PM)",
-      "Coach to Dujiangyan Bus Station, about 1.5-2 hours",
-      "Transfer to local bus No. 102 to the Panda Base stop (about 50 min)",
+      "Chadianzi Bus Station (茶店子客运站, Metro Line 2) — first bus ~7:30 AM, last ~7:00 PM",
+      "Coach to Dujiangyan Bus Station, 1.5-2 hours",
+      "Local bus No. 102 to the Panda Base stop (~50 min)",
     ],
     tag: "Cheapest",
   },
@@ -165,10 +165,10 @@ const transport = [
     cost: "CNY 150-250",
     icon: "M12 2L4 12l8 10 8-10z",
     steps: [
-      "Use Didi (Chinese Uber) or hail a taxi from anywhere in Chengdu",
+      "Use Didi (Chinese Uber) or hail a taxi anywhere in Chengdu",
       "Show the driver: 都江堰熊猫基地 (Dujiangyan Panda Base)",
       "Most convenient door-to-door, especially with luggage",
-      "Tip: taxis are scarce in Dujiangyan — arrange a return ride via your Didi app or hotel in advance, or you may struggle to get back to Chengdu",
+      "Tip: taxis are scarce in Dujiangyan — arrange your return ride in advance via Didi or your hotel",
     ],
     tag: "Most convenient",
   },
@@ -178,7 +178,7 @@ const transport = [
     cost: "CNY 300-600",
     icon: "M12 2a10 10 0 100 20 10 10 0 000-20z",
     steps: [
-      "Book through Trip.com, Klook, or a local agency",
+      "Book via Trip.com, Klook, or a local agency",
       "Includes hotel pickup, transport, and sometimes a guide",
       "Often combined with the Dujiangyan Irrigation System",
     ],
@@ -193,7 +193,7 @@ const seasons = [
     rating: "Best",
     color: "bg-green-50 border-green-200",
     badge: "bg-green-200 text-green-800",
-    desc: "Mild temperatures, lush bamboo, active pandas outdoors. April and May are ideal — comfortable weather before the summer heat. The best window to visit.",
+    desc: "Mild temperatures, lush bamboo, active pandas outdoors. April and May are ideal — the best window to visit.",
   },
   {
     name: "Summer",
@@ -201,7 +201,7 @@ const seasons = [
     rating: "Good",
     color: "bg-yellow-50 border-yellow-200",
     badge: "bg-yellow-200 text-yellow-800",
-    desc: "Hot and humid with afternoon thunderstorms. Pandas nap by midday — arrive at 8:30 AM. July and August are peak domestic season, so expect crowds.",
+    desc: "Hot and humid. Pandas nap by midday — arrive at 8:30 AM. July-August is peak domestic season.",
   },
   {
     name: "Autumn",
@@ -209,7 +209,7 @@ const seasons = [
     rating: "Best",
     color: "bg-orange-50 border-orange-200",
     badge: "bg-orange-200 text-orange-800",
-    desc: "Crisp, clear days and beautiful fall colors. Pandas are active and playful. Avoid the first week of October (Golden Week) when the country travels.",
+    desc: "Crisp, clear days; pandas active and playful. Avoid Golden Week (first week of October).",
   },
   {
     name: "Winter",
@@ -217,7 +217,7 @@ const seasons = [
     rating: "Okay",
     color: "bg-blue-50 border-blue-200",
     badge: "bg-blue-200 text-blue-800",
-    desc: "Cold but very quiet — the base is nearly empty. Pandas love the cool weather and stay active. Chinese New Year brings a brief visitor spike.",
+    desc: "Cold but nearly empty. Pandas love the cool weather and stay active. CNY brings a brief spike.",
   },
 ];
 
@@ -237,37 +237,37 @@ const monthTable = [
 ];
 
 const volunteerDay = [
-  { step: "1", title: "Morning Briefing", desc: "Arrive by 8:30 AM, change into your uniform, and get a safety orientation from an English-speaking coordinator." },
-  { step: "2", title: "Clean Enclosures", desc: "Sweep and clean panda enclosures — real behind-the-scenes panda care work." },
-  { step: "3", title: "Prepare Food", desc: "Wash bamboo, make panda cakes from a grain mix, and portion apples and carrots." },
+  { step: "1", title: "Morning Briefing", desc: "Arrive by 8:30 AM, uniform change, safety orientation from an English-speaking coordinator." },
+  { step: "2", title: "Clean Enclosures", desc: "Sweep and clean panda enclosures — real behind-the-scenes work." },
+  { step: "3", title: "Prepare Food", desc: "Wash bamboo, make panda cakes, portion apples and carrots." },
   { step: "4", title: "Feed the Pandas", desc: "The highlight — hand-feed pandas under staff supervision. Photos allowed (no flash)." },
-  { step: "5", title: "Observe & Learn", desc: "Watch panda behavior, learn about conservation, visit the nursery if cubs are present." },
-  { step: "6", title: "Certificate", desc: "Receive your volunteer certificate and souvenir. Programs finish around 3:00-4:00 PM." },
+  { step: "5", title: "Observe & Learn", desc: "Watch behavior, learn about conservation, visit the nursery if cubs are present." },
+  { step: "6", title: "Certificate", desc: "Receive your certificate and souvenir. Finishes around 3:00-4:00 PM." },
 ];
 
 const rhythm = [
-  { time: "8:30 AM", icon: "sun", title: "Gates Open — Pandas Eat Breakfast", desc: "Best time of day. Pandas are hungry, active, and climbing. Arrive at opening.", active: true },
+  { time: "8:30 AM", icon: "sun", title: "Gates Open — Pandas Eat Breakfast", desc: "Best time of day: hungry, active, climbing. Arrive at opening.", active: true },
   { time: "9:00 AM", icon: "broom", title: "Volunteers Start Morning Shift", desc: "Safety briefing, uniform change, then enclosure cleaning and food prep.", active: false },
-  { time: "10:30 AM", icon: "carrot", title: "Feeding Time", desc: "Volunteers hand-feed bamboo shoots, apples, and panda cakes. Best photo opportunity.", active: false },
-  { time: "11:30 AM", icon: "moon", title: "Nap Time Begins", desc: "Most pandas settle in for a midday nap. Good time for the museum or nature trails.", active: false },
-  { time: "2:00 PM", icon: "apple-whole", title: "Afternoon Activity Window", desc: "Pandas wake for an afternoon snack. Quieter with softer light for photography.", active: true },
-  { time: "5:00 PM", icon: "cloud-sun", title: "Base Closes", desc: "Head back to Chengdu or continue to the Dujiangyan Irrigation System (15 min away).", active: false },
+  { time: "10:30 AM", icon: "carrot", title: "Feeding Time", desc: "Volunteers hand-feed bamboo shoots, apples, panda cakes. Best photo op.", active: false },
+  { time: "11:30 AM", icon: "moon", title: "Nap Time Begins", desc: "Most pandas settle for a midday nap. Good time for the museum or trails.", active: false },
+  { time: "2:00 PM", icon: "apple-whole", title: "Afternoon Activity Window", desc: "Pandas wake for a snack. Quieter, softer light for photography.", active: true },
+  { time: "5:00 PM", icon: "cloud-sun", title: "Base Closes", desc: "Head back to Chengdu or continue to the Irrigation System (15 min away).", active: false },
 ];
 
 const zones = [
-  { name: "Panpan Garden", chinese: "盼盼园", highlight: "At the entrance", desc: "The first zone you meet. Watch mother pandas caring for cubs — eating bamboo, climbing, and playing." },
-  { name: "Linze Garden", chinese: "临泽园", highlight: "Red pandas & black bears", desc: "The red panda area. Spot red pandas in the trees and black bears in the neighboring enclosure." },
-  { name: "Diequan Garden", chinese: "叠泉园", highlight: "Most popular", desc: "The largest zone and furthest from the entrance, home to the most pandas — including Panda Lele, the famously active returnee from Singapore. Take the shuttle if you'd rather not walk." },
-  { name: "Shuangnan Garden", chinese: "双楠园", highlight: "Uphill walking", desc: "More giant pandas in a hillside setting. Expect some uphill walking between the viewing areas here." },
+  { name: "Panpan Garden", chinese: "盼盼园", highlight: "At the entrance", desc: "The first zone. Mother pandas caring for cubs — eating bamboo, climbing, playing." },
+  { name: "Linze Garden", chinese: "临泽园", highlight: "Red pandas & black bears", desc: "The red panda area; black bears in the neighboring enclosure." },
+  { name: "Diequan Garden", chinese: "叠泉园", highlight: "Most popular", desc: "The largest zone, furthest from the entrance, with the most pandas — including Lele, the famously active returnee from Singapore. Take the shuttle to save the walk." },
+  { name: "Shuangnan Garden", chinese: "双楠园", highlight: "Uphill walking", desc: "More giant pandas on a hillside. Expect uphill walking between viewing areas." },
 ];
 
 const packing = [
-  { icon: "shoe-prints", title: "Comfortable walking shoes", desc: "The base is on a hillside with uneven paths. Leave the sandals at home.", must: true },
-  { icon: "camera", title: "Camera with zoom lens", desc: "Pandas can be 5-15 meters from viewing areas. Phone zoom won't cut it.", must: true },
+  { icon: "shoe-prints", title: "Comfortable walking shoes", desc: "Hillside with uneven paths. Leave the sandals at home.", must: true },
+  { icon: "camera", title: "Camera with zoom lens", desc: "Pandas are 5-15 m from viewing areas; phone zoom won't cut it.", must: true },
   { icon: "passport", title: "Passport", desc: "Required for foreign visitors at ticket purchase and entry.", must: true },
-  { icon: "spray-can-sparkles", title: "Sunscreen + hat", desc: "Limited shade in some open areas. Sichuan sun is stronger than you think.", must: true },
-  { icon: "droplet", title: "Water + snacks", desc: "Limited food options inside the base. Pack enough for a half day.", must: false },
-  { icon: "umbrella", title: "Rain jacket or umbrella", desc: "Sichuan weather changes fast. A light rain jacket saves your day.", must: false },
+  { icon: "spray-can-sparkles", title: "Sunscreen + hat", desc: "Limited shade in open areas; Sichuan sun is stronger than you think.", must: true },
+  { icon: "droplet", title: "Water + snacks", desc: "Limited food options inside; pack for a half day.", must: false },
+  { icon: "umbrella", title: "Rain jacket or umbrella", desc: "Sichuan weather changes fast.", must: false },
 ];
 
 const comparison = [
@@ -294,7 +294,7 @@ const alternatives = [
     hours: "7:30 AM - 5:30 PM",
     transit: "Train to Lidui Park + taxi",
     volunteer: false,
-    desc: "~17 km from the closed base, ~65 km from Chengdu. Part of the Chengdu system but focused on semi-wild training. Red pandas roam freely and may walk right past you on the boardwalks.",
+    desc: "~17 km from the closed base, ~65 km from Chengdu. Part of the Chengdu system but focused on semi-wild training. Red pandas roam freely along the boardwalks.",
   },
   {
     name: "Wolong Giant Panda Nature Reserve (卧龙)",
@@ -306,7 +306,7 @@ const alternatives = [
     hours: "Full day",
     transit: "Bus from Chengdu (2-2.5 h)",
     volunteer: true,
-    desc: "~120 km from Chengdu. The largest panda reserve with the most natural setting and a full volunteer program similar to Dujiangyan's. Best for an immersive mountain experience.",
+    desc: "~120 km from Chengdu. The largest panda reserve, the most natural setting, and a full volunteer program like Dujiangyan's.",
   },
   {
     name: "Bifengxia Panda Base (碧峰峡)",
@@ -318,7 +318,7 @@ const alternatives = [
     hours: "Full day",
     transit: "Bus from Chengdu (2.5 h)",
     volunteer: true,
-    desc: "~160 km from Chengdu, near Ya'an. One of three bases offering the official panda keeper volunteer program, set in a scenic gorge with fewer crowds than Wolong.",
+    desc: "~160 km from Chengdu, near Ya'an. Official keeper volunteer program in a scenic gorge, with fewer crowds than Wolong.",
   },
   {
     name: "Chengdu Research Base of Giant Panda Breeding (成都大熊猫繁育研究基地)",
@@ -330,7 +330,7 @@ const alternatives = [
     hours: "7:30 AM - 6:00 PM",
     transit: "Metro Line 3",
     volunteer: false,
-    desc: "~10 km from downtown Chengdu. The most famous base with a panda nursery and excellent museum. Very crowded — arrive before 8 AM. No volunteer program, but the best place to see baby pandas.",
+    desc: "~10 km from downtown Chengdu. The most famous base: panda nursery, excellent museum, very crowded — arrive before 8 AM. Best place to see baby pandas.",
   },
 ];
 
@@ -340,28 +340,28 @@ const nearby = [
     dist: "15 min from the base",
     unesco: true,
     image: "/images/dujiangyan-irrigation.webp",
-    desc: "A 2,000-year-old engineering marvel and UNESCO World Heritage site built in 256 BC. Walk the ancient riverbanks, cross the historic Anlan Suspension Bridge, and visit Erwang Temple.",
+    desc: "A 2,000-year-old engineering marvel and UNESCO site built in 256 BC. Walk the ancient riverbanks, cross the Anlan Suspension Bridge, and visit Erwang Temple.",
   },
   {
     title: "Mount Qingcheng",
     dist: "30 min from the base",
     unesco: true,
     image: "/images/mount-qingcheng.webp",
-    desc: "One of the birthplaces of Taoism and a UNESCO World Heritage site. Hike misty forests, visit ancient Taoist temples, and enjoy panoramic summit views. Allow 3-5 hours for the front mountain.",
+    desc: "A birthplace of Taoism and UNESCO site. Misty forests, ancient temples, panoramic summit views. Allow 3-5 hours for the front mountain.",
   },
   {
     title: "Panda Valley (熊猫谷)",
     dist: "20 min from the base",
     unesco: false,
     image: "/images/panda-forest.webp",
-    desc: "The Dujiangyan Field Research Center for Giant Pandas — a semi-wild training area where pandas learn survival skills. Even quieter than the main base, with red pandas roaming the boardwalks.",
+    desc: "The Dujiangyan Field Research Center — a semi-wild training area where pandas learn survival skills. Quieter than the main base, with red pandas on the boardwalks.",
   },
   {
     title: "Dujiangyan Old Town",
     dist: "15 min from the base",
     unesco: false,
     image: "/images/dujiangyan-nanqiao-bridge.webp",
-    desc: "Pedestrian streets near the South Bridge (Nanqiao) come alive at night with food stalls, riverside restaurants, and Sichuan opera. The illuminated South Bridge is beautiful after dark.",
+    desc: "Pedestrian streets near South Bridge (Nanqiao) come alive at night with food stalls, riverside restaurants, and Sichuan opera.",
   },
 ];
 
@@ -372,7 +372,7 @@ const featured = [
     image: "/images/panda-forest.webp",
     alt: "Giant pandas resting in forested enclosure at Dujiangyan",
     href: "#tickets",
-    desc: "Two to four hours, 20 pandas, open-air enclosures you can't get in Chengdu. Best started at 8:30 AM feeding time.",
+    desc: "Two to four hours, 20 pandas, open-air enclosures. Best started at 8:30 AM feeding time.",
   },
   {
     title: "The volunteer keeper program",
@@ -380,7 +380,7 @@ const featured = [
     image: "/images/volunteer-feeding.webp",
     alt: "Volunteer hand-feeding a giant panda at Dujiangyan",
     href: "#volunteer",
-    desc: "The only base near Chengdu with a hands-on keeper program — clean, feed, and learn from the keepers. Book 1-2 weeks ahead.",
+    desc: "Clean, feed, and learn from the keepers — the only program near Chengdu. Book 1-2 weeks ahead.",
   },
   {
     title: "Pair it with UNESCO sights",
@@ -388,7 +388,7 @@ const featured = [
     image: "/images/mount-qingcheng.webp",
     alt: "Misty forest path on Mount Qingcheng in Dujiangyan",
     href: "#nearby",
-    desc: "Add the 2,000-year-old Irrigation System and Mount Qingcheng. All within 30 minutes of the base.",
+    desc: "Add the 2,000-year-old Irrigation System and Mount Qingcheng, both within 30 minutes.",
   },
 ];
 
@@ -396,22 +396,22 @@ const whyChoose = [
   {
     icon: "medal",
     title: "Closest keeper program to Chengdu",
-    desc: "Just 1.5 hours from the city, Dujiangyan is the only base near Chengdu offering a real hands-on volunteer program.",
+    desc: "Just 1.5 hours from the city — the only base near Chengdu with a real hands-on volunteer program.",
   },
   {
     icon: "window-maximize",
     title: "Open-air, not behind glass",
-    desc: "Unlike Chengdu's glass-walled nurseries, Dujiangyan's enclosures are open — closer views and clearer photos.",
+    desc: "Unlike Chengdu's glass-walled nurseries, Dujiangyan's enclosures are open — closer views, clearer photos.",
   },
   {
     icon: "leaf",
     title: "Genuinely quieter",
-    desc: "A fraction of Chengdu's crowds, on a scenic hillside. Weekday mornings feel almost private.",
+    desc: "A fraction of Chengdu's crowds on a scenic hillside. Weekday mornings feel almost private.",
   },
   {
     icon: "paw",
     title: "Real rescue & conservation",
-    desc: "Operated by the CCRCGP for rescue and disease prevention — your visit supports genuine conservation work.",
+    desc: "Operated by the CCRCGP for rescue and disease prevention — your visit supports genuine conservation.",
   },
 ];
 
@@ -423,7 +423,7 @@ const visitorFeedback = [
     tag: "Most-repeated advice",
   },
   {
-    quote: "\u201cOpen-air enclosures beat the glass walls of Chengdu — the pandas feel closer and the photos come out clearer.\u201d",
+    quote: "\u201cOpen-air enclosures beat Chengdu's glass walls — pandas feel closer, photos come out clearer.\u201d",
     source: "TripAdvisor",
     rating: "4.7/5 · 388 reviews",
     tag: "Dujiangyan's edge",
@@ -433,12 +433,6 @@ const visitorFeedback = [
     source: "Trip.com",
     rating: "Aggregated themes",
     tag: "When to go",
-  },
-  {
-    quote: "\u201cViewing is from 5-15 m away, so bring a real zoom lens — phone zoom won't cut it.\u201d",
-    source: "Klook",
-    rating: "Aggregated themes",
-    tag: "Pack this",
   },
 ];
 
@@ -467,10 +461,10 @@ const stats = [
 ];
 
 const routeSteps = [
-  { icon: "ticket", title: "Book your train", desc: "Xipu Station → Dujiangyan Station. Around CNY 15-25 one way." },
-  { icon: "train-subway", title: "Ride the high-speed rail", desc: "The fastest leg — roughly 20-30 minutes of flat, scenic farmland." },
-  { icon: "taxi", title: "Taxi from the station", desc: "About 15 minutes to the base gate. Negotiate the meter or use a ride-hailing app." },
-  { icon: "paw", title: "You're at the gate", desc: "Total door-to-door is around 1-1.5 hours from downtown Chengdu." },
+  { icon: "ticket", title: "Book your train", desc: "Xipu Station → Dujiangyan Station. CNY 15-25 one way." },
+  { icon: "train-subway", title: "Ride the high-speed rail", desc: "Roughly 20-30 minutes of scenic farmland." },
+  { icon: "taxi", title: "Taxi from the station", desc: "About 15 minutes to the gate. Use the meter or Didi." },
+  { icon: "paw", title: "You're at the gate", desc: "Total door-to-door: 1-1.5 hours from downtown Chengdu." },
 ];
 ---
 
@@ -689,10 +683,10 @@ const routeSteps = [
       <span class="inline-block w-8 h-px bg-accent-500/60"></span> The short version
     </p>
     <p class="font-display text-xl md:text-2xl font-medium text-warm-900 leading-relaxed">
-      A panda trip is never just a trip. At Dujiangyan, an hour and a half from Chengdu, the enclosures are open-air, the hillside is quiet, and — unlike the huge city base — you can actually get hands-on as a keeper for a day.
+      At Dujiangyan, 1.5 hours from Chengdu, the enclosures are open-air, the hillside is quiet, and — unlike the huge city base — you can get hands-on as a keeper for a day.
     </p>
     <p class="mt-5 text-warm-600 leading-relaxed">
-      This guide brings the essential, reader-verified details onto one page: tickets, the volunteer program, transport, the best time to go, how Dujiangyan stacks up against Chengdu, and the UNESCO sights nearby. Skip the noise below the fold — here's the honest picture.
+      This guide brings the essential, reader-verified details onto one page: tickets, the volunteer program, transport, the best time to go, how Dujiangyan stacks up against Chengdu, and the UNESCO sights nearby.
     </p>
   </section>
 
@@ -809,13 +803,13 @@ const routeSteps = [
       <div class="mt-8 p-6 rounded-2xl border border-amber-200 bg-amber-50/50">
         <h3 class="font-semibold text-amber-900 mb-3 flex items-center gap-2">Set honest expectations</h3>
         <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-warm-700 list-disc pl-5">
-          <li>Pandas nap from ~11:30 AM — expect sleepy pandas at midday, not action.</li>
-          <li>Facilities are functional rather than luxurious; a few visitors note maintenance could be better.</li>
-          <li>Volunteer programs have grown more observation-led since April 2024 — confirm what's included when you book.</li>
-          <li>Without a shuttle, expect steady walking on a hillside.</li>
+          <li>Pandas nap from ~11:30 AM — expect sleepy pandas at midday.</li>
+          <li>Facilities are functional rather than luxurious.</li>
+          <li>Volunteer programs are more observation-led since April 2024 — confirm what's included when booking.</li>
+          <li>Without a shuttle, expect steady hillside walking.</li>
         </ul>
       </div>
-      <p class="mt-6 text-xs text-warm-500">Dujiangyan Panda Base is currently closed for renovation; these themes describe normal operations. Reviewed on TripAdvisor, Trip.com and Klook.</p>
+      <p class="mt-6 text-xs text-warm-500">These themes describe normal operations; the base is currently closed for renovation. Sources: TripAdvisor, Trip.com, Klook.</p>
     </div>
   </section>
 
@@ -865,34 +859,13 @@ const routeSteps = [
     </div>
   </section>
 
-  <!-- ============ 30-SECOND VERDICT ============ -->
-  <section class="max-w-7xl mx-auto px-4 pb-16 md:pb-24 reveal">
-    <div class="grid md:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
-      <div class="p-8 bg-white">
-        <p class="text-[11px] font-semibold tracking-[0.18em] text-accent-600 uppercase mb-3">Best for</p>
-        <p class="font-display text-2xl font-semibold text-warm-950">Volunteers &amp; quiet visits</p>
-        <p class="mt-3 text-sm text-warm-600 leading-relaxed">If you want to get hands-on with pandas — cleaning, feeding, preparing food — this is the only base near Chengdu that lets you do it.</p>
-      </div>
-      <div class="p-8 bg-white">
-        <p class="text-[11px] font-semibold tracking-[0.18em] text-amber-600 uppercase mb-3">Skip if</p>
-        <p class="font-display text-2xl font-semibold text-warm-950">You want lots of pandas</p>
-        <p class="mt-3 text-sm text-warm-600 leading-relaxed">With ~20 pandas vs Chengdu's 200, this is about quality over quantity. See the <a href="#comparison" class="text-accent-600 underline font-medium">Dujiangyan vs Chengdu comparison</a> for scale.</p>
-      </div>
-      <div class="p-8 bg-white">
-        <p class="text-[11px] font-semibold tracking-[0.18em] text-blue-600 uppercase mb-3">Ideal combo</p>
-        <p class="font-display text-2xl font-semibold text-warm-950">Volunteer day + UNESCO sites</p>
-        <p class="mt-3 text-sm text-warm-600 leading-relaxed">Combine a morning volunteer shift with the <a href="#nearby" class="text-accent-600 underline font-medium">Dujiangyan Irrigation System</a> and Mount Qingcheng — both UNESCO sites within 30 minutes.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ TICKETS ============ -->
   <section id="tickets" class="scroll-mt-28 bg-white py-20 md:py-28 reveal">
     <div class="max-w-7xl mx-auto px-4">
       <SectionHeader
         eyebrow="Tickets & Pricing"
         title="How much is Dujiangyan Panda Base?"
-        subtitle="Transparent pricing with no hidden fees. Verified against official listings and visitor reports, last updated July 2026. Prices are suspended while the base is closed for renovation."
+        subtitle="Transparent pricing, verified against official listings and visitor reports, July 2026. Prices are suspended while the base is closed."
       />
       <div class="mt-12 overflow-hidden rounded-2xl border border-warm-200 bg-white">
         <table class="w-full text-sm">
@@ -939,7 +912,7 @@ const routeSteps = [
     <SectionHeader
       eyebrow="Volunteer Program"
       title="Become a panda keeper for a day"
-      subtitle="The only base near Chengdu where you can get hands-on with pandas. Currently suspended while the base is closed — Wolong and Bifengxia run equivalent programs."
+      subtitle="The only base near Chengdu with hands-on panda work. Currently suspended while closed — Wolong and Bifengxia run equivalents."
     />
 
     <div class="mt-12 grid md:grid-cols-2 gap-10 items-center">
@@ -976,20 +949,20 @@ const routeSteps = [
       ))}
     </div>
 
-    <p class="mt-5 text-xs text-warm-500">A typical keeper day (per published itineraries): ~8:00 AM start with care work (breaking bamboo, washing bamboo shoots, cleaning enclosure glass), lunch and a panda film around noon, panda-cake making and leaf cutting mid-afternoon, then your certificate by ~2:30 PM. Even during the keeper program you are <strong>not allowed to touch or hold the pandas</strong>.</p>
+    <p class="mt-5 text-xs text-warm-500">Care work in the morning (bamboo, enclosure cleaning), lunch and a panda film at noon, panda-cake making mid-afternoon, certificate by ~2:30 PM. Even during the keeper program you are <strong>not allowed to touch or hold the pandas</strong>.</p>
 
-    <div class="mt-12 grid sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-warm-200 bg-warm-200">
+      <div class="mt-8 grid sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-warm-200 bg-warm-200">
       <div class="p-7 bg-white">
         <h3 class="font-semibold text-warm-900">Health</h3>
-        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Good general health required. Anyone with a cold, flu, or infectious condition won't be allowed near the pandas.</p>
+        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Good general health required — no colds or infectious conditions near the pandas.</p>
       </div>
       <div class="p-7 bg-white">
         <h3 class="font-semibold text-warm-900">Language</h3>
-        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Basic English is usually sufficient — most programs have English-speaking coordinators.</p>
+        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Basic English is usually sufficient; coordinators speak English.</p>
       </div>
       <div class="p-7 bg-white">
         <h3 class="font-semibold text-warm-900">Documents</h3>
-        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Valid passport or ID. Some programs ask for a simple health declaration form.</p>
+        <p class="mt-2 text-sm text-warm-600 leading-relaxed">Valid passport or ID; some programs ask a simple health declaration.</p>
       </div>
     </div>
 
@@ -1001,7 +974,7 @@ const routeSteps = [
         <li><strong class="text-white">Your Chengdu hotel / hostel concierge</strong> — give them 3-4 days lead time</li>
         <li><strong class="text-white">Official WeChat channel</strong> of the China Conservation and Research Center for the Giant Panda (<a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn</a>) — for Chinese speakers</li>
       </ul>
-      <p class="mt-4 text-xs text-accent-200 flex items-center gap-1.5"><Icon name="fa6-solid:triangle-exclamation" class="w-3.5 h-3.5 text-amber-400 shrink-0" /> While Dujiangyan is closed, equivalent keeper programs run at <a href="#alternatives" class="text-accent-300 hover:text-white underline">Wolong and Bifengxia</a>.</p>
+      <p class="mt-4 text-xs text-accent-200 flex items-center gap-1.5"><Icon name="fa6-solid:triangle-exclamation" class="w-3.5 h-3.5 text-amber-400 shrink-0" /> While closed, equivalent keeper programs run at <a href="#alternatives" class="text-accent-300 hover:text-white underline">Wolong and Bifengxia</a>.</p>
     </div>
   </section>
 
@@ -1011,7 +984,7 @@ const routeSteps = [
       <SectionHeader
         eyebrow="Getting There"
         title="How to get to Dujiangyan Panda Base from Chengdu"
-        subtitle="Four ways to reach the base. The high-speed train is the fastest and most convenient option — about 1-1.5 hours door-to-door."
+        subtitle="Four ways to reach the base. The high-speed train is fastest — 1-1.5 hours door-to-door."
       />
       <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {routeSteps.map((r, i) => (
@@ -1067,7 +1040,7 @@ const routeSteps = [
           ></iframe>
         </div>
         <p class="mt-3 text-xs text-warm-500">
-          Show <a href="https://www.google.com/maps/search/Dujiangyan+Panda+Base+%E9%83%BD%E6%B1%9F%E5%A0%B0%E4%B8%AD%E5%8D%8E%E5%A4%A7%E7%86%8A%E7%8C%AB%E8%8B%91" target="_blank" rel="noopener noreferrer" class="text-accent-600 hover:text-accent-700 underline">Dujiangyan Panda Base on Google Maps</a> · About 70 km (1-1.5 h) from downtown Chengdu, 18 km from Dujiangyan city.
+          <a href="https://www.google.com/maps/search/Dujiangyan+Panda+Base+%E9%83%BD%E6%B1%9F%E5%A0%B0%E4%B8%AD%E5%8D%8E%E5%A4%A7%E7%86%8A%E7%8C%AB%E8%8B%91" target="_blank" rel="noopener noreferrer" class="text-accent-600 hover:text-accent-700 underline">Dujiangyan Panda Base on Google Maps</a> · ~70 km (1-1.5 h) from downtown Chengdu, 18 km from Dujiangyan city.
         </p>
       </div>
 
@@ -1086,7 +1059,7 @@ const routeSteps = [
     <SectionHeader
       eyebrow="Best Time to Visit"
       title="When to visit Dujiangyan Panda Base"
-      subtitle="Spring and autumn offer the best weather and most active pandas. Here's what each season and month looks like."
+      subtitle="Spring and autumn for weather and active pandas — here's each season and month."
     />
     <div class="mt-12 grid md:grid-cols-2 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
       {seasons.map((s) => (
@@ -1126,7 +1099,7 @@ const routeSteps = [
         </tbody>
       </table>
     </div>
-    <p class="mt-4 text-xs text-warm-500">Typical conditions at ~700 m elevation. Sichuan weather can be unpredictable — always check the forecast before you go.</p>
+        <p class="mt-4 text-xs text-warm-500">Typical conditions at ~700 m elevation. Sichuan weather is unpredictable — check the forecast before you go.</p>
   </section>
 
   <!-- ============ VS CHENGDU ============ -->
@@ -1177,19 +1150,19 @@ const routeSteps = [
           </ul>
         </div>
       </div>
-      <p class="mt-8 text-warm-600 leading-relaxed max-w-[75ch]">
-        <strong>Can you do both?</strong> Absolutely — and many visitors do: a morning at Chengdu Research Base, then an afternoon train to Dujiangyan for a volunteer day the next morning. If you only have one panda day, choose <strong>Dujiangyan for the volunteer experience, Chengdu for the spectacle.</strong>
+        <p class="mt-8 text-warm-600 leading-relaxed max-w-[75ch]">
+        <strong>Can you do both?</strong> Yes — morning at Chengdu, afternoon train to Dujiangyan for a volunteer day. One panda day only: <strong>Dujiangyan to volunteer, Chengdu for the spectacle.</strong>
       </p>
     </div>
   </section>
 
   <!-- ============ NEARBY ATTRACTIONS ============ -->
   <section id="nearby" class="scroll-mt-28 max-w-7xl mx-auto px-4 py-20 md:py-28 reveal">
-    <SectionHeader
-      eyebrow="Nearby"
-      title="Make it a full day in Dujiangyan"
-      subtitle="Combine your panda visit with these UNESCO sites and scenic spots, all within 30 minutes of the base."
-    />
+      <SectionHeader
+        eyebrow="Nearby"
+        title="Make it a full day in Dujiangyan"
+        subtitle="UNESCO sites and scenic spots, all within 30 minutes of the base."
+      />
     <div class="mt-12 space-y-8">
       {nearby.map((attraction) => (
         <div class={attraction.image ? "grid md:grid-cols-2 gap-8 md:gap-12 items-center" : ""}>
@@ -1213,7 +1186,7 @@ const routeSteps = [
     </div>
     <div class="mt-14 rounded-3xl bg-accent-900 p-8 md:p-10">
       <h2 class="font-display text-2xl font-semibold text-white mb-3">Suggested day-trip route</h2>
-      <p class="text-accent-200 leading-relaxed">Start at the Panda Base in the morning (8:30 AM), then head to the Dujiangyan Irrigation System for the afternoon. Cross the Anlan Bridge, explore the temples, and finish with dinner in Dujiangyan Old Town. Mount Qingcheng deserves its own full day.</p>
+      <p class="text-accent-200 leading-relaxed">Panda Base in the morning (8:30 AM), the Irrigation System in the afternoon — Anlan Bridge, temples, then dinner in Dujiangyan Old Town. Mount Qingcheng deserves its own full day.</p>
     </div>
   </section>
 
@@ -1225,7 +1198,7 @@ const routeSteps = [
           <span class="inline-block w-8 h-px bg-accent-300/70"></span> While Dujiangyan Is Closed
         </p>
         <h2 class="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-semibold text-white leading-[1.08]">Where to see pandas instead</h2>
-        <p class="mt-5 text-accent-200 leading-relaxed max-w-[65ch]">From closest to furthest, here are the best panda experiences available right now.</p>
+        <p class="mt-5 text-accent-200 leading-relaxed max-w-[65ch]">From closest to furthest, the best panda experiences available right now.</p>
       </div>
       <div class="mt-12 space-y-6">
         {alternatives.map((alt, ai) => (
@@ -1258,9 +1231,9 @@ const routeSteps = [
       <div class="mt-8 rounded-3xl bg-warm-900 border border-warm-800 p-7 md:p-8">
         <h3 class="font-display text-xl font-semibold text-white mb-3">Booking tips while Dujiangyan is closed</h3>
         <ul class="space-y-2.5 text-sm text-warm-300 list-disc pl-5">
-          <li><strong class="text-white">Panda Valley:</strong> book online in advance — there is no reliable on-site ticket window. Use the official English page at <a href="https://panda.org.cn/en/pandavalley/tickets" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn/en/pandavalley/tickets</a> or the WeChat mini-program 熊猫谷 (has an English toggle). Foreign visitors book with a passport number.</li>
-          <li><strong class="text-white">Wolong & Bifengxia:</strong> volunteer keeper programs are booked through authorized agencies or the CCRCGP's official channels — plan 1-2 weeks ahead in peak season.</li>
-          <li><strong class="text-white">General:</strong> weekday mornings are always quieter; don't rely on walk-up tickets on weekends or Chinese holidays.</li>
+          <li><strong class="text-white">Panda Valley:</strong> book online — no reliable ticket window. Official page: <a href="https://panda.org.cn/en/pandavalley/tickets" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn/en/pandavalley/tickets</a> (passport number required).</li>
+          <li><strong class="text-white">Wolong & Bifengxia:</strong> volunteer programs via authorized agencies or CCRCGP official channels — 1-2 weeks ahead in peak season.</li>
+          <li><strong class="text-white">General:</strong> weekday mornings are quieter; don't rely on walk-up tickets on weekends or holidays.</li>
         </ul>
       </div>
     </div>
@@ -1268,11 +1241,11 @@ const routeSteps = [
 
   <!-- ============ DAILY RHYTHM ============ -->
   <section id="visit-guide" class="scroll-mt-28 max-w-7xl mx-auto px-4 py-20 md:py-28 reveal">
-    <SectionHeader
-      eyebrow="During Your Visit"
-      title="A panda's day — plan around it"
-      subtitle="Pandas follow a predictable rhythm. Time your visit right and you'll see them at their best."
-    />
+      <SectionHeader
+        eyebrow="During Your Visit"
+        title="A panda's day — plan around it"
+        subtitle="Pandas follow a predictable rhythm — time your visit right."
+      />
     <div class="mt-10 relative">
       <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-warm-200 -translate-x-1/2 hidden md:block" />
       <div class="space-y-8">
@@ -1303,7 +1276,7 @@ const routeSteps = [
     </div>
 
     <h2 class="mt-20 font-display text-2xl md:text-3xl font-semibold text-warm-950">The base, zone by zone</h2>
-    <p class="mt-3 text-sm text-warm-600">The park holds 40+ pandas (20+ on view) across four main zones, each a 5-10 minute walk apart, plus a shuttle. To dodge the tour groups, start at the entrance and work inward: Panpan Garden → Linze Garden → Diequan Garden → Shuangnan Garden.</p>
+    <p class="mt-3 text-sm text-warm-600">The park holds 40+ pandas (20+ on view) across four zones, each a 5-10 minute walk apart, plus a shuttle. To dodge tour groups: Panpan Garden → Linze Garden → Diequan Garden → Shuangnan Garden.</p>
     <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
       {zones.map((z) => (
         <div class="p-7 bg-white">
@@ -1317,10 +1290,10 @@ const routeSteps = [
     <div class="mt-8 rounded-3xl border border-amber-200 bg-amber-50/60 p-7 md:p-8">
       <h3 class="font-display text-xl font-semibold text-amber-900 mb-3">Before you go — things to know</h3>
       <ul class="space-y-2.5 text-sm text-warm-700 list-disc pl-5">
-        <li>The base is <strong>hilly with many steps</strong> and not very wheelchair-friendly — if that's a concern, Panda Valley is the flatter alternative.</li>
-        <li>Stone viewing fences are quite high: hold young children (under about 1.2 m) so they can see the pandas.</li>
-        <li>Shuttle buses run within the park between the zones.</li>
-        <li>Meals: the base canteen, nearby farmhouses, or in Dujiangyan city center. No need to stay overnight unless you're also visiting the Irrigation System or Mt. Qingcheng.</li>
+        <li>The base is <strong>hilly with many steps</strong> and not very wheelchair-friendly — Panda Valley is the flatter alternative.</li>
+        <li>Stone viewing fences are high: lift young children (under ~1.2 m) so they can see.</li>
+        <li>Shuttle buses run between the zones.</li>
+        <li>Meals: the base canteen, nearby farmhouses, or Dujiangyan city center.</li>
       </ul>
     </div>
   </section>
@@ -1331,7 +1304,7 @@ const routeSteps = [
       <SectionHeader
         eyebrow="Before You Go"
         title="Pack this, not that"
-        subtitle="Six essentials that make the difference between a good visit and a great one."
+        subtitle="Six essentials for a great visit."
       />
       <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-px overflow-hidden rounded-3xl border border-warm-200 bg-warm-200">
         {packing.map((item) => (
@@ -1357,27 +1330,27 @@ const routeSteps = [
     <SectionHeader
       eyebrow="Volunteer Stories"
       title="A panda keeper's day, first-hand"
-      subtitle="Honest accounts from volunteers who cleaned enclosures, prepared bamboo, and hand-fed pandas at Dujiangyan."
+      subtitle="Honest accounts from volunteers at Dujiangyan."
     />
     <div class="mt-12 rounded-3xl border border-warm-200 bg-warm-100/40 p-8 md:p-12">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-accent-500/30 mb-6" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
       <p class="font-display text-lg md:text-xl text-warm-800 leading-relaxed">
-        "When I signed up, I knew it would involve physical work — but the realness of it was the best part. By 8:30 AM we'd changed into the blue volunteer uniforms and gotten our safety briefing from an English-speaking coordinator. Cleaning enclosures is hard work (pandas eat up to 40 kg of bamboo a day, and what goes in must come out), but that's what makes it feel authentic. Then came the highlight around 11 AM: hand-feeding. A giant panda sitting two feet away, reaching out to take an apple from your hand, is surreal. The fee was CNY 800, including uniform, lunch, and a certificate."
+        "I knew it would involve physical work — but the realness of it was the best part. By 8:30 AM we were in blue volunteer uniforms getting our safety briefing from an English-speaking coordinator. Cleaning enclosures is hard work (pandas eat up to 40 kg of bamboo a day, and what goes in must come out), but that's what makes it feel authentic. Then the highlight at 11 AM: hand-feeding. A giant panda two feet away, taking an apple from your hand, is surreal. The fee was CNY 800, including uniform, lunch, and a certificate."
       </p>
       <p class="mt-6 text-sm font-semibold text-warm-900">— Sarah, volunteer, June 2026</p>
       <p class="mt-8 pt-6 border-t border-warm-200 text-sm text-warm-600 leading-relaxed">
-        <strong>Booking reality check:</strong> the base has no dedicated English booking site — the reliable paths are authorized travel agencies, your Chengdu hotel/hostel concierge, or the base's WeChat channel for Chinese speakers. Book 1-2 weeks ahead (3-4 weeks in peak season). Be wary of anyone quoting far above CNY 900 or guaranteeing you can "hold a baby panda" — that's no longer permitted.
+        <strong>Booking reality check:</strong> no dedicated English booking site — book via authorized agencies, your Chengdu hotel concierge, or the base's WeChat channel.
       </p>
     </div>
   </section>
 
   <!-- ============ FAQ ============ -->
   <section id="faq" class="scroll-mt-28 max-w-3xl mx-auto px-4 py-20 md:py-28 reveal">
-    <SectionHeader
-      eyebrow="FAQ"
-      title="Frequently asked questions"
-      subtitle="Every common question about visiting, volunteering, and getting to Dujiangyan Panda Base."
-    />
+      <SectionHeader
+        eyebrow="FAQ"
+        title="Frequently asked questions"
+        subtitle="Visiting, volunteering, and getting to Dujiangyan Panda Base."
+      />
     <div class="mt-10">
       <Faq items={faqItems} />
     </div>
@@ -1398,8 +1371,7 @@ const routeSteps = [
       </h2>
       <p class="mt-5 text-warm-200 text-lg max-w-xl mx-auto leading-relaxed">
         Tickets, the keeper program, transport, and the best time to go — all reader-verified. Plan now so you're first in line when the gates reopen.
-      </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
+      </p><div class="mt-8 flex flex-wrap justify-center gap-4">
         <a href="#tickets" class="px-6 py-3 rounded-full bg-amber-500 text-white font-medium text-sm hover:bg-amber-600 transition-colors">Tickets & Pricing</a>
         <a href="#volunteer" class="px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">Volunteer Program</a>
         <a href="#alternatives" class="px-6 py-3 rounded-full border border-white/40 text-white font-medium text-sm hover:bg-white/10 transition-colors">Alternatives While Closed</a>
@@ -1416,21 +1388,21 @@ const routeSteps = [
       <h2 class="font-display text-3xl md:text-4xl font-semibold text-white leading-[1.08]">An independent, reader-verified guide</h2>
       <div class="mt-7 space-y-4 text-warm-300 leading-relaxed">
         <p>
-          Dujiangyan Panda Base Guide is an independent travel resource created to help international travelers plan their visit. We are <strong class="text-warm-100">not affiliated</strong> with the official base or any government tourism organization.
+          Dujiangyan Panda Base Guide is an independent travel resource for international travelers. We are <strong class="text-warm-100">not affiliated</strong> with the official base or any government tourism organization.
         </p>
         <p>
-          We keep prices, hours, and booking information accurate by revisiting our content regularly, monitoring official channels, and incorporating feedback from readers and past volunteers. Time-sensitive information on this page was last verified <strong class="text-warm-100">July 2026</strong>.
+          We keep prices, hours, and booking information accurate by revisiting content regularly, monitoring official channels, and incorporating reader feedback. Time-sensitive information was last verified <strong class="text-warm-100">July 2026</strong>.
         </p>
       </div>
       <div class="mt-10 grid sm:grid-cols-2 gap-px overflow-hidden rounded-3xl border border-warm-800 bg-warm-800">
         <div class="p-8 bg-warm-900">
           <h3 class="font-display text-xl font-semibold text-white">Have a correction or a story?</h3>
-          <p class="mt-3 text-sm text-warm-300">Spotted outdated info or volunteered at a panda base? We welcome corrections and guest stories — they keep this guide accurate.</p>
+          <p class="mt-3 text-sm text-warm-300">Spotted outdated info or volunteered at a panda base? We welcome corrections and guest stories.</p>
           <EmailLink class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors" />
         </div>
         <div class="p-8 bg-warm-900">
           <h3 class="font-display text-xl font-semibold text-white">Official matters</h3>
-          <p class="mt-3 text-sm text-warm-300">For volunteer bookings, visiting permits, or official information, contact the China Conservation and Research Center for the Giant Panda directly — <a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn</a>.</p>
+          <p class="mt-3 text-sm text-warm-300">For bookings, permits, or official info, contact the CCRCGP directly — <a href="https://panda.org.cn/en/" target="_blank" rel="noopener noreferrer" class="text-accent-300 hover:text-white underline">panda.org.cn</a>.</p>
         </div>
       </div>
     </div>
