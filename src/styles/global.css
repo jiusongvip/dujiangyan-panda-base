@@ -79,6 +79,15 @@ html.js .reveal.reveal-in {
   transform: none;
 }
 
+/* Far-below-fold sections skip layout & paint until scrolled near —
+   cuts ~1.9s of style/layout work on throttled mobile CPUs. */
+.cv-auto {
+  content-visibility: auto;
+  /* 8-viewport approximation keeps scrollbar stable; sections carry their
+     own intrinsic size once rendered. */
+  contain-intrinsic-size: auto 1600px;
+}
+
 /* Trust-source logo marquee — infinite horizontal scroll */
 @keyframes marquee {
   from { transform: translateX(0); }

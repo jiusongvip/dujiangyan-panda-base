@@ -194,10 +194,17 @@ const ogImageUrl = ogImage || defaultOgImage;
     const ga = document.createElement('script');
     ga.async = true;
     ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-T96B7YRQZ3';
-    window.addEventListener('load', () => setTimeout(() => {
+    let gaSent = false;
+    function sendGa() {
+      if (gaSent) return;
+      gaSent = true;
       gtag('js', new Date());
       gtag('config', 'G-T96B7YRQZ3');
       document.head.appendChild(ga);
-    }, 1200));
+    }
+    ['pointerdown', 'keydown', 'touchstart'].forEach((evt) =>
+      window.addEventListener(evt, sendGa, { once: true, passive: true })
+    );
+    window.addEventListener('load', () => setTimeout(sendGa, 10000));
   </script>
 </html>
