@@ -502,24 +502,26 @@ const routeSteps = [
           Tickets, the volunteer keeper program, how to get there, and every question answered — all on one page.
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#alternatives" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-500 text-white font-medium text-sm hover:bg-amber-600 transition-colors">
+          <a href="#alternatives" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 text-amber-950 font-semibold text-sm hover:bg-amber-300 transition-colors">
             Current Closure Status
           </a>
-          <a href="#volunteer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">
+          <a href="#volunteer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-600 text-white font-medium text-sm hover:bg-accent-700 transition-colors">
             Volunteer Program
           </a>
           <a href="#tickets" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 text-white font-medium text-sm hover:bg-white/10 transition-colors">
             Tickets & Pricing
           </a>
         </div>
-        <div class="mt-10 flex items-center gap-2">
+        <div class="mt-10 flex items-center gap-1.5">
           {heroSlides.map((_, i) => (
             <button
               type="button"
               data-hero-dot
               aria-label={`Show slide ${i + 1}`}
-              class={`w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? "bg-white" : "bg-white/40 hover:bg-white/70"}`}
-            ></button>
+              class="group inline-flex h-7 w-7 items-center justify-center rounded-full"
+            >
+              <span class={`h-2.5 w-2.5 rounded-full transition-colors ${i === 0 ? "bg-white" : "bg-white/40 group-hover:bg-white/70"}`}></span>
+            </button>
           ))}
         </div>
       </div>
@@ -528,7 +530,7 @@ const routeSteps = [
     <!-- Planner widget -->
     <div class="relative z-20 max-w-7xl mx-auto px-4 -mt-24 pb-12">
       <div class="rounded-2xl bg-white/95 backdrop-blur border border-warm-200 shadow-xl p-5 md:p-6">
-        <p class="text-xs font-semibold text-warm-500 uppercase tracking-wide mb-4">Plan your visit</p>
+        <p class="text-xs font-semibold text-warm-700 uppercase tracking-wide mb-4">Plan your visit</p>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end">
           <div>
             <label for="plan-when" class="block text-xs font-medium text-warm-700 mb-1.5">When are you planning to visit?</label>
@@ -584,8 +586,10 @@ const routeSteps = [
           s.classList.toggle("hero-zoom", k === current);
         });
         heroDots.forEach((d, k) => {
-          d.classList.toggle("bg-white", k === current);
-          d.classList.toggle("bg-white/40", k !== current);
+          const dot = d.firstElementChild;
+          if (!dot) return;
+          dot.classList.toggle("bg-white", k === current);
+          dot.classList.toggle("bg-white/40", k !== current);
         });
       };
       heroDots.forEach((dot, k) => dot.addEventListener("click", () => show(k)));
@@ -648,8 +652,12 @@ const routeSteps = [
       const go = (n) => {
         idx = (n + trackEls.length) % trackEls.length;
         track.style.transform = `translateX(-${idx * 100}%)`;
-        dots.forEach((d, k) => d.classList.toggle("bg-accent-600", k === idx));
-        dots.forEach((d, k) => d.classList.toggle("bg-warm-300", k !== idx));
+        dots.forEach((d, k) => {
+          const dot = d.firstElementChild;
+          if (!dot) return;
+          dot.classList.toggle("bg-accent-600", k === idx);
+          dot.classList.toggle("bg-warm-300", k !== idx);
+        });
       };
       const autoplay = () => { timer = setInterval(() => go(idx + 1), 6000); };
       dots.forEach((d, k) => d.addEventListener("click", () => { go(k); clearInterval(timer); autoplay(); }));
@@ -721,7 +729,7 @@ const routeSteps = [
   <!-- ============ TRUST / SOURCES (marquee) ============ -->
   <section class="border-y border-warm-200 bg-white overflow-hidden">
     <div class="pt-8 pb-3">
-      <p class="text-center text-xs font-medium text-warm-500 uppercase tracking-wide">Trusted information sourced from</p>
+      <p class="text-center text-xs font-medium text-warm-700 uppercase tracking-wide">Trusted information sourced from</p>
     </div>
     <div class="relative">
       <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent"></div>
@@ -731,7 +739,7 @@ const routeSteps = [
           const inner = (
             <>
               <span class={`font-display text-xl font-bold whitespace-nowrap ${s.highlight ? "text-accent-700" : "text-warm-700"} transition-colors`}>{s.name}</span>
-              <span class="text-[11px] text-warm-500 whitespace-nowrap">{s.note}</span>
+              <span class="text-[11px] text-warm-700 whitespace-nowrap">{s.note}</span>
             </>
           );
           const marker = i >= trustSources.length ? { "aria-hidden": "true" } : {};
@@ -756,11 +764,11 @@ const routeSteps = [
         </div>
         <div class="flex flex-wrap gap-3">
           <div class="px-4 py-2.5 rounded-lg border border-warm-200 bg-warm-50">
-            <p class="text-xs text-warm-500">TripAdvisor</p>
-            <p class="font-bold text-warm-900">4.7 / 5 <span class="text-xs font-medium text-warm-500">· 388 reviews</span></p>
+            <p class="text-xs text-warm-700">TripAdvisor</p>
+            <p class="font-bold text-warm-900">4.7 / 5 <span class="text-xs font-medium text-warm-700">· 388 reviews</span></p>
           </div>
           <div class="px-4 py-2.5 rounded-lg border border-warm-200 bg-warm-50">
-            <p class="text-xs text-warm-500">Booking platforms</p>
+            <p class="text-xs text-warm-700">Booking platforms</p>
             <p class="font-bold text-warm-900">Trip.com <span class="text-warm-400 font-normal">·</span> Klook</p>
           </div>
         </div>
@@ -779,7 +787,7 @@ const routeSteps = [
                   <blockquote class="mt-6 font-display text-xl md:text-2xl font-medium text-warm-900 leading-relaxed">{v.quote}</blockquote>
                   <figcaption class="mt-6">
                     <p class="text-sm font-semibold text-warm-900">{v.source}</p>
-                    <p class="text-xs text-warm-500">{v.rating}</p>
+                    <p class="text-xs text-warm-700">{v.rating}</p>
                   </figcaption>
                 </div>
               </figure>
@@ -792,7 +800,9 @@ const routeSteps = [
           </button>
           <div class="flex items-center gap-2">
             {visitorFeedback.map((_, i) => (
-              <button type="button" data-testimonial-dot aria-label={`Go to review ${i + 1}`} class={`w-2 h-2 rounded-full transition-colors ${i === 0 ? "bg-accent-600" : "bg-warm-300 hover:bg-warm-400"}`}></button>
+              <button type="button" data-testimonial-dot aria-label={`Go to review ${i + 1}`} class="group inline-flex h-7 w-7 items-center justify-center rounded-full">
+                <span class={`h-2 w-2 rounded-full transition-colors ${i === 0 ? "bg-accent-600" : "bg-warm-300 group-hover:bg-warm-400"}`}></span>
+              </button>
             ))}
           </div>
           <button type="button" data-testimonial-next aria-label="Next review" class="w-11 h-11 rounded-full border border-warm-300 bg-white text-warm-700 hover:bg-accent-50 hover:text-accent-700 hover:border-accent-300 transition-colors flex items-center justify-center">
@@ -809,7 +819,7 @@ const routeSteps = [
           <li>Without a shuttle, expect steady hillside walking.</li>
         </ul>
       </div>
-      <p class="mt-6 text-xs text-warm-500">These themes describe normal operations; the base is currently closed for renovation. Sources: TripAdvisor, Trip.com, Klook.</p>
+      <p class="mt-6 text-xs text-warm-700">These themes describe normal operations; the base is currently closed for renovation. Sources: TripAdvisor, Trip.com, Klook.</p>
     </div>
   </section>
 
@@ -852,7 +862,7 @@ const routeSteps = [
               {s.prefix}<span data-count={s.value} data-decimals={s.decimals ?? 0}>0</span>{s.suffix}
             </p>
             <p class="mt-2 text-sm font-semibold text-warm-900">{s.label}</p>
-            <p class="mt-0.5 text-[11px] text-warm-500">{s.sub}</p>
+            <p class="mt-0.5 text-[11px] text-warm-700">{s.sub}</p>
           </div>
         ))}
       </div>
@@ -871,9 +881,9 @@ const routeSteps = [
         <table class="w-full text-sm">
           <thead>
             <tr class="bg-warm-100/70">
-              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Ticket Type</th>
-              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Price (CNY)</th>
-              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Notes</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Ticket Type</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Price (CNY)</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Notes</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-warm-200">
@@ -949,7 +959,7 @@ const routeSteps = [
       ))}
     </div>
 
-    <p class="mt-5 text-xs text-warm-500">Care work in the morning (bamboo, enclosure cleaning), lunch and a panda film at noon, panda-cake making mid-afternoon, certificate by ~2:30 PM. Even during the keeper program you are <strong>not allowed to touch or hold the pandas</strong>.</p>
+    <p class="mt-5 text-xs text-warm-700">Care work in the morning (bamboo, enclosure cleaning), lunch and a panda film at noon, panda-cake making mid-afternoon, certificate by ~2:30 PM. Even during the keeper program you are <strong>not allowed to touch or hold the pandas</strong>.</p>
 
       <div class="mt-8 grid sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-warm-200 bg-warm-200">
       <div class="p-7 bg-white">
@@ -1008,7 +1018,7 @@ const routeSteps = [
               <div class="flex-1">
                 <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 class="font-display text-xl font-semibold text-warm-950">{item.method}</h3>
-                  <span class="text-xs text-warm-500">{item.time}</span>
+                  <span class="text-xs text-warm-700">{item.time}</span>
                   <span class="text-xs font-semibold text-accent-700">{item.cost}</span>
                   <span class="ml-auto text-[10px] px-2.5 py-1 rounded-full bg-accent-100 text-accent-800 font-semibold uppercase tracking-wide">{item.tag}</span>
                 </div>
@@ -1039,7 +1049,7 @@ const routeSteps = [
             class="w-full h-[320px] md:h-[400px] border-0"
           ></iframe>
         </div>
-        <p class="mt-3 text-xs text-warm-500">
+        <p class="mt-3 text-xs text-warm-700">
           <a href="https://www.google.com/maps/search/Dujiangyan+Panda+Base+%E9%83%BD%E6%B1%9F%E5%A0%B0%E4%B8%AD%E5%8D%8E%E5%A4%A7%E7%86%8A%E7%8C%AB%E8%8B%91" target="_blank" rel="noopener noreferrer" class="text-accent-600 hover:text-accent-700 underline">Dujiangyan Panda Base on Google Maps</a> · ~70 km (1-1.5 h) from downtown Chengdu, 18 km from Dujiangyan city.
         </p>
       </div>
@@ -1068,7 +1078,7 @@ const routeSteps = [
             <h3 class="font-display text-xl font-semibold text-warm-950">{s.name}</h3>
             <span class={`text-xs font-medium px-3 py-1 rounded-full ${s.badge}`}>{s.rating}</span>
           </div>
-          <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-warm-500 mb-2">{s.period}</p>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.15em] text-warm-700 mb-2">{s.period}</p>
           <p class="text-sm text-warm-700 leading-relaxed">{s.desc}</p>
         </div>
       ))}
@@ -1079,11 +1089,11 @@ const routeSteps = [
       <table class="w-full text-sm">
         <thead>
           <tr class="bg-warm-100/70">
-            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Month</th>
-            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Temp (C)</th>
-            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Crowds</th>
-            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Panda Activity</th>
-            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Rating</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Month</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Temp (C)</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Crowds</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Panda Activity</th>
+            <th class="text-left px-5 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Rating</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-warm-200">
@@ -1099,7 +1109,7 @@ const routeSteps = [
         </tbody>
       </table>
     </div>
-        <p class="mt-4 text-xs text-warm-500">Typical conditions at ~700 m elevation. Sichuan weather is unpredictable — check the forecast before you go.</p>
+        <p class="mt-4 text-xs text-warm-700">Typical conditions at ~700 m elevation. Sichuan weather is unpredictable — check the forecast before you go.</p>
   </section>
 
   <!-- ============ VS CHENGDU ============ -->
@@ -1114,9 +1124,9 @@ const routeSteps = [
         <table class="w-full text-sm">
           <thead>
             <tr class="bg-warm-100/70">
-              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Feature</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Feature</th>
               <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-accent-800 bg-accent-50/70">Dujiangyan</th>
-              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-500">Chengdu</th>
+              <th class="text-left px-6 py-4 font-semibold text-[11px] uppercase tracking-[0.12em] text-warm-700">Chengdu</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-warm-200">
@@ -1176,7 +1186,7 @@ const routeSteps = [
           <div class={attraction.image ? "" : "p-0 md:p-8"}>
             <div class="flex items-center gap-3 mb-3">
               {attraction.unesco && <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 uppercase tracking-wide">UNESCO</span>}
-              <span class="text-xs text-warm-500">{attraction.dist}</span>
+              <span class="text-xs text-warm-700">{attraction.dist}</span>
             </div>
             <h3 class="font-display text-2xl font-semibold text-warm-950">{attraction.title}</h3>
             <p class="mt-3 text-sm text-warm-600 leading-relaxed">{attraction.desc}</p>
@@ -1217,10 +1227,10 @@ const routeSteps = [
                 <h3 class="font-display text-xl font-semibold text-warm-950">{alt.name}</h3>
                 <p class="mt-2 text-sm text-warm-600 leading-relaxed">{alt.desc}</p>
                 <div class="mt-5 grid sm:grid-cols-4 gap-3 text-xs">
-                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Tickets</span><span class="font-display text-base font-semibold text-warm-950">{alt.tickets}</span></div>
-                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Hours</span><span class="font-semibold text-warm-900">{alt.hours}</span></div>
-                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Transit</span><span class="font-semibold text-warm-900">{alt.transit}</span></div>
-                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-500 block mb-1">Volunteer</span><span class={`font-semibold ${alt.volunteer ? "text-accent-700" : "text-warm-900"}`}>{alt.volunteer ? "Available" : "Not offered"}</span></div>
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-700 block mb-1">Tickets</span><span class="font-display text-base font-semibold text-warm-950">{alt.tickets}</span></div>
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-700 block mb-1">Hours</span><span class="font-semibold text-warm-900">{alt.hours}</span></div>
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-700 block mb-1">Transit</span><span class="font-semibold text-warm-900">{alt.transit}</span></div>
+                  <div class="bg-warm-50 rounded-xl p-3.5"><span class="text-[11px] font-semibold uppercase tracking-wide text-warm-700 block mb-1">Volunteer</span><span class={`font-semibold ${alt.volunteer ? "text-accent-700" : "text-warm-900"}`}>{alt.volunteer ? "Available" : "Not offered"}</span></div>
                 </div>
               </div>
             </div>
@@ -1260,12 +1270,12 @@ const routeSteps = [
                 </div>
               )}
             </div>
-            <div class={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10 ${item.active ? 'bg-accent-500 text-white ring-4 ring-accent-100' : 'bg-warm-200 text-warm-600'}`}>
+            <div class={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold z-10 ${item.active ? 'bg-accent-600 text-white ring-4 ring-accent-100' : 'bg-warm-200 text-warm-800'}`}>
               {item.time.split(':')[0]}
             </div>
             <div class={`md:w-1/2 ${item.active ? '' : 'md:order-1 md:text-right md:pr-8'}`}>
               <div class="md:hidden mb-1"><Icon name={`fa6-solid:${item.icon}`} class="w-5 h-5 text-accent-600" /></div>
-              <p class="text-xs font-semibold text-warm-500">{item.time}</p>
+              <p class="text-xs font-semibold text-warm-700">{item.time}</p>
               <h3 class={`text-sm font-semibold mt-0.5 ${item.active ? 'text-accent-800' : 'text-warm-700'}`}>{item.title}</h3>
               <p class="text-xs text-warm-600 mt-1 leading-relaxed md:max-w-xs">{item.desc}</p>
               {!item.active && <div class="hidden md:block mt-1"><Icon name={`fa6-solid:${item.icon}`} class="w-5 h-5 text-warm-400" /></div>}
@@ -1372,8 +1382,8 @@ const routeSteps = [
       <p class="mt-5 text-warm-200 text-lg max-w-xl mx-auto leading-relaxed">
         Tickets, the keeper program, transport, and the best time to go — all reader-verified. Plan now so you're first in line when the gates reopen.
       </p><div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="#tickets" class="px-6 py-3 rounded-full bg-amber-500 text-white font-medium text-sm hover:bg-amber-600 transition-colors">Tickets & Pricing</a>
-        <a href="#volunteer" class="px-6 py-3 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors">Volunteer Program</a>
+        <a href="#tickets" class="px-6 py-3 rounded-full bg-amber-400 text-amber-950 font-semibold text-sm hover:bg-amber-300 transition-colors">Tickets & Pricing</a>
+        <a href="#volunteer" class="px-6 py-3 rounded-full bg-accent-600 text-white font-medium text-sm hover:bg-accent-700 transition-colors">Volunteer Program</a>
         <a href="#alternatives" class="px-6 py-3 rounded-full border border-white/40 text-white font-medium text-sm hover:bg-white/10 transition-colors">Alternatives While Closed</a>
       </div>
     </div>
@@ -1398,7 +1408,7 @@ const routeSteps = [
         <div class="p-8 bg-warm-900">
           <h3 class="font-display text-xl font-semibold text-white">Have a correction or a story?</h3>
           <p class="mt-3 text-sm text-warm-300">We welcome corrections and guest stories from past volunteers.</p>
-          <EmailLink class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-500 text-white font-medium text-sm hover:bg-accent-600 transition-colors" />
+          <EmailLink class="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent-600 text-white font-medium text-sm hover:bg-accent-700 transition-colors" />
         </div>
         <div class="p-8 bg-warm-900">
           <h3 class="font-display text-xl font-semibold text-white">Official matters</h3>

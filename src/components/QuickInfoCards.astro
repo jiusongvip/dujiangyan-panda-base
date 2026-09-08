@@ -16,9 +16,9 @@ const infos = [
   <div class="grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-warm-200 bg-warm-200 shadow-sm">
     {infos.map((info) => (
       <div class={`bg-white p-5 ${info.alert ? "bg-amber-50" : ""}`}>
-        <p class="text-[11px] font-semibold tracking-[0.15em] text-warm-500 uppercase mb-2">{info.label}</p>
+        <p class="text-[11px] font-semibold tracking-[0.15em] text-warm-700 uppercase mb-2">{info.label}</p>
         <p class={`font-display text-lg md:text-xl font-semibold leading-tight ${info.alert ? "text-amber-800" : "text-warm-950"}`}>{info.value}</p>
-        <p class="text-xs text-warm-500 mt-1.5 leading-snug">{info.note}</p>
+        <p class="text-xs text-warm-700 mt-1.5 leading-snug">{info.note}</p>
       </div>
     ))}
   </div>
