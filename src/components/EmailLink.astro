@@ -2,21 +2,23 @@
 // Email link with no plaintext address in the HTML source: the address is
 // assembled client-side, so Cloudflare email obfuscation never triggers and
 // its render-blocking email-decode.min.js is never injected.
+// Pass `label` to show custom anchor text (e.g. "Contact") instead of the address.
 interface Props {
   class?: string;
   user?: string;
   domain?: string;
+  label?: string;
 }
-const { class: className = "", user = "hello", domain = "dujiangyan-panda-base.com" } = Astro.props;
+const { class: className = "", user = "hello", domain = "dujiangyan-panda-base.com", label = "" } = Astro.props;
 ---
 
-<a href="#" data-email-user={user} data-email-domain={domain} class={className}></a>
+<a href="#" data-email-user={user} data-email-domain={domain} data-email-label={label} class={className}>{label}</a>
 
 <script>
   const links = document.querySelectorAll<HTMLElement>("[data-email-user]");
   for (const el of links) {
     const addr = `${el.dataset.emailUser}@${el.dataset.emailDomain}`;
-    el.textContent = addr;
+    if (!el.dataset.emailLabel) el.textContent = addr;
     el.setAttribute("href", `mailto:${addr}`);
   }
 </script>
