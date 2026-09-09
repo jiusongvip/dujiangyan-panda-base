@@ -16,8 +16,13 @@ const urls = [...new Set([...first.matchAll(urlRe)].map((m) => m[1]))];
 const critical = urls.filter((u) => /^\/_astro\/(geist|fraunces)-latin-wght-normal\./.test(u));
 if (critical.length === 0) throw new Error("latin font URLs not found: " + urls.join(", "));
 
+// Geist (body font) loads at low priority so the LCP hero image wins the
+// bandwidth race on mobile; text renders via font-display: swap meanwhile.
 const preloads = critical
-  .map((u) => `<link rel="preload" as="font" type="font/woff2" href="${u}" crossorigin>`)
+  .map((u) => {
+    const priority = u.includes("geist") ? ' fetchpriority="low"' : "";
+    return `<link rel="preload" as="font" type="font/woff2" href="${u}"${priority} crossorigin>`;
+  })
   .join("");
 
 let injected = 0;
